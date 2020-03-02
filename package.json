@@ -1,7 +1,7 @@
 {
 	"name": "sanitize-middleware",
-  "version": "1.0.0",
-  "description": "Connect/Express middleware to sanitize requests",
+	"version": "1.0.0",
+	"description": "Connect/Express middleware to sanitize requests",
 	"main": "src/index.js",
 	"repository": "git@github.com:Fdawgs/sanitize-middleware.git",
 	"author": "Frazer Smith",
