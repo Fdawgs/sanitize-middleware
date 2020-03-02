@@ -1,0 +1,58 @@
+{
+	"name": "sanitize-middleware",
+  "version": "1.0.0",
+  "description": "Connect/Express middleware to sanitize requests",
+	"main": "src/index.js",
+	"repository": "git@github.com:Fdawgs/sanitize-middleware.git",
+	"author": "Frazer Smith",
+	"license": "MIT",
+	"scripts": {
+		"changelog": "conventional-changelog -p @commitlint/config-conventional -s -i CHANGELOG.md",
+		"dupe-check": "yarn jsinspect ./src",
+		"lint": "eslint src/**/*.js",
+		"prettier": "prettier ** --write",
+		"start": "node src/index.js",
+		"test": "cross-env NODE_ENV=test yarn lint && yarn test-coverage",
+		"test-coverage": "cross-env NODE_ENV=test jest --coverage --verbose",
+		"test-only": "cross-env NODE_ENV=test jest --verbose"
+	},
+	"jest": {
+		"clearMocks": true,
+		"collectCoverage": true,
+		"testEnvironment": "node",
+		"verbose": true
+	},
+	"prettier": {
+		"arrowParens": "always",
+		"bracketSpacing": true,
+		"endOfLine": "lf",
+		"semi": true,
+		"singleQuote": true,
+		"tabWidth": 4,
+		"trailingComma": "none",
+		"useTabs": true
+	},
+	"devDependencies": {
+		"@commitlint/config-conventional": "^8.3.4",
+		"conventional-changelog-cli": "^2.0.31",
+		"coveralls": "^3.0.9",
+		"eslint": "^6.8.0",
+		"eslint-config-airbnb-base": "^14.0.0",
+		"eslint-config-prettier": "^6.10.0",
+		"eslint-plugin-import": "^2.20.1",
+		"eslint-plugin-jest": "^23.8.0",
+		"eslint-plugin-json": "^2.1.0",
+		"jest": "^25.1.0",
+		"jsinspect": "^0.12.7",
+		"node-mocks-http": "^1.8.1",
+		"prettier": "1.19.1",
+		"typescript": "^3.8.2"
+	},
+	"dependencies": {
+		"cross-env": "^7.0.0",
+		"moment": "^2.24.0",
+		"sanitize-html": "^1.22.0",
+		"validator": "^12.2.0",
+		"xss": "^1.0.6"
+	}
+}
