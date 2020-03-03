@@ -197,4 +197,27 @@ describe('Sanitization and validation middleware', () => {
 		);
 		expect(next).toHaveBeenCalledTimes(1);
 	});
+
+	test('Should pass an error to next if invalid type provided for argument in config', () => {
+		const adjustedArgs = {
+			argInvalid: { type: 'gibberish', mandatory: false }
+		};
+		Object.assign(adjustedArgs, requiredArgs);
+
+		const middleware = sanitizeMiddleware(adjustedArgs);
+
+		const query = {};
+		const req = httpMocks.createRequest({
+			method: 'GET',
+			params: Object.assign(query, args)
+		});
+		const res = httpMocks.createResponse();
+		const next = jest.fn();
+
+		middleware(req, res, next);
+		expect(next.mock.calls[0][0].message).toBe(
+			'Invalid option provided: argInvalid'
+		);
+		expect(next).toHaveBeenCalledTimes(1);
+	});
 });
