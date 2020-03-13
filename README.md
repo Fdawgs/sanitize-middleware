@@ -21,7 +21,6 @@ npm install sanitize-middleware
 
 sanitize-middleware's test scripts use yarn commands.
 
-
 # Usage
 
 If no options are provided to the middleware, the middleware will accept every argument and then attempt to derive the type before sanitizing.
@@ -42,15 +41,36 @@ const sanitizeMiddleware = require('sanitize-middleware');
 const express = require('express');
 const app = express();
 
-
 // localhost:8204/test?id=hello&status=current would throw an error as type of the id query key is wrong
 // localhost:8204/test?id=1 would throw an error as the mandatory status query key is missing
 const options = {
-	status: { type: 'string', mandatory: true },
-	type: { type: 'string', mandatory: false },
-	id: { type: 'number', mandatory: false },
-	specialty: { type: 'string', mandatory: false },
-	subject: { type: 'string', mandatory: false }
+	query: {
+		status: { type: 'string', mandatory: true },
+		type: { type: 'string', mandatory: false },
+		id: { type: 'number', mandatory: false },
+		specialty: { type: 'string', mandatory: false },
+		subject: { type: 'string', mandatory: false }
+	}
+};
+
+app.use(sanitizeMiddleware(options));
+```
+
+The mandatory key for a type is optional, if not present is is assumed the key is not mandatory.
+
+```js
+const sanitizeMiddleware = require('sanitize-middleware');
+const express = require('express');
+const app = express();
+
+const options = {
+	query: {
+		specialty: { type: 'string', mandatory: false },
+		subject: { type: 'string', mandatory: false }
+	},
+	params: {
+		id: { type: 'string' }
+	}
 };
 
 app.use(sanitizeMiddleware(options));

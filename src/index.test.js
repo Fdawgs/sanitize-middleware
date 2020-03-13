@@ -53,7 +53,7 @@ describe('Sanitization and validation middleware', () => {
 	});
 
 	test('Should parse GET query values if all arguments are valid', () => {
-		const middleware = sanitizeMiddleware(requiredArgs);
+		const middleware = sanitizeMiddleware({ query: requiredArgs });
 
 		const query = {};
 		const req = httpMocks.createRequest({
@@ -76,7 +76,7 @@ describe('Sanitization and validation middleware', () => {
 	});
 
 	test('Should pass an error to next if invalid GET query values are provided', () => {
-		const middleware = sanitizeMiddleware(requiredArgs);
+		const middleware = sanitizeMiddleware({ query: requiredArgs });
 
 		const query = {};
 		const req = httpMocks.createRequest({
@@ -94,7 +94,7 @@ describe('Sanitization and validation middleware', () => {
 	});
 
 	test('Should parse params values if all arguments are valid', () => {
-		const middleware = sanitizeMiddleware(requiredArgs);
+		const middleware = sanitizeMiddleware({ params: requiredArgs });
 
 		const query = {};
 		const req = httpMocks.createRequest({
@@ -117,7 +117,7 @@ describe('Sanitization and validation middleware', () => {
 	});
 
 	test('Should pass an error to next if invalid param values are provided', () => {
-		const middleware = sanitizeMiddleware(requiredArgs);
+		const middleware = sanitizeMiddleware({ params: requiredArgs });
 
 		const query = {};
 		const req = httpMocks.createRequest({
@@ -135,7 +135,7 @@ describe('Sanitization and validation middleware', () => {
 	});
 
 	test('Should parse PUT body values if all arguments are valid', () => {
-		const middleware = sanitizeMiddleware(requiredArgs);
+		const middleware = sanitizeMiddleware({ body: requiredArgs });
 
 		const query = {};
 		const req = httpMocks.createRequest({
@@ -158,7 +158,7 @@ describe('Sanitization and validation middleware', () => {
 	});
 
 	test('Should pass an error to next if invalid PUT body values are provided', () => {
-		const middleware = sanitizeMiddleware(requiredArgs);
+		const middleware = sanitizeMiddleware({ body: requiredArgs });
 
 		const query = {};
 		const req = httpMocks.createRequest({
@@ -180,7 +180,7 @@ describe('Sanitization and validation middleware', () => {
 		Object.assign(adjustedArgs, requiredArgs);
 		adjustedArgs.argString.mandatory = true;
 
-		const middleware = sanitizeMiddleware(adjustedArgs);
+		const middleware = sanitizeMiddleware({ params: adjustedArgs });
 
 		const query = {};
 		const req = httpMocks.createRequest({
@@ -204,7 +204,7 @@ describe('Sanitization and validation middleware', () => {
 		};
 		Object.assign(adjustedArgs, requiredArgs);
 
-		const middleware = sanitizeMiddleware(adjustedArgs);
+		const middleware = sanitizeMiddleware({ params: adjustedArgs });
 
 		const query = {};
 		const req = httpMocks.createRequest({

@@ -182,29 +182,32 @@ function parseValues(args, config) {
  * @description Check all mandatory values are present and then validate
  * and sanitize query, param and body of requests to protect against
  * cross-site scripting (XSS) and command injection attacks.
- * @param {Object.<string, {type: string, mandatory: boolean}>=} config - Sanitization configuration values.
+ * @param {Object} config - Sanitization configuration values.
+ * @param {Object.<string, {type: string, mandatory: boolean}>=} config.body
+ * @param {Object.<string, {type: string, mandatory: boolean}>=} config.params
+ * @param {Object.<string, {type: string, mandatory: boolean}>=} config.query
  * @return {Function} Express middleware.
  */
-module.exports = function sanitizeMiddleware(config = {}) {
+module.exports = function sanitizeMiddleware(
+	config = { body: {}, params: {}, query: {} }
+) {
 	return (req, res, next) => {
-		if (
-			req.body && Object.keys(req.body).length
-		) {
-			req.body = parseValues(req.body, config);
+		if (req.body && Object.keys(req.body).length) {
+			req.body = parseValues(req.body, config.body);
 			if (req.body instanceof Error) {
 				res.status(400);
 				return next(req.body);
 			}
 		}
 		if (req.params && Object.keys(req.params).length) {
-			req.params = parseValues(req.params, config);
+			req.params = parseValues(req.params, config.params);
 			if (req.params instanceof Error) {
 				res.status(400);
 				return next(req.params);
 			}
 		}
 		if (req.query && Object.keys(req.query).length) {
-			req.query = parseValues(req.query, config);
+			req.query = parseValues(req.query, config.query);
 			if (req.query instanceof Error) {
 				res.status(400);
 				return next(req.query);
