@@ -14,7 +14,7 @@ const args = {
 };
 
 const requiredArgs = {
-	argString: { type: 'string', mandatory: false },
+	argString: { type: 'string', mandatory: false, maxLength: 5 },
 	argNumber: { type: 'number', mandatory: false },
 	argNumberString: { type: 'number', mandatory: false },
 	argObject: { type: 'object', mandatory: false },
@@ -176,8 +176,7 @@ describe('Sanitization and validation middleware', () => {
 	});
 
 	test('Should pass an error to next if mandatory value is missing', () => {
-		const adjustedArgs = {};
-		Object.assign(adjustedArgs, requiredArgs);
+		const adjustedArgs = JSON.parse(JSON.stringify(requiredArgs));
 		adjustedArgs.argString.mandatory = true;
 
 		const middleware = sanitizeMiddleware({ params: adjustedArgs });
