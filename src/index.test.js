@@ -198,11 +198,31 @@ describe('Sanitization and validation middleware', () => {
 		expect(next).toHaveBeenCalledTimes(1);
 	});
 
+	test('Should pass an error to next if value is greater than max length specified', () => {
+		const adjustedArgs = JSON.parse(JSON.stringify(requiredArgs));
+		adjustedArgs.argString.maxLength = 2;
+
+		const middleware = sanitizeMiddleware({ params: adjustedArgs });
+
+		const query = {};
+		const req = httpMocks.createRequest({
+			method: 'GET',
+			params: Object.assign(query, args)
+		});
+		const res = httpMocks.createResponse();
+		const next = jest.fn();
+		delete req.params.argInvalid;
+
+		middleware(req, res, next);
+		expect(next.mock.calls[0][0].message).toBe(
+			'argString is greater than the allowed length of 2'
+		);
+		expect(next).toHaveBeenCalledTimes(1);
+	});
+
 	test('Should pass an error to next if invalid type provided for argument in config', () => {
-		const adjustedArgs = {
-			argInvalid: { type: 'gibberish', mandatory: false }
-		};
-		Object.assign(adjustedArgs, requiredArgs);
+		const adjustedArgs = JSON.parse(JSON.stringify(requiredArgs));
+		adjustedArgs.argInvalid = { type: 'gibberish', mandatory: false };
 
 		const middleware = sanitizeMiddleware({ params: adjustedArgs });
 
