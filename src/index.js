@@ -188,20 +188,7 @@ function parseValues(args, config) {
 module.exports = function sanitizeMiddleware(config = {}) {
 	return (req, res, next) => {
 		if (
-			req.query &&
-			req.method === 'GET' &&
-			Object.keys(req.query).length
-		) {
-			req.query = parseValues(req.query, config);
-			if (req.query instanceof Error) {
-				res.status(400);
-				return next(req.query);
-			}
-		}
-		if (
-			req.body &&
-			['PUT', 'POST'].includes(req.method) &&
-			Object.keys(req.body).length
+			req.body && Object.keys(req.body).length
 		) {
 			req.body = parseValues(req.body, config);
 			if (req.body instanceof Error) {
@@ -214,6 +201,13 @@ module.exports = function sanitizeMiddleware(config = {}) {
 			if (req.params instanceof Error) {
 				res.status(400);
 				return next(req.params);
+			}
+		}
+		if (req.query && Object.keys(req.query).length) {
+			req.query = parseValues(req.query, config);
+			if (req.query instanceof Error) {
+				res.status(400);
+				return next(req.query);
 			}
 		}
 		return next();
