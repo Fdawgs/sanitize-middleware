@@ -204,9 +204,9 @@ function parseValues(args, config) {
  * and sanitizes the query, param and body of requests to protect against
  * cross-site scripting (XSS) and command injection attacks.
  * @param {Object} config - Sanitization configuration values.
- * @param {Object.<string, {type: string, mandatory: boolean, maxLength: number}>=} config.body
- * @param {Object.<string, {type: string, mandatory: boolean, maxLength: number}>=} config.params
- * @param {Object.<string, {type: string, mandatory: boolean, maxLength: number}>=} config.query
+ * @param {Object.<string, {type: ('boolean'|'date'|'json'|'number'|'object'|'string'), mandatory: boolean, maxLength: number}>=} config.body
+ * @param {Object.<string, {type: ('boolean'|'date'|'json'|'number'|'object'|'string'), mandatory: boolean, maxLength: number}>=} config.params
+ * @param {Object.<string, {type: ('boolean'|'date'|'json'|'number'|'object'|'string'), mandatory: boolean, maxLength: number}>=} config.query
  * @return {Function} Express middleware.
  */
 module.exports = function sanitizeMiddleware(
