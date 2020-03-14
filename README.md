@@ -40,18 +40,14 @@ Each of the above properties must be objects, with further properties as objects
 ```js
 const exampleConfig = {
 	body: {
-		bodyProperty1: {
-		},
-		bodyProperty2: {
-		}
+		bodyProperty1: {},
+		bodyProperty2: {}
 	},
 	query: {
-		queryProperty1: {
-		}
+		queryProperty1: {}
 	},
 	params: {
-		paramsProperty1: {
-		}
+		paramsProperty1: {}
 	}
 };
 ```
