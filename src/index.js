@@ -117,8 +117,8 @@ function parseValue(value, type) {
 
 /**
  * @author Frazer Smith
- * @description Check all mandatory arguments are present then
- * attempt to validate and sanitize all arguments passed.
+ * @description Check all mandatory arguments are present.
+ * If one or more is missing an error will be returned else it will attempt to validate and sanitize all arguments passed.
  * @param {Object} args
  * @param {Object=} config - Objects containing accepted arguments as properties, and their types as values.
  * @returns {Error|String}
@@ -128,7 +128,7 @@ function parseValues(args, config) {
 	const keys = Object.keys(values);
 	let message;
 
-	// check mandatory values are present
+	// Check mandatory values are present
 	const mandatoryArgs = [];
 	Object.keys(config).forEach((configKey) => {
 		if (
@@ -138,7 +138,6 @@ function parseValues(args, config) {
 			mandatoryArgs.push(configKey);
 		}
 	});
-
 	if (
 		mandatoryArgs.every((element) =>
 			keys.map((x) => x.toLowerCase()).includes(element.toLowerCase())
@@ -147,6 +146,27 @@ function parseValues(args, config) {
 		message = `A mandatory parameter is missing from the list: ${mandatoryArgs
 			.join(', ')
 			.toString()}`;
+		return new Error(message);
+	}
+
+	// Check values are under the max length specified
+	const maxLengthArgs = {};
+
+	Object.keys(config).forEach((configKey) => {
+		if (
+			config[configKey].maxLength &&
+			typeof config[configKey].maxLength === 'number'
+		) {
+			maxLengthArgs[configKey] = config[configKey].maxLength;
+		}
+	});
+
+	Object.keys(maxLengthArgs).forEach((maxLengthKey) => {
+		if (values[maxLengthKey].length > maxLengthArgs[maxLengthKey]) {
+			message = `${maxLengthKey} is greater than the allowed length of ${maxLengthArgs[maxLengthKey]}`;
+		}
+	});
+	if (message) {
 		return new Error(message);
 	}
 
@@ -171,6 +191,7 @@ function parseValues(args, config) {
 			message = `Invalid option provided: ${key}`;
 		}
 	});
+
 	if (typeof message !== 'undefined') {
 		return new Error(message);
 	}
@@ -179,41 +200,38 @@ function parseValues(args, config) {
 
 /**
  * @author Frazer Smith
- * @description Check all mandatory values are present and then validate
- * and sanitize query, param and body of requests to protect against
+ * @description Validates
+ * and sanitizes the query, param and body of requests to protect against
  * cross-site scripting (XSS) and command injection attacks.
- * @param {Object.<string, {type: string, mandatory: boolean}>=} config - Sanitization configuration values.
+ * @param {Object} config - Sanitization configuration values.
+ * @param {Object.<string, {type: ('boolean'|'date'|'json'|'number'|'object'|'string'), mandatory: boolean, maxLength: number}>=} config.body
+ * @param {Object.<string, {type: ('boolean'|'date'|'json'|'number'|'object'|'string'), mandatory: boolean, maxLength: number}>=} config.params
+ * @param {Object.<string, {type: ('boolean'|'date'|'json'|'number'|'object'|'string'), mandatory: boolean, maxLength: number}>=} config.query
  * @return {Function} Express middleware.
  */
-module.exports = function sanitizeMiddleware(config = {}) {
+module.exports = function sanitizeMiddleware(
+	config = { body: {}, params: {}, query: {} }
+) {
 	return (req, res, next) => {
-		if (
-			req.query &&
-			req.method === 'GET' &&
-			Object.keys(req.query).length
-		) {
-			req.query = parseValues(req.query, config);
-			if (req.query instanceof Error) {
-				res.status(400);
-				return next(req.query);
-			}
-		}
-		if (
-			req.body &&
-			['PUT', 'POST'].includes(req.method) &&
-			Object.keys(req.body).length
-		) {
-			req.body = parseValues(req.body, config);
+		if (req.body && Object.keys(req.body).length) {
+			req.body = parseValues(req.body, config.body);
 			if (req.body instanceof Error) {
 				res.status(400);
 				return next(req.body);
 			}
 		}
 		if (req.params && Object.keys(req.params).length) {
-			req.params = parseValues(req.params, config);
+			req.params = parseValues(req.params, config.params);
 			if (req.params instanceof Error) {
 				res.status(400);
 				return next(req.params);
+			}
+		}
+		if (req.query && Object.keys(req.query).length) {
+			req.query = parseValues(req.query, config.query);
+			if (req.query instanceof Error) {
+				res.status(400);
+				return next(req.query);
 			}
 		}
 		return next();

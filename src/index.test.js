@@ -14,7 +14,7 @@ const args = {
 };
 
 const requiredArgs = {
-	argString: { type: 'string', mandatory: false },
+	argString: { type: 'string', mandatory: false, maxLength: 5 },
 	argNumber: { type: 'number', mandatory: false },
 	argNumberString: { type: 'number', mandatory: false },
 	argObject: { type: 'object', mandatory: false },
@@ -53,7 +53,7 @@ describe('Sanitization and validation middleware', () => {
 	});
 
 	test('Should parse GET query values if all arguments are valid', () => {
-		const middleware = sanitizeMiddleware(requiredArgs);
+		const middleware = sanitizeMiddleware({ query: requiredArgs });
 
 		const query = {};
 		const req = httpMocks.createRequest({
@@ -76,7 +76,7 @@ describe('Sanitization and validation middleware', () => {
 	});
 
 	test('Should pass an error to next if invalid GET query values are provided', () => {
-		const middleware = sanitizeMiddleware(requiredArgs);
+		const middleware = sanitizeMiddleware({ query: requiredArgs });
 
 		const query = {};
 		const req = httpMocks.createRequest({
@@ -94,7 +94,7 @@ describe('Sanitization and validation middleware', () => {
 	});
 
 	test('Should parse params values if all arguments are valid', () => {
-		const middleware = sanitizeMiddleware(requiredArgs);
+		const middleware = sanitizeMiddleware({ params: requiredArgs });
 
 		const query = {};
 		const req = httpMocks.createRequest({
@@ -117,7 +117,7 @@ describe('Sanitization and validation middleware', () => {
 	});
 
 	test('Should pass an error to next if invalid param values are provided', () => {
-		const middleware = sanitizeMiddleware(requiredArgs);
+		const middleware = sanitizeMiddleware({ params: requiredArgs });
 
 		const query = {};
 		const req = httpMocks.createRequest({
@@ -135,7 +135,7 @@ describe('Sanitization and validation middleware', () => {
 	});
 
 	test('Should parse PUT body values if all arguments are valid', () => {
-		const middleware = sanitizeMiddleware(requiredArgs);
+		const middleware = sanitizeMiddleware({ body: requiredArgs });
 
 		const query = {};
 		const req = httpMocks.createRequest({
@@ -158,7 +158,7 @@ describe('Sanitization and validation middleware', () => {
 	});
 
 	test('Should pass an error to next if invalid PUT body values are provided', () => {
-		const middleware = sanitizeMiddleware(requiredArgs);
+		const middleware = sanitizeMiddleware({ body: requiredArgs });
 
 		const query = {};
 		const req = httpMocks.createRequest({
@@ -176,11 +176,10 @@ describe('Sanitization and validation middleware', () => {
 	});
 
 	test('Should pass an error to next if mandatory value is missing', () => {
-		const adjustedArgs = {};
-		Object.assign(adjustedArgs, requiredArgs);
+		const adjustedArgs = JSON.parse(JSON.stringify(requiredArgs));
 		adjustedArgs.argString.mandatory = true;
 
-		const middleware = sanitizeMiddleware(adjustedArgs);
+		const middleware = sanitizeMiddleware({ params: adjustedArgs });
 
 		const query = {};
 		const req = httpMocks.createRequest({
@@ -198,13 +197,33 @@ describe('Sanitization and validation middleware', () => {
 		expect(next).toHaveBeenCalledTimes(1);
 	});
 
-	test('Should pass an error to next if invalid type provided for argument in config', () => {
-		const adjustedArgs = {
-			argInvalid: { type: 'gibberish', mandatory: false }
-		};
-		Object.assign(adjustedArgs, requiredArgs);
+	test('Should pass an error to next if value is greater than max length specified', () => {
+		const adjustedArgs = JSON.parse(JSON.stringify(requiredArgs));
+		adjustedArgs.argString.maxLength = 2;
 
-		const middleware = sanitizeMiddleware(adjustedArgs);
+		const middleware = sanitizeMiddleware({ params: adjustedArgs });
+
+		const query = {};
+		const req = httpMocks.createRequest({
+			method: 'GET',
+			params: Object.assign(query, args)
+		});
+		const res = httpMocks.createResponse();
+		const next = jest.fn();
+		delete req.params.argInvalid;
+
+		middleware(req, res, next);
+		expect(next.mock.calls[0][0].message).toBe(
+			'argString is greater than the allowed length of 2'
+		);
+		expect(next).toHaveBeenCalledTimes(1);
+	});
+
+	test('Should pass an error to next if invalid type provided for argument in config', () => {
+		const adjustedArgs = JSON.parse(JSON.stringify(requiredArgs));
+		adjustedArgs.argInvalid = { type: 'gibberish', mandatory: false };
+
+		const middleware = sanitizeMiddleware({ params: adjustedArgs });
 
 		const query = {};
 		const req = httpMocks.createRequest({
