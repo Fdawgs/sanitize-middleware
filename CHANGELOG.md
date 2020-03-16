@@ -1,3 +1,8 @@
+## <small>2.0.1 (2020-03-16)</small>
+
+-   chore: update dependencies ([d4c0364](https://github.com/Fdawgs/sanitize-middleware/commit/d4c0364))
+-   build(deps-dev): bump eslint-plugin-json from 2.1.0 to 2.1.1 ([c16a0e1](https://github.com/Fdawgs/sanitize-middleware/commit/c16a0e1))
+
 ## 2.0.0 (2020-03-14)
 
 -   docs: update jsdoc tags ([2698275](https://github.com/Fdawgs/sanitize-middleware/commit/2698275))
