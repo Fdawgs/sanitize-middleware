@@ -108,7 +108,7 @@ function parseValue(value, type) {
 			break;
 		default:
 		case 'string':
-			// Strip any HTML tags, non-word characters, and control characters
+			// Strip any invalid HTML tags, non-word characters, and control characters
 			result = validator.stripLow(xss(sanitize(value))).trim();
 			break;
 	}
