@@ -11,8 +11,8 @@ const args = {
 	argDate: '2020-04-24',
 	argJson: '{ "test1": 1, "test2": 2 }',
 	argHtml: "<a href='https://www.nhs.uk/'><c>b</c></a>",
-	argInvalid: 'i\'m not valid'
-
+	argCtrlChars: '\x01\x09',
+	argInvalid: "i'm not valid"
 };
 
 const requiredArgs = {
@@ -24,7 +24,8 @@ const requiredArgs = {
 	argBooleanString: { type: 'boolean', mandatory: false },
 	argDate: { type: 'date', mandatory: false },
 	argJson: { type: 'json', mandatory: false },
-	argHtml: {type: 'string' }
+	argHtml: { type: 'string' },
+	argCtrlChars: { type: 'string' }
 };
 
 describe('Sanitization and validation middleware', () => {
@@ -57,6 +58,10 @@ describe('Sanitization and validation middleware', () => {
 		expect(typeof req.query.argHtml).toBe('string');
 		expect(req.query.argHtml).toBe('<a href="https://www.nhs.uk/">b</a>');
 
+		// check control character removal
+		expect(typeof req.query.argCtrlChars).toBe('string');
+		expect(req.query.argCtrlChars).toBe('');
+
 		expect(next).toHaveBeenCalledTimes(1);
 	});
 
@@ -84,7 +89,11 @@ describe('Sanitization and validation middleware', () => {
 		// check HTML parsing
 		expect(typeof req.query.argHtml).toBe('string');
 		expect(req.query.argHtml).toBe('<a href="https://www.nhs.uk/">b</a>');
-		
+
+		// check control character removal
+		expect(typeof req.query.argCtrlChars).toBe('string');
+		expect(req.query.argCtrlChars).toBe('');
+
 		expect(next).toHaveBeenCalledTimes(1);
 	});
 
@@ -132,6 +141,10 @@ describe('Sanitization and validation middleware', () => {
 		expect(typeof req.params.argHtml).toBe('string');
 		expect(req.params.argHtml).toBe('<a href="https://www.nhs.uk/">b</a>');
 
+		// check control character removal
+		expect(typeof req.params.argCtrlChars).toBe('string');
+		expect(req.params.argCtrlChars).toBe('');
+
 		expect(next).toHaveBeenCalledTimes(1);
 	});
 
@@ -177,6 +190,10 @@ describe('Sanitization and validation middleware', () => {
 		// check HTML parsing
 		expect(typeof req.body.argHtml).toBe('string');
 		expect(req.body.argHtml).toBe('<a href="https://www.nhs.uk/">b</a>');
+
+		// check control character removal
+		expect(typeof req.body.argCtrlChars).toBe('string');
+		expect(req.body.argCtrlChars).toBe('');
 
 		expect(next).toHaveBeenCalledTimes(1);
 	});
