@@ -106,7 +106,7 @@ function parseValue(value, type) {
 		case 'object':
 			result = JSON.parse(JSON.stringify(value));
 			break;
-		// string types will be passed to this
+		// String types will be passed to this
 		default:
 			// Strip any invalid HTML tags, non-word characters, and control characters
 			result = validator.stripLow(xss(sanitize(value))).trim();

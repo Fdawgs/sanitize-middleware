@@ -54,11 +54,11 @@ describe('Sanitization and validation middleware', () => {
 		expect(typeof req.query.argBooleanString).toBe('boolean');
 		expect(typeof req.query.argObject).toBe('object');
 
-		// check HTML parsing
+		// Test HTML parsing
 		expect(typeof req.query.argHtml).toBe('string');
 		expect(req.query.argHtml).toBe('<a href="https://www.nhs.uk/">b</a>');
 
-		// check control character removal
+		// Test control character removal
 		expect(typeof req.query.argCtrlChars).toBe('string');
 		expect(req.query.argCtrlChars).toBe('');
 
@@ -86,11 +86,11 @@ describe('Sanitization and validation middleware', () => {
 		expect(typeof req.query.argBooleanString).toBe('boolean');
 		expect(typeof req.query.argObject).toBe('object');
 
-		// check HTML parsing
+		// Test HTML parsing
 		expect(typeof req.query.argHtml).toBe('string');
 		expect(req.query.argHtml).toBe('<a href="https://www.nhs.uk/">b</a>');
 
-		// check control character removal
+		// Test control character removal
 		expect(typeof req.query.argCtrlChars).toBe('string');
 		expect(req.query.argCtrlChars).toBe('');
 
@@ -137,11 +137,11 @@ describe('Sanitization and validation middleware', () => {
 		expect(typeof req.params.argObject).toBe('object');
 		expect(typeof req.params.argHtml).toBe('string');
 
-		// check HTML parsing
+		// Test HTML parsing
 		expect(typeof req.params.argHtml).toBe('string');
 		expect(req.params.argHtml).toBe('<a href="https://www.nhs.uk/">b</a>');
 
-		// check control character removal
+		// Test control character removal
 		expect(typeof req.params.argCtrlChars).toBe('string');
 		expect(req.params.argCtrlChars).toBe('');
 
@@ -187,11 +187,11 @@ describe('Sanitization and validation middleware', () => {
 		expect(typeof req.body.argBooleanString).toBe('boolean');
 		expect(typeof req.body.argObject).toBe('object');
 
-		// check HTML parsing
+		// Test HTML parsing
 		expect(typeof req.body.argHtml).toBe('string');
 		expect(req.body.argHtml).toBe('<a href="https://www.nhs.uk/">b</a>');
 
-		// check control character removal
+		// Test control character removal
 		expect(typeof req.body.argCtrlChars).toBe('string');
 		expect(req.body.argCtrlChars).toBe('');
 
