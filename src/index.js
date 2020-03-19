@@ -106,9 +106,9 @@ function parseValue(value, type) {
 		case 'object':
 			result = JSON.parse(JSON.stringify(value));
 			break;
+		// String types will be passed to this
 		default:
-		case 'string':
-			// Strip any HTML tags, non-word characters, and control characters
+			// Strip any invalid HTML tags, non-word characters, and control characters
 			result = validator.stripLow(xss(sanitize(value))).trim();
 			break;
 	}
@@ -182,11 +182,11 @@ function parseValues(args, config) {
 			validateType(values[key], config[key].type)
 		) {
 			values[key] = parseValue(values[key], config[key].type);
-		} else if (Object.keys(config).length === 0) {
-			const type = deriveType(values[key]);
-			if (validateType(values[key], type)) {
-				values[key] = parseValue(values[key], type);
-			}
+		} else if (
+			Object.keys(config).length === 0 &&
+			validateType(values[key], deriveType(values[key])) !== false
+		) {
+			values[key] = parseValue(values[key], deriveType(values[key]));
 		} else {
 			message = `Invalid option provided: ${key}`;
 		}

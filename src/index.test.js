@@ -10,6 +10,8 @@ const args = {
 	argBooleanString: 'true',
 	argDate: '2020-04-24',
 	argJson: '{ "test1": 1, "test2": 2 }',
+	argHtml: "<a href='https://www.nhs.uk/'><c>b</c></a>",
+	argCtrlChars: '\x01\x09',
 	argInvalid: "i'm not valid"
 };
 
@@ -21,7 +23,9 @@ const requiredArgs = {
 	argBoolean: { type: 'boolean', mandatory: false },
 	argBooleanString: { type: 'boolean', mandatory: false },
 	argDate: { type: 'date', mandatory: false },
-	argJson: { type: 'json', mandatory: false }
+	argJson: { type: 'json', mandatory: false },
+	argHtml: { type: 'string' },
+	argCtrlChars: { type: 'string' }
 };
 
 describe('Sanitization and validation middleware', () => {
@@ -49,6 +53,15 @@ describe('Sanitization and validation middleware', () => {
 		expect(typeof req.query.argBoolean).toBe('boolean');
 		expect(typeof req.query.argBooleanString).toBe('boolean');
 		expect(typeof req.query.argObject).toBe('object');
+
+		// Test HTML parsing
+		expect(typeof req.query.argHtml).toBe('string');
+		expect(req.query.argHtml).toBe('<a href="https://www.nhs.uk/">b</a>');
+
+		// Test control character removal
+		expect(typeof req.query.argCtrlChars).toBe('string');
+		expect(req.query.argCtrlChars).toBe('');
+
 		expect(next).toHaveBeenCalledTimes(1);
 	});
 
@@ -72,6 +85,15 @@ describe('Sanitization and validation middleware', () => {
 		expect(typeof req.query.argBoolean).toBe('boolean');
 		expect(typeof req.query.argBooleanString).toBe('boolean');
 		expect(typeof req.query.argObject).toBe('object');
+
+		// Test HTML parsing
+		expect(typeof req.query.argHtml).toBe('string');
+		expect(req.query.argHtml).toBe('<a href="https://www.nhs.uk/">b</a>');
+
+		// Test control character removal
+		expect(typeof req.query.argCtrlChars).toBe('string');
+		expect(req.query.argCtrlChars).toBe('');
+
 		expect(next).toHaveBeenCalledTimes(1);
 	});
 
@@ -113,6 +135,16 @@ describe('Sanitization and validation middleware', () => {
 		expect(typeof req.params.argBoolean).toBe('boolean');
 		expect(typeof req.params.argBooleanString).toBe('boolean');
 		expect(typeof req.params.argObject).toBe('object');
+		expect(typeof req.params.argHtml).toBe('string');
+
+		// Test HTML parsing
+		expect(typeof req.params.argHtml).toBe('string');
+		expect(req.params.argHtml).toBe('<a href="https://www.nhs.uk/">b</a>');
+
+		// Test control character removal
+		expect(typeof req.params.argCtrlChars).toBe('string');
+		expect(req.params.argCtrlChars).toBe('');
+
 		expect(next).toHaveBeenCalledTimes(1);
 	});
 
@@ -154,6 +186,15 @@ describe('Sanitization and validation middleware', () => {
 		expect(typeof req.body.argBoolean).toBe('boolean');
 		expect(typeof req.body.argBooleanString).toBe('boolean');
 		expect(typeof req.body.argObject).toBe('object');
+
+		// Test HTML parsing
+		expect(typeof req.body.argHtml).toBe('string');
+		expect(req.body.argHtml).toBe('<a href="https://www.nhs.uk/">b</a>');
+
+		// Test control character removal
+		expect(typeof req.body.argCtrlChars).toBe('string');
+		expect(req.body.argCtrlChars).toBe('');
+
 		expect(next).toHaveBeenCalledTimes(1);
 	});
 
