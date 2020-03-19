@@ -1,3 +1,11 @@
+## <small>2.0.2 (2020-03-19)</small>
+
+-   refactor(index): merge if statement into above statement ([8c8a88d](https://github.com/Fdawgs/sanitize-middleware/commit/8c8a88d))
+-   refactor(index): remove redundant case block from switch statement ([1456b5a](https://github.com/Fdawgs/sanitize-middleware/commit/1456b5a))
+-   style(index): start comments with uppercase letter ([f0f5876](https://github.com/Fdawgs/sanitize-middleware/commit/f0f5876))
+-   tests(index): add tests for control character removal ([bbea07f](https://github.com/Fdawgs/sanitize-middleware/commit/bbea07f))
+-   tests(index): add tests for html parsing ([6116b14](https://github.com/Fdawgs/sanitize-middleware/commit/6116b14))
+
 ## <small>2.0.1 (2020-03-16)</small>
 
 -   chore: update dependencies ([d4c0364](https://github.com/Fdawgs/sanitize-middleware/commit/d4c0364))
