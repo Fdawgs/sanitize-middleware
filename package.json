@@ -1,6 +1,6 @@
 {
 	"name": "sanitize-middleware",
-	"version": "2.0.1",
+	"version": "2.0.2",
 	"description": "Connect/Express middleware to sanitize requests",
 	"main": "src/index.js",
 	"repository": "git@github.com:Fdawgs/sanitize-middleware.git",
