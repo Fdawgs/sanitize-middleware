@@ -1,3 +1,17 @@
+## <small>2.0.3 (2020-03-21)</small>
+
+-   ci(travis): add deploy steps ([9596d9a](https://github.com/Fdawgs/sanitize-middleware/commit/9596d9a))
+-   ci(travis): add release tags to branch safelist ([5366518](https://github.com/Fdawgs/sanitize-middleware/commit/5366518))
+-   ci(travis): allow osx builds to fail ([4672391](https://github.com/Fdawgs/sanitize-middleware/commit/4672391))
+-   ci(travis): test osx ([ccf2873](https://github.com/Fdawgs/sanitize-middleware/commit/ccf2873))
+-   build(deps-dev): bump coveralls from 3.0.9 to 3.0.11 ([813c5aa](https://github.com/Fdawgs/sanitize-middleware/commit/813c5aa))
+-   build(deps-dev): bump prettier from 1.19.1 to 2.0.0 ([26b3ca7](https://github.com/Fdawgs/sanitize-middleware/commit/26b3ca7))
+-   build(deps-dev): increase min version of coveralls ([83d0e07](https://github.com/Fdawgs/sanitize-middleware/commit/83d0e07))
+-   build(deps): bump validator from 12.2.0 to 13.0.0 ([50bcb38](https://github.com/Fdawgs/sanitize-middleware/commit/50bcb38))
+-   chore(package): add prettier call to changelog gen script ([078f281](https://github.com/Fdawgs/sanitize-middleware/commit/078f281))
+-   chore(package): update description; add keywords array ([34b57ff](https://github.com/Fdawgs/sanitize-middleware/commit/34b57ff))
+-   chore(package): use test-only script when testing ([accd6d5](https://github.com/Fdawgs/sanitize-middleware/commit/accd6d5))
+
 ## <small>2.0.2 (2020-03-19)</small>
 
 -   refactor(index): merge if statement into above statement ([8c8a88d](https://github.com/Fdawgs/sanitize-middleware/commit/8c8a88d))
