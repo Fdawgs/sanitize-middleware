@@ -1,7 +1,16 @@
 {
 	"name": "sanitize-middleware",
 	"version": "2.0.2",
-	"description": "Connect/Express middleware to sanitize requests",
+	"description": "Connect/Express middleware that sanitizes requests to protect against cross-site scripting (XSS) and command injection attacks",
+	"keywords": [
+		"express",
+		"middleware",
+		"sanitization",
+		"sanitize",
+		"sanitisation",
+		"sanitise",
+		"xss"
+	  ],
 	"main": "src/index.js",
 	"repository": "git@github.com:Fdawgs/sanitize-middleware.git",
 	"author": "Frazer Smith",
