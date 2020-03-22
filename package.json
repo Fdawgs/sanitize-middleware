@@ -1,6 +1,6 @@
 {
 	"name": "sanitize-middleware",
-	"version": "2.0.2",
+	"version": "2.0.3",
 	"description": "Connect/Express middleware that sanitizes requests to protect against cross-site scripting (XSS) and command injection attacks",
 	"keywords": [
 		"express",
@@ -55,7 +55,7 @@
 		"jest": "^25.1.0",
 		"jsinspect": "^0.12.7",
 		"node-mocks-http": "^1.8.1",
-		"prettier": "1.19.1",
+		"prettier": "2.0.0",
 		"typescript": "^3.8.3"
 	},
 	"dependencies": {
