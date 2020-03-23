@@ -55,7 +55,7 @@
 		"jest": "^25.1.0",
 		"jsinspect": "^0.12.7",
 		"node-mocks-http": "^1.8.1",
-		"prettier": "2.0.0",
+		"prettier": "2.0.1",
 		"typescript": "^3.8.3"
 	},
 	"dependencies": {
