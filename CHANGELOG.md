@@ -1,3 +1,11 @@
+## <small>2.0.4 (2020-03-25)</small>
+
+-   build(deps-dev): bump eslint-config-prettier from 6.10.0 to 6.10.1 ([e1ce98a](https://github.com/Fdawgs/sanitize-middleware/commit/e1ce98a))
+-   build(deps-dev): bump prettier from 2.0.0 to 2.0.1 ([154ab9e](https://github.com/Fdawgs/sanitize-middleware/commit/154ab9e))
+-   build(deps): update dependencies ([63b5147](https://github.com/Fdawgs/sanitize-middleware/commit/63b5147))
+-   ci(travis): move npm release into own job ([7d18d17](https://github.com/Fdawgs/sanitize-middleware/commit/7d18d17))
+-   ci(travis): rotate npm token ([902ad67](https://github.com/Fdawgs/sanitize-middleware/commit/902ad67))
+
 ## <small>2.0.3 (2020-03-21)</small>
 
 -   ci(travis): add deploy steps ([9596d9a](https://github.com/Fdawgs/sanitize-middleware/commit/9596d9a))
