@@ -52,11 +52,13 @@ const exampleConfig = {
 };
 ```
 
-Each of the object properties within `body`, `query`, and/or `params` have optional properties themselves:
+Each of the object properties within `body`, `query`, and/or `params` have properties themselves:
 
--   `type` - the expected type of the recieved property
--   `mandatory` - whether the property is mandatory
--   `maxLength` - the maximum accepted length of a property
+| Property             | Type      | Description                                |
+| -------------------- | --------- | ------------------------------------------ |
+| mandatory (optional) | `Boolean` | Whether the property is mandatory          |
+| maxLength (optional) | `Number`  | The maximum accepted length of a property  |
+| type (required)      | `String`  | The expected type of the recieved property |
 
 # Examples
 
