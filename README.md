@@ -58,7 +58,7 @@ Each of the object properties within `body`, `query`, and/or `params` have prope
 | -------------------- | --------- | ------------------------------------------ |
 | mandatory (optional) | `Boolean` | Whether the property is mandatory          |
 | maxLength (optional) | `Number`  | The maximum accepted length of a property  |
-| type (required)      | `String`  | The expected type of the recieved property |
+| type (required)      | `String`  | The expected type of the received property |
 
 ## Examples
 
@@ -72,7 +72,7 @@ const app = express();
 app.use(sanitizeMiddleware());
 ```
 
-With options provided, if a recieved property that is mandatory is missing, is the wrong type, or is longer than the max length, an error will be passed to `next()` to be handled by your error handler middleware.
+With options provided, if a received property that is mandatory is missing, is the wrong type, or is longer than the max length, an error will be passed to `next()` to be handled by your error handler middleware.
 
 ```js
 const sanitizeMiddleware = require('sanitize-middleware');
@@ -81,7 +81,7 @@ const app = express();
 
 // localhost:8204/test?id=hello&status=current would throw an error as type of the id query key is wrong
 // localhost:8204/test?id=1 would throw an error as the mandatory status query key is missing
-// localhost:8204/test?subject=bananas would thrown an error as the length is greater than the maxLength allowed
+// localhost:8204/test?subject=bananas would throw an error as the length is greater than the maxLength allowed
 const options = {
 	query: {
 		status: { type: 'string', mandatory: true },
@@ -95,7 +95,7 @@ const options = {
 app.use(sanitizeMiddleware(options));
 ```
 
-The `mandatory` property is optional, if not present is is assumed a recieved property matching it's parent key name is not mandatory.
+The `mandatory` property is optional, if not present it is assumed a received property matching its parent key name is not mandatory.
 
 ```js
 const sanitizeMiddleware = require('sanitize-middleware');
