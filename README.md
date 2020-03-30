@@ -5,7 +5,7 @@
 
 > Connect/Express middleware that sanitizes the query, params and body of requests to protect against cross-site scripting (XSS) and command injection attacks
 
-# Installation
+## Installation
 
 Install using [`yarn`](https://yarnpkg.com/en/package/sanitize-middleware):
 
@@ -21,13 +21,13 @@ npm install sanitize-middleware
 
 sanitize-middleware's test scripts use yarn commands.
 
-# API
+## API
 
 ```js
 const sanitizeMiddleware = require('sanitize-middleware');
 ```
 
-## Options
+### Options
 
 The `sanitizeMiddleware` function takes an optional `config` object that may contain any of the following properties, mapped to the `req` object property of the same name:
 
@@ -60,7 +60,7 @@ Each of the object properties within `body`, `query`, and/or `params` have prope
 | maxLength (optional) | `Number`  | The maximum accepted length of a property  |
 | type (required)      | `String`  | The expected type of the recieved property |
 
-# Examples
+## Examples
 
 If no options are provided to the middleware, the middleware will accept every property found in the `body`, `query`, and `params` object properties of a `req` and then attempt to derive the type before sanitizing.
 
@@ -115,10 +115,10 @@ const options = {
 app.use(sanitizeMiddleware(options));
 ```
 
-# Contributing
+## Contributing
 
 Please see [CONTRIBUTING.md](https://github.com/Fdawgs/sanitize-middleware/blob/master/CONTRIBUTING.md) for more details regarding contributing to this project.
 
-# License
+## License
 
 `sanitize-middleware` is licensed under the [MIT](https://github.com/Fdawgs/sanitize-middleware/blob/master/LICENSE) license.
