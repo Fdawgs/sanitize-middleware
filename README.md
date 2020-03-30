@@ -5,7 +5,7 @@
 
 > Connect/Express middleware that sanitizes the query, params and body of requests to protect against cross-site scripting (XSS) and command injection attacks
 
-# Installation
+## Installation
 
 Install using [`yarn`](https://yarnpkg.com/en/package/sanitize-middleware):
 
@@ -21,13 +21,13 @@ npm install sanitize-middleware
 
 sanitize-middleware's test scripts use yarn commands.
 
-# API
+## API
 
 ```js
 const sanitizeMiddleware = require('sanitize-middleware');
 ```
 
-## Options
+### Options
 
 The `sanitizeMiddleware` function takes an optional `config` object that may contain any of the following properties, mapped to the `req` object property of the same name:
 
@@ -52,13 +52,15 @@ const exampleConfig = {
 };
 ```
 
-Each of the object properties within `body`, `query`, and/or `params` have optional properties themselves:
+Each of the object properties within `body`, `query`, and/or `params` have properties themselves:
 
--   `type` - the expected type of the recieved property
--   `mandatory` - whether the property is mandatory
--   `maxLength` - the maximum accepted length of a property
+| Property             | Type      | Description                                |
+| -------------------- | --------- | ------------------------------------------ |
+| mandatory (optional) | `Boolean` | Whether the property is mandatory          |
+| maxLength (optional) | `Number`  | The maximum accepted length of a property  |
+| type (required)      | `String`  | The expected type of the received property |
 
-# Examples
+## Examples
 
 If no options are provided to the middleware, the middleware will accept every property found in the `body`, `query`, and `params` object properties of a `req` and then attempt to derive the type before sanitizing.
 
@@ -70,7 +72,7 @@ const app = express();
 app.use(sanitizeMiddleware());
 ```
 
-With options provided, if a recieved property that is mandatory is missing, is the wrong type, or is longer than the max length, an error will be passed to `next()` to be handled by your error handler middleware.
+With options provided, if a received property that is mandatory is missing, is the wrong type, or is longer than the max length, an error will be passed to `next()` to be handled by your error handler middleware.
 
 ```js
 const sanitizeMiddleware = require('sanitize-middleware');
@@ -79,7 +81,7 @@ const app = express();
 
 // localhost:8204/test?id=hello&status=current would throw an error as type of the id query key is wrong
 // localhost:8204/test?id=1 would throw an error as the mandatory status query key is missing
-// localhost:8204/test?subject=bananas would thrown an error as the length is greater than the maxLength allowed
+// localhost:8204/test?subject=bananas would throw an error as the length is greater than the maxLength allowed
 const options = {
 	query: {
 		status: { type: 'string', mandatory: true },
@@ -93,7 +95,7 @@ const options = {
 app.use(sanitizeMiddleware(options));
 ```
 
-The `mandatory` property is optional, if not present is is assumed a recieved property matching it's parent key name is not mandatory.
+The `mandatory` property is optional, if not present it is assumed a received property matching its parent key name is not mandatory.
 
 ```js
 const sanitizeMiddleware = require('sanitize-middleware');
@@ -113,10 +115,10 @@ const options = {
 app.use(sanitizeMiddleware(options));
 ```
 
-# Contributing
+## Contributing
 
 Please see [CONTRIBUTING.md](https://github.com/Fdawgs/sanitize-middleware/blob/master/CONTRIBUTING.md) for more details regarding contributing to this project.
 
-# License
+## License
 
 `sanitize-middleware` is licensed under the [MIT](https://github.com/Fdawgs/sanitize-middleware/blob/master/LICENSE) license.

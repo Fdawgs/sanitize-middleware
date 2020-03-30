@@ -35,7 +35,7 @@ function deriveType(value) {
 
 /**
  * @author Frazer Smith
- * @description Validate that value is of type passed.
+ * @description Validates that value is of type passed.
  * @param {String} value
  * @param {('boolean'|'date'|'json'|'number'|'object'|'string')=} type - Expected type of value.
  * @returns {Boolean} confirmation that value is valid.
@@ -117,7 +117,7 @@ function parseValue(value, type) {
 
 /**
  * @author Frazer Smith
- * @description Check all mandatory arguments are present.
+ * @description Checks all mandatory arguments are present.
  * If one or more is missing an error will be returned else it will attempt to validate and sanitize all arguments passed.
  * @param {Object} args
  * @param {Object=} config - Objects containing accepted arguments as properties, and their types as values.
