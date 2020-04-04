@@ -1,3 +1,15 @@
+## <small>2.0.5 (2020-04-04)</small>
+
+-   build(deps-dev): bump eslint-plugin-import from 2.20.1 to 2.20.2 ([186932d](https://github.com/Fdawgs/sanitize-middleware/commit/186932d))
+-   build(deps-dev): bump jest from 25.1.0 to 25.2.4 ([b084c92](https://github.com/Fdawgs/sanitize-middleware/commit/b084c92))
+-   build(deps-dev): update dev dependencies to resolve vulnerabilities ([70143e4](https://github.com/Fdawgs/sanitize-middleware/commit/70143e4))
+-   style(travis): alphabetise test options ([9fefe91](https://github.com/Fdawgs/sanitize-middleware/commit/9fefe91))
+-   chore(package): tidy jest config and cli options ([8efaae0](https://github.com/Fdawgs/sanitize-middleware/commit/8efaae0))
+-   docs: grammar and spelling fixes ([c6f496c](https://github.com/Fdawgs/sanitize-middleware/commit/c6f496c))
+-   docs(contributing): grammar and spelling fixes ([b93d9a5](https://github.com/Fdawgs/sanitize-middleware/commit/b93d9a5))
+-   docs(readme): clarify on requirement of properties ([cd21a34](https://github.com/Fdawgs/sanitize-middleware/commit/cd21a34))
+-   docs(readme): correct section sizes ([83ccbf5](https://github.com/Fdawgs/sanitize-middleware/commit/83ccbf5))
+
 ## <small>2.0.4 (2020-03-25)</small>
 
 -   build(deps-dev): bump eslint-config-prettier from 6.10.0 to 6.10.1 ([e1ce98a](https://github.com/Fdawgs/sanitize-middleware/commit/e1ce98a))
