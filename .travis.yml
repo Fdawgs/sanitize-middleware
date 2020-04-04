@@ -31,16 +31,16 @@ jobs:
         - os: osx
     include:
         - stage: Produce Coverage
-          os: linux
           node_js: node
+          os: linux
           script: jest --coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage
         - stage: Check for Code Duplication
-          os: linux
           node_js: node
+          os: linux
           script: yarn dupe-check
         - stage: NPM release
-          os: linux
           node_js: node
+          os: linux
           deploy:
             provider: npm
             email: devfrazs@outlook.com
