@@ -1,4 +1,3 @@
-const moment = require('moment');
 const sanitize = require('sanitize-html');
 const validator = require('validator');
 const xss = require('xss');
@@ -24,7 +23,7 @@ function deriveType(value) {
 		(validator.isFloat(value) && typeof value === 'string')
 	) {
 		result = 'number';
-	} else if (moment(value, moment.ISO_8601, true).isValid()) {
+	} else if (validator.isISO8601(value, {strict: true})) {
 		result = 'date';
 	} else {
 		result = 'string';
@@ -50,7 +49,7 @@ function validateType(value, type) {
 				typeof value === 'boolean';
 			break;
 		case 'date':
-			result = moment(value, undefined, true).isValid();
+			result = validator.toDate(value) !== null; 
 			break;
 		case 'json':
 			result = typeof JSON.parse(value) === 'object';
@@ -91,7 +90,7 @@ function parseValue(value, type) {
 			}
 			break;
 		case 'date':
-			result = moment(value, undefined, true).toDate();
+			result = validator.toDate(value);
 			break;
 		case 'json':
 			result = JSON.parse(value);
