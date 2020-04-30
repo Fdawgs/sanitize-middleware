@@ -1,3 +1,14 @@
+## <small>2.0.6 (2020-04-30)</small>
+
+-   tests(package): add runinband option for jest cli ([b743a53](https://github.com/Fdawgs/sanitize-middleware/commit/b743a53))
+-   build(deps-dev): bump coveralls from 3.0.11 to 3.1.0 ([ce7ba20](https://github.com/Fdawgs/sanitize-middleware/commit/ce7ba20))
+-   build(deps-dev): bump eslint-config-prettier from 6.10.1 to 6.11.0 ([4627ce5](https://github.com/Fdawgs/sanitize-middleware/commit/4627ce5))
+-   build(deps-dev): bump jest from 25.2.7 to 25.5.1 ([3dfa1c8](https://github.com/Fdawgs/sanitize-middleware/commit/3dfa1c8))
+-   build(deps-dev): bump jest from 25.5.1 to 25.5.2 ([5cd59da](https://github.com/Fdawgs/sanitize-middleware/commit/5cd59da))
+-   build(deps-dev): bump prettier from 2.0.2 to 2.0.5 ([a27e813](https://github.com/Fdawgs/sanitize-middleware/commit/a27e813))
+-   build(deps): bump sanitize-html from 1.22.1 to 1.23.0 ([74794d1](https://github.com/Fdawgs/sanitize-middleware/commit/74794d1))
+-   refactor(index): replace moment module with validator functions ([e11b33e](https://github.com/Fdawgs/sanitize-middleware/commit/e11b33e))
+
 ## <small>2.0.5 (2020-04-04)</small>
 
 -   build(deps-dev): bump eslint-plugin-import from 2.20.1 to 2.20.2 ([186932d](https://github.com/Fdawgs/sanitize-middleware/commit/186932d))
