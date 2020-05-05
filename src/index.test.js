@@ -63,6 +63,7 @@ describe('Sanitization and validation middleware', () => {
 		expect(req.query.argCtrlChars).toBe('');
 
 		expect(next).toHaveBeenCalledTimes(1);
+		expect(next.mock.calls[0][0]).toBeUndefined();
 	});
 
 	test('Should parse GET query values if all arguments are valid', () => {
@@ -95,6 +96,7 @@ describe('Sanitization and validation middleware', () => {
 		expect(req.query.argCtrlChars).toBe('');
 
 		expect(next).toHaveBeenCalledTimes(1);
+		expect(next.mock.calls[0][0]).toBeUndefined();
 	});
 
 	test('Should pass an error to next if invalid GET query values are provided', () => {
@@ -146,6 +148,7 @@ describe('Sanitization and validation middleware', () => {
 		expect(req.params.argCtrlChars).toBe('');
 
 		expect(next).toHaveBeenCalledTimes(1);
+		expect(next.mock.calls[0][0]).toBeUndefined();
 	});
 
 	test('Should pass an error to next if invalid param values are provided', () => {
@@ -196,6 +199,7 @@ describe('Sanitization and validation middleware', () => {
 		expect(req.body.argCtrlChars).toBe('');
 
 		expect(next).toHaveBeenCalledTimes(1);
+		expect(next.mock.calls[0][0]).toBeUndefined();
 	});
 
 	test('Should pass an error to next if invalid PUT body values are provided', () => {
