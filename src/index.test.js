@@ -46,7 +46,6 @@ describe('Sanitization and validation middleware', () => {
 		const next = jest.fn();
 
 		middleware(req, res, next);
-		expect(res.statusCode).toBe(200);
 		expect(typeof req.query.argString).toBe('string');
 		expect(typeof req.query.argNumber).toBe('number');
 		expect(typeof req.query.argNumberString).toBe('number');
@@ -62,6 +61,7 @@ describe('Sanitization and validation middleware', () => {
 		expect(typeof req.query.argCtrlChars).toBe('string');
 		expect(req.query.argCtrlChars).toBe('');
 
+		expect(res.statusCode).toBe(200);
 		expect(next).toHaveBeenCalledTimes(1);
 		expect(next.mock.calls[0][0]).toBeUndefined();
 	});
@@ -79,7 +79,6 @@ describe('Sanitization and validation middleware', () => {
 		delete req.query.argInvalid;
 
 		middleware(req, res, next);
-		expect(res.statusCode).toBe(200);
 		expect(typeof req.query.argString).toBe('string');
 		expect(typeof req.query.argNumber).toBe('number');
 		expect(typeof req.query.argNumberString).toBe('number');
@@ -95,6 +94,7 @@ describe('Sanitization and validation middleware', () => {
 		expect(typeof req.query.argCtrlChars).toBe('string');
 		expect(req.query.argCtrlChars).toBe('');
 
+		expect(res.statusCode).toBe(200);
 		expect(next).toHaveBeenCalledTimes(1);
 		expect(next.mock.calls[0][0]).toBeUndefined();
 	});
@@ -111,10 +111,10 @@ describe('Sanitization and validation middleware', () => {
 		const next = jest.fn();
 
 		middleware(req, res, next);
+		expect(next).toHaveBeenCalledTimes(1);
 		expect(next.mock.calls[0][0].message).toBe(
 			'Invalid option provided: argInvalid'
 		);
-		expect(next).toHaveBeenCalledTimes(1);
 	});
 
 	test('Should parse params values if all arguments are valid', () => {
@@ -130,7 +130,6 @@ describe('Sanitization and validation middleware', () => {
 		delete req.params.argInvalid;
 
 		middleware(req, res, next);
-		expect(res.statusCode).toBe(200);
 		expect(typeof req.params.argString).toBe('string');
 		expect(typeof req.params.argNumber).toBe('number');
 		expect(typeof req.params.argNumberString).toBe('number');
@@ -147,6 +146,7 @@ describe('Sanitization and validation middleware', () => {
 		expect(typeof req.params.argCtrlChars).toBe('string');
 		expect(req.params.argCtrlChars).toBe('');
 
+		expect(res.statusCode).toBe(200);
 		expect(next).toHaveBeenCalledTimes(1);
 		expect(next.mock.calls[0][0]).toBeUndefined();
 	});
@@ -163,10 +163,10 @@ describe('Sanitization and validation middleware', () => {
 		const next = jest.fn();
 
 		middleware(req, res, next);
+		expect(next).toHaveBeenCalledTimes(1);
 		expect(next.mock.calls[0][0].message).toBe(
 			'Invalid option provided: argInvalid'
 		);
-		expect(next).toHaveBeenCalledTimes(1);
 	});
 
 	test('Should parse PUT body values if all arguments are valid', () => {
@@ -182,7 +182,6 @@ describe('Sanitization and validation middleware', () => {
 		delete req.body.argInvalid;
 
 		middleware(req, res, next);
-		expect(res.statusCode).toBe(200);
 		expect(typeof req.body.argString).toBe('string');
 		expect(typeof req.body.argNumber).toBe('number');
 		expect(typeof req.body.argNumberString).toBe('number');
@@ -198,6 +197,7 @@ describe('Sanitization and validation middleware', () => {
 		expect(typeof req.body.argCtrlChars).toBe('string');
 		expect(req.body.argCtrlChars).toBe('');
 
+		expect(res.statusCode).toBe(200);
 		expect(next).toHaveBeenCalledTimes(1);
 		expect(next.mock.calls[0][0]).toBeUndefined();
 	});
@@ -214,10 +214,10 @@ describe('Sanitization and validation middleware', () => {
 		const next = jest.fn();
 
 		middleware(req, res, next);
+		expect(next).toHaveBeenCalledTimes(1);
 		expect(next.mock.calls[0][0].message).toBe(
 			'Invalid option provided: argInvalid'
 		);
-		expect(next).toHaveBeenCalledTimes(1);
 	});
 
 	test('Should pass an error to next if mandatory value is missing', () => {
@@ -236,10 +236,10 @@ describe('Sanitization and validation middleware', () => {
 		delete req.params.argString;
 
 		middleware(req, res, next);
+		expect(next).toHaveBeenCalledTimes(1);
 		expect(next.mock.calls[0][0].message).toBe(
 			'A mandatory parameter is missing from the list: argString'
 		);
-		expect(next).toHaveBeenCalledTimes(1);
 	});
 
 	test('Should pass an error to next if value is greater than max length specified', () => {
@@ -258,10 +258,10 @@ describe('Sanitization and validation middleware', () => {
 		delete req.params.argInvalid;
 
 		middleware(req, res, next);
+		expect(next).toHaveBeenCalledTimes(1);
 		expect(next.mock.calls[0][0].message).toBe(
 			'argString is greater than the allowed length of 2'
 		);
-		expect(next).toHaveBeenCalledTimes(1);
 	});
 
 	test('Should pass an error to next if invalid type provided for argument in config', () => {
@@ -279,9 +279,9 @@ describe('Sanitization and validation middleware', () => {
 		const next = jest.fn();
 
 		middleware(req, res, next);
+		expect(next).toHaveBeenCalledTimes(1);
 		expect(next.mock.calls[0][0].message).toBe(
 			'Invalid option provided: argInvalid'
 		);
-		expect(next).toHaveBeenCalledTimes(1);
 	});
 });

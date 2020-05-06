@@ -23,7 +23,7 @@ function deriveType(value) {
 		(validator.isFloat(value) && typeof value === 'string')
 	) {
 		result = 'number';
-	} else if (validator.isISO8601(value, {strict: true})) {
+	} else if (validator.isISO8601(value, { strict: true })) {
 		result = 'date';
 	} else {
 		result = 'string';
@@ -49,7 +49,7 @@ function validateType(value, type) {
 				typeof value === 'boolean';
 			break;
 		case 'date':
-			result = validator.toDate(value) !== null; 
+			result = validator.toDate(value) !== null;
 			break;
 		case 'json':
 			result = typeof JSON.parse(value) === 'object';
