@@ -46,21 +46,20 @@ describe('Sanitization and validation middleware', () => {
 		const next = jest.fn();
 
 		middleware(req, res, next);
-		expect(typeof req.query.argString).toBe('string');
-		expect(typeof req.query.argNumber).toBe('number');
-		expect(typeof req.query.argNumberString).toBe('number');
-		expect(typeof req.query.argBoolean).toBe('boolean');
-		expect(typeof req.query.argBooleanString).toBe('boolean');
-		expect(typeof req.query.argObject).toBe('object');
+		expect(req.query).toMatchObject({
+			argString: expect.any(String),
+			argNumber: expect.any(Number),
+			argNumberString: expect.any(Number),
+			argBoolean: expect.any(Boolean),
+			argBooleanString: expect.any(Boolean),
+			argObject: expect.any(Object),
 
-		// Test HTML parsing
-		expect(typeof req.query.argHtml).toBe('string');
-		expect(req.query.argHtml).toBe('<a href="https://www.nhs.uk/">b</a>');
+			// Test HTML parsing
+			argHtml: '<a href="https://www.nhs.uk/">b</a>',
 
-		// Test control character removal
-		expect(typeof req.query.argCtrlChars).toBe('string');
-		expect(req.query.argCtrlChars).toBe('');
-
+			// Test control character removal
+			argCtrlChars: ''
+		});
 		expect(res.statusCode).toBe(200);
 		expect(next).toHaveBeenCalledTimes(1);
 		expect(next.mock.calls[0][0]).toBeUndefined();
@@ -79,21 +78,20 @@ describe('Sanitization and validation middleware', () => {
 		delete req.query.argInvalid;
 
 		middleware(req, res, next);
-		expect(typeof req.query.argString).toBe('string');
-		expect(typeof req.query.argNumber).toBe('number');
-		expect(typeof req.query.argNumberString).toBe('number');
-		expect(typeof req.query.argBoolean).toBe('boolean');
-		expect(typeof req.query.argBooleanString).toBe('boolean');
-		expect(typeof req.query.argObject).toBe('object');
+		expect(req.query).toMatchObject({
+			argString: expect.any(String),
+			argNumber: expect.any(Number),
+			argNumberString: expect.any(Number),
+			argBoolean: expect.any(Boolean),
+			argBooleanString: expect.any(Boolean),
+			argObject: expect.any(Object),
 
-		// Test HTML parsing
-		expect(typeof req.query.argHtml).toBe('string');
-		expect(req.query.argHtml).toBe('<a href="https://www.nhs.uk/">b</a>');
+			// Test HTML parsing
+			argHtml: '<a href="https://www.nhs.uk/">b</a>',
 
-		// Test control character removal
-		expect(typeof req.query.argCtrlChars).toBe('string');
-		expect(req.query.argCtrlChars).toBe('');
-
+			// Test control character removal
+			argCtrlChars: ''
+		});
 		expect(res.statusCode).toBe(200);
 		expect(next).toHaveBeenCalledTimes(1);
 		expect(next.mock.calls[0][0]).toBeUndefined();
@@ -130,22 +128,20 @@ describe('Sanitization and validation middleware', () => {
 		delete req.params.argInvalid;
 
 		middleware(req, res, next);
-		expect(typeof req.params.argString).toBe('string');
-		expect(typeof req.params.argNumber).toBe('number');
-		expect(typeof req.params.argNumberString).toBe('number');
-		expect(typeof req.params.argBoolean).toBe('boolean');
-		expect(typeof req.params.argBooleanString).toBe('boolean');
-		expect(typeof req.params.argObject).toBe('object');
-		expect(typeof req.params.argHtml).toBe('string');
+		expect(req.params).toMatchObject({
+			argString: expect.any(String),
+			argNumber: expect.any(Number),
+			argNumberString: expect.any(Number),
+			argBoolean: expect.any(Boolean),
+			argBooleanString: expect.any(Boolean),
+			argObject: expect.any(Object),
 
-		// Test HTML parsing
-		expect(typeof req.params.argHtml).toBe('string');
-		expect(req.params.argHtml).toBe('<a href="https://www.nhs.uk/">b</a>');
+			// Test HTML parsing
+			argHtml: '<a href="https://www.nhs.uk/">b</a>',
 
-		// Test control character removal
-		expect(typeof req.params.argCtrlChars).toBe('string');
-		expect(req.params.argCtrlChars).toBe('');
-
+			// Test control character removal
+			argCtrlChars: ''
+		});
 		expect(res.statusCode).toBe(200);
 		expect(next).toHaveBeenCalledTimes(1);
 		expect(next.mock.calls[0][0]).toBeUndefined();
@@ -182,21 +178,21 @@ describe('Sanitization and validation middleware', () => {
 		delete req.body.argInvalid;
 
 		middleware(req, res, next);
-		expect(typeof req.body.argString).toBe('string');
-		expect(typeof req.body.argNumber).toBe('number');
-		expect(typeof req.body.argNumberString).toBe('number');
-		expect(typeof req.body.argBoolean).toBe('boolean');
-		expect(typeof req.body.argBooleanString).toBe('boolean');
-		expect(typeof req.body.argObject).toBe('object');
 
-		// Test HTML parsing
-		expect(typeof req.body.argHtml).toBe('string');
-		expect(req.body.argHtml).toBe('<a href="https://www.nhs.uk/">b</a>');
+		expect(req.body).toMatchObject({
+			argString: expect.any(String),
+			argNumber: expect.any(Number),
+			argNumberString: expect.any(Number),
+			argBoolean: expect.any(Boolean),
+			argBooleanString: expect.any(Boolean),
+			argObject: expect.any(Object),
 
-		// Test control character removal
-		expect(typeof req.body.argCtrlChars).toBe('string');
-		expect(req.body.argCtrlChars).toBe('');
+			// Test HTML parsing
+			argHtml: '<a href="https://www.nhs.uk/">b</a>',
 
+			// Test control character removal
+			argCtrlChars: ''
+		});
 		expect(res.statusCode).toBe(200);
 		expect(next).toHaveBeenCalledTimes(1);
 		expect(next.mock.calls[0][0]).toBeUndefined();
