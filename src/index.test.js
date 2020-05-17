@@ -1,3 +1,4 @@
+const cloneDeep = require('lodash/cloneDeep');
 const httpMocks = require('node-mocks-http');
 const sanitizeMiddleware = require('./index');
 
@@ -217,10 +218,10 @@ describe('Sanitization and validation middleware', () => {
 	});
 
 	test('Should pass an error to next if mandatory value is missing', () => {
-		const adjustedArgs = JSON.parse(JSON.stringify(requiredArgs));
-		adjustedArgs.argString.mandatory = true;
+		const modArgs = cloneDeep(requiredArgs)
+		modArgs.argString.mandatory = true;
 
-		const middleware = sanitizeMiddleware({ params: adjustedArgs });
+		const middleware = sanitizeMiddleware({ params: modArgs });
 
 		const query = {};
 		const req = httpMocks.createRequest({
@@ -239,10 +240,10 @@ describe('Sanitization and validation middleware', () => {
 	});
 
 	test('Should pass an error to next if value is greater than max length specified', () => {
-		const adjustedArgs = JSON.parse(JSON.stringify(requiredArgs));
-		adjustedArgs.argString.maxLength = 2;
+		const modArgs = cloneDeep(requiredArgs)
+		modArgs.argString.maxLength = 2;
 
-		const middleware = sanitizeMiddleware({ params: adjustedArgs });
+		const middleware = sanitizeMiddleware({ params: modArgs });
 
 		const query = {};
 		const req = httpMocks.createRequest({
@@ -261,10 +262,10 @@ describe('Sanitization and validation middleware', () => {
 	});
 
 	test('Should pass an error to next if invalid type provided for argument in config', () => {
-		const adjustedArgs = JSON.parse(JSON.stringify(requiredArgs));
-		adjustedArgs.argInvalid = { type: 'gibberish', mandatory: false };
+		const modArgs = cloneDeep(requiredArgs)
+		modArgs.argInvalid = { type: 'gibberish', mandatory: false };
 
-		const middleware = sanitizeMiddleware({ params: adjustedArgs });
+		const middleware = sanitizeMiddleware({ params: modArgs });
 
 		const query = {};
 		const req = httpMocks.createRequest({
