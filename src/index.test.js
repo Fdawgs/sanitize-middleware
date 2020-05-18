@@ -218,7 +218,7 @@ describe('Sanitization and validation middleware', () => {
 	});
 
 	test('Should pass an error to next if mandatory value is missing', () => {
-		const modArgs = cloneDeep(requiredArgs)
+		const modArgs = cloneDeep(requiredArgs);
 		modArgs.argString.mandatory = true;
 
 		const middleware = sanitizeMiddleware({ params: modArgs });
@@ -240,7 +240,7 @@ describe('Sanitization and validation middleware', () => {
 	});
 
 	test('Should pass an error to next if value is greater than max length specified', () => {
-		const modArgs = cloneDeep(requiredArgs)
+		const modArgs = cloneDeep(requiredArgs);
 		modArgs.argString.maxLength = 2;
 
 		const middleware = sanitizeMiddleware({ params: modArgs });
@@ -262,7 +262,7 @@ describe('Sanitization and validation middleware', () => {
 	});
 
 	test('Should pass an error to next if invalid type provided for argument in config', () => {
-		const modArgs = cloneDeep(requiredArgs)
+		const modArgs = cloneDeep(requiredArgs);
 		modArgs.argInvalid = { type: 'gibberish', mandatory: false };
 
 		const middleware = sanitizeMiddleware({ params: modArgs });
