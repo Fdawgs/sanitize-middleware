@@ -36,7 +36,7 @@ describe('Sanitization and validation middleware', () => {
 		expect(typeof middleware).toBe('function');
 	});
 
-	test('Should continue if no required arguments are provided', () => {
+	test('Should continue when no required arguments are provided', () => {
 		const middleware = sanitizeMiddleware();
 		const query = {};
 		const req = httpMocks.createRequest({
@@ -63,7 +63,7 @@ describe('Sanitization and validation middleware', () => {
 		expect(next.mock.calls[0][0]).toBeUndefined();
 	});
 
-	test('Should parse GET query values if all arguments are valid', () => {
+	test('Should parse GET query values when all arguments are valid', () => {
 		const middleware = sanitizeMiddleware({ query: requiredArgs });
 		const query = {};
 		const req = httpMocks.createRequest({
@@ -91,7 +91,7 @@ describe('Sanitization and validation middleware', () => {
 		expect(next.mock.calls[0][0]).toBeUndefined();
 	});
 
-	test('Should pass an error to next if invalid GET query values are provided', () => {
+	test('Should pass an error to next when invalid GET query values are provided', () => {
 		const middleware = sanitizeMiddleware({ query: requiredArgs });
 		const query = {};
 		const req = httpMocks.createRequest({
@@ -109,7 +109,7 @@ describe('Sanitization and validation middleware', () => {
 		);
 	});
 
-	test('Should parse params values if all arguments are valid', () => {
+	test('Should parse params values when all arguments are valid', () => {
 		const middleware = sanitizeMiddleware({ params: requiredArgs });
 		const query = {};
 		const req = httpMocks.createRequest({
@@ -137,7 +137,7 @@ describe('Sanitization and validation middleware', () => {
 		expect(next.mock.calls[0][0]).toBeUndefined();
 	});
 
-	test('Should pass an error to next if invalid param values are provided', () => {
+	test('Should pass an error to next when invalid param values are provided', () => {
 		const middleware = sanitizeMiddleware({ params: requiredArgs });
 		const query = {};
 		const req = httpMocks.createRequest({
@@ -155,7 +155,7 @@ describe('Sanitization and validation middleware', () => {
 		);
 	});
 
-	test('Should parse PUT body values if all arguments are valid', () => {
+	test('Should parse PUT body values when all arguments are valid', () => {
 		const middleware = sanitizeMiddleware({ body: requiredArgs });
 		const query = {};
 		const req = httpMocks.createRequest({
@@ -183,7 +183,7 @@ describe('Sanitization and validation middleware', () => {
 		expect(next.mock.calls[0][0]).toBeUndefined();
 	});
 
-	test('Should pass an error to next if invalid PUT body values are provided', () => {
+	test('Should pass an error to next when invalid PUT body values are provided', () => {
 		const middleware = sanitizeMiddleware({ body: requiredArgs });
 		const query = {};
 		const req = httpMocks.createRequest({
@@ -201,7 +201,7 @@ describe('Sanitization and validation middleware', () => {
 		);
 	});
 
-	test('Should pass an error to next if mandatory value is missing', () => {
+	test('Should pass an error to next when mandatory value is missing', () => {
 		const modArgs = cloneDeep(requiredArgs);
 		modArgs.argString.mandatory = true;
 		const middleware = sanitizeMiddleware({ params: modArgs });
@@ -222,7 +222,7 @@ describe('Sanitization and validation middleware', () => {
 		);
 	});
 
-	test('Should pass an error to next if value is greater than max length specified', () => {
+	test('Should pass an error to next when value is greater than max length specified', () => {
 		const modArgs = cloneDeep(requiredArgs);
 		modArgs.argString.maxLength = 2;
 		const middleware = sanitizeMiddleware({ params: modArgs });
@@ -243,7 +243,7 @@ describe('Sanitization and validation middleware', () => {
 		);
 	});
 
-	test('Should pass an error to next if invalid type provided for argument in config', () => {
+	test('Should pass an error to next when invalid type is provided for argument in config', () => {
 		const modArgs = cloneDeep(requiredArgs);
 		modArgs.argInvalid = { type: 'gibberish', mandatory: false };
 		const middleware = sanitizeMiddleware({ params: modArgs });
