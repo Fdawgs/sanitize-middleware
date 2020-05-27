@@ -6,7 +6,7 @@ const xss = require('xss');
  * @author Frazer Smith
  * @description Attempts to derive type of value.
  * @param {*} value
- * @returns {String} type of value.
+ * @returns {string} type of value.
  */
 function deriveType(value) {
 	let result;
@@ -35,9 +35,9 @@ function deriveType(value) {
 /**
  * @author Frazer Smith
  * @description Validates that value is of type passed.
- * @param {String} value
+ * @param {string} value
  * @param {('boolean'|'date'|'json'|'number'|'object'|'string')=} type - Expected type of value.
- * @returns {Boolean} confirmation that value is valid.
+ * @returns {boolean} confirmation that value is valid.
  */
 function validateType(value, type) {
 	let result;
@@ -75,9 +75,9 @@ function validateType(value, type) {
 /**
  * @author Frazer Smith
  * @description Sanitizes value based on type passed.
- * @param {String} value
+ * @param {string} value
  * @param {('boolean'|'date'|'json'|'number'|'object'|'string')=} type - Expected type of value.
- * @returns {String} parsed value.
+ * @returns {string} parsed value.
  */
 function parseValue(value, type) {
 	let result;
@@ -118,9 +118,9 @@ function parseValue(value, type) {
  * @author Frazer Smith
  * @description Checks all mandatory arguments are present.
  * If one or more is missing an error will be returned else it will attempt to validate and sanitize all arguments passed.
- * @param {Object} args
- * @param {Object=} config - Objects containing accepted arguments as properties, and their types as values.
- * @returns {Error|String}
+ * @param {object} args
+ * @param {object=} config - Objects containing accepted arguments as properties, and their types as values.
+ * @returns {Error|string}
  */
 function parseValues(args, config) {
 	const values = args;
@@ -202,10 +202,10 @@ function parseValues(args, config) {
  * @description Validates
  * and sanitizes the query, param and body of requests to protect against
  * cross-site scripting (XSS) and command injection attacks.
- * @param {Object} config - Sanitization configuration values.
- * @param {Object.<string, {type: ('boolean'|'date'|'json'|'number'|'object'|'string'), mandatory: boolean, maxLength: number}>=} config.body
- * @param {Object.<string, {type: ('boolean'|'date'|'json'|'number'|'object'|'string'), mandatory: boolean, maxLength: number}>=} config.params
- * @param {Object.<string, {type: ('boolean'|'date'|'json'|'number'|'object'|'string'), mandatory: boolean, maxLength: number}>=} config.query
+ * @param {object} config - Sanitization configuration values.
+ * @param {object.<string, {type: ('boolean'|'date'|'json'|'number'|'object'|'string'), mandatory: boolean, maxLength: number}>=} config.body
+ * @param {object.<string, {type: ('boolean'|'date'|'json'|'number'|'object'|'string'), mandatory: boolean, maxLength: number}>=} config.params
+ * @param {object.<string, {type: ('boolean'|'date'|'json'|'number'|'object'|'string'), mandatory: boolean, maxLength: number}>=} config.query
  * @return {Function} Express middleware.
  */
 module.exports = function sanitizeMiddleware(
