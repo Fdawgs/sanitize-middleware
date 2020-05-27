@@ -32,12 +32,12 @@ const requiredArgs = {
 describe('Sanitization and validation middleware', () => {
 	test('Should return a middleware function', () => {
 		const middleware = sanitizeMiddleware();
+
 		expect(typeof middleware).toBe('function');
 	});
 
 	test('Should continue if no required arguments are provided', () => {
 		const middleware = sanitizeMiddleware();
-
 		const query = {};
 		const req = httpMocks.createRequest({
 			method: 'GET',
@@ -47,6 +47,7 @@ describe('Sanitization and validation middleware', () => {
 		const next = jest.fn();
 
 		middleware(req, res, next);
+
 		expect(req.query).toMatchObject({
 			argString: expect.any(String),
 			argNumber: expect.any(Number),
@@ -54,11 +55,7 @@ describe('Sanitization and validation middleware', () => {
 			argBoolean: expect.any(Boolean),
 			argBooleanString: expect.any(Boolean),
 			argObject: expect.any(Object),
-
-			// Test HTML parsing
 			argHtml: '<a href="https://www.nhs.uk/">b</a>',
-
-			// Test control character removal
 			argCtrlChars: ''
 		});
 		expect(res.statusCode).toBe(200);
@@ -68,7 +65,6 @@ describe('Sanitization and validation middleware', () => {
 
 	test('Should parse GET query values if all arguments are valid', () => {
 		const middleware = sanitizeMiddleware({ query: requiredArgs });
-
 		const query = {};
 		const req = httpMocks.createRequest({
 			method: 'GET',
@@ -79,6 +75,7 @@ describe('Sanitization and validation middleware', () => {
 		delete req.query.argInvalid;
 
 		middleware(req, res, next);
+
 		expect(req.query).toMatchObject({
 			argString: expect.any(String),
 			argNumber: expect.any(Number),
@@ -86,11 +83,7 @@ describe('Sanitization and validation middleware', () => {
 			argBoolean: expect.any(Boolean),
 			argBooleanString: expect.any(Boolean),
 			argObject: expect.any(Object),
-
-			// Test HTML parsing
 			argHtml: '<a href="https://www.nhs.uk/">b</a>',
-
-			// Test control character removal
 			argCtrlChars: ''
 		});
 		expect(res.statusCode).toBe(200);
@@ -100,7 +93,6 @@ describe('Sanitization and validation middleware', () => {
 
 	test('Should pass an error to next if invalid GET query values are provided', () => {
 		const middleware = sanitizeMiddleware({ query: requiredArgs });
-
 		const query = {};
 		const req = httpMocks.createRequest({
 			method: 'GET',
@@ -110,6 +102,7 @@ describe('Sanitization and validation middleware', () => {
 		const next = jest.fn();
 
 		middleware(req, res, next);
+
 		expect(next).toHaveBeenCalledTimes(1);
 		expect(next.mock.calls[0][0].message).toBe(
 			'Invalid option provided: argInvalid'
@@ -118,7 +111,6 @@ describe('Sanitization and validation middleware', () => {
 
 	test('Should parse params values if all arguments are valid', () => {
 		const middleware = sanitizeMiddleware({ params: requiredArgs });
-
 		const query = {};
 		const req = httpMocks.createRequest({
 			method: 'GET',
@@ -129,6 +121,7 @@ describe('Sanitization and validation middleware', () => {
 		delete req.params.argInvalid;
 
 		middleware(req, res, next);
+
 		expect(req.params).toMatchObject({
 			argString: expect.any(String),
 			argNumber: expect.any(Number),
@@ -136,11 +129,7 @@ describe('Sanitization and validation middleware', () => {
 			argBoolean: expect.any(Boolean),
 			argBooleanString: expect.any(Boolean),
 			argObject: expect.any(Object),
-
-			// Test HTML parsing
 			argHtml: '<a href="https://www.nhs.uk/">b</a>',
-
-			// Test control character removal
 			argCtrlChars: ''
 		});
 		expect(res.statusCode).toBe(200);
@@ -150,7 +139,6 @@ describe('Sanitization and validation middleware', () => {
 
 	test('Should pass an error to next if invalid param values are provided', () => {
 		const middleware = sanitizeMiddleware({ params: requiredArgs });
-
 		const query = {};
 		const req = httpMocks.createRequest({
 			method: 'GET',
@@ -160,6 +148,7 @@ describe('Sanitization and validation middleware', () => {
 		const next = jest.fn();
 
 		middleware(req, res, next);
+
 		expect(next).toHaveBeenCalledTimes(1);
 		expect(next.mock.calls[0][0].message).toBe(
 			'Invalid option provided: argInvalid'
@@ -168,7 +157,6 @@ describe('Sanitization and validation middleware', () => {
 
 	test('Should parse PUT body values if all arguments are valid', () => {
 		const middleware = sanitizeMiddleware({ body: requiredArgs });
-
 		const query = {};
 		const req = httpMocks.createRequest({
 			method: 'PUT',
@@ -187,11 +175,7 @@ describe('Sanitization and validation middleware', () => {
 			argBoolean: expect.any(Boolean),
 			argBooleanString: expect.any(Boolean),
 			argObject: expect.any(Object),
-
-			// Test HTML parsing
 			argHtml: '<a href="https://www.nhs.uk/">b</a>',
-
-			// Test control character removal
 			argCtrlChars: ''
 		});
 		expect(res.statusCode).toBe(200);
@@ -201,7 +185,6 @@ describe('Sanitization and validation middleware', () => {
 
 	test('Should pass an error to next if invalid PUT body values are provided', () => {
 		const middleware = sanitizeMiddleware({ body: requiredArgs });
-
 		const query = {};
 		const req = httpMocks.createRequest({
 			method: 'PUT',
@@ -211,6 +194,7 @@ describe('Sanitization and validation middleware', () => {
 		const next = jest.fn();
 
 		middleware(req, res, next);
+
 		expect(next).toHaveBeenCalledTimes(1);
 		expect(next.mock.calls[0][0].message).toBe(
 			'Invalid option provided: argInvalid'
@@ -220,9 +204,7 @@ describe('Sanitization and validation middleware', () => {
 	test('Should pass an error to next if mandatory value is missing', () => {
 		const modArgs = cloneDeep(requiredArgs);
 		modArgs.argString.mandatory = true;
-
 		const middleware = sanitizeMiddleware({ params: modArgs });
-
 		const query = {};
 		const req = httpMocks.createRequest({
 			method: 'GET',
@@ -233,6 +215,7 @@ describe('Sanitization and validation middleware', () => {
 		delete req.params.argString;
 
 		middleware(req, res, next);
+
 		expect(next).toHaveBeenCalledTimes(1);
 		expect(next.mock.calls[0][0].message).toBe(
 			'A mandatory parameter is missing from the list: argString'
@@ -242,9 +225,7 @@ describe('Sanitization and validation middleware', () => {
 	test('Should pass an error to next if value is greater than max length specified', () => {
 		const modArgs = cloneDeep(requiredArgs);
 		modArgs.argString.maxLength = 2;
-
 		const middleware = sanitizeMiddleware({ params: modArgs });
-
 		const query = {};
 		const req = httpMocks.createRequest({
 			method: 'GET',
@@ -255,6 +236,7 @@ describe('Sanitization and validation middleware', () => {
 		delete req.params.argInvalid;
 
 		middleware(req, res, next);
+
 		expect(next).toHaveBeenCalledTimes(1);
 		expect(next.mock.calls[0][0].message).toBe(
 			'argString is greater than the allowed length of 2'
@@ -264,9 +246,7 @@ describe('Sanitization and validation middleware', () => {
 	test('Should pass an error to next if invalid type provided for argument in config', () => {
 		const modArgs = cloneDeep(requiredArgs);
 		modArgs.argInvalid = { type: 'gibberish', mandatory: false };
-
 		const middleware = sanitizeMiddleware({ params: modArgs });
-
 		const query = {};
 		const req = httpMocks.createRequest({
 			method: 'GET',
@@ -276,6 +256,7 @@ describe('Sanitization and validation middleware', () => {
 		const next = jest.fn();
 
 		middleware(req, res, next);
+
 		expect(next).toHaveBeenCalledTimes(1);
 		expect(next.mock.calls[0][0].message).toBe(
 			'Invalid option provided: argInvalid'
