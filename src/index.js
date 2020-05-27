@@ -206,7 +206,7 @@ function parseValues(args, config) {
  * @param {object.<string, {type: ('boolean'|'date'|'json'|'number'|'object'|'string'), mandatory: boolean, maxLength: number}>=} config.body
  * @param {object.<string, {type: ('boolean'|'date'|'json'|'number'|'object'|'string'), mandatory: boolean, maxLength: number}>=} config.params
  * @param {object.<string, {type: ('boolean'|'date'|'json'|'number'|'object'|'string'), mandatory: boolean, maxLength: number}>=} config.query
- * @return {Function} Express middleware.
+ * @returns {Function} Express middleware.
  */
 module.exports = function sanitizeMiddleware(
 	config = { body: {}, params: {}, query: {} }
