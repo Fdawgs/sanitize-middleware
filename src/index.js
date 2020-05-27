@@ -118,9 +118,9 @@ function parseValue(value, type) {
  * @author Frazer Smith
  * @description Checks all mandatory arguments are present.
  * If one or more is missing an error will be returned else it will attempt to validate and sanitize all arguments passed.
- * @param {object} args
+ * @param {object} args - Object containing request arguments to be parsed.
  * @param {object=} config - Objects containing accepted arguments as properties, and their types as values.
- * @returns {Error|string}
+ * @returns {Error|object} - Error object or object containing sanitized arguments.
  */
 function parseValues(args, config) {
 	const values = args;
@@ -150,7 +150,6 @@ function parseValues(args, config) {
 
 	// Check values are under the max length specified
 	const maxLengthArgs = {};
-
 	Object.keys(config).forEach((configKey) => {
 		if (
 			config[configKey].maxLength &&
@@ -159,7 +158,6 @@ function parseValues(args, config) {
 			maxLengthArgs[configKey] = config[configKey].maxLength;
 		}
 	});
-
 	Object.keys(maxLengthArgs).forEach((maxLengthKey) => {
 		if (values[maxLengthKey].length > maxLengthArgs[maxLengthKey]) {
 			message = `${maxLengthKey} is greater than the allowed length of ${maxLengthArgs[maxLengthKey]}`;
