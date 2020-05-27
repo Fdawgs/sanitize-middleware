@@ -5,7 +5,7 @@ const xss = require('xss');
 /**
  * @author Frazer Smith
  * @description Attempts to derive type of value.
- * @param {*} value
+ * @param {*} value - Value to derive type from.
  * @returns {string} type of value.
  */
 function deriveType(value) {
@@ -35,7 +35,7 @@ function deriveType(value) {
 /**
  * @author Frazer Smith
  * @description Validates that value is of type passed.
- * @param {string} value
+ * @param {string} value - Value to validate.
  * @param {('boolean'|'date'|'json'|'number'|'object'|'string')=} type - Expected type of value.
  * @returns {boolean} confirmation that value is valid.
  */
@@ -75,7 +75,7 @@ function validateType(value, type) {
 /**
  * @author Frazer Smith
  * @description Sanitizes value based on type passed.
- * @param {string} value
+ * @param {string} value - Value to sanitize.
  * @param {('boolean'|'date'|'json'|'number'|'object'|'string')=} type - Expected type of value.
  * @returns {string} parsed value.
  */
