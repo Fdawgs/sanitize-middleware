@@ -1,19 +1,20 @@
 const cloneDeep = require('lodash/cloneDeep');
+const faker = require('faker/locale/en_GB');
 const httpMocks = require('node-mocks-http');
 const sanitizeMiddleware = require('./index');
 
 const args = {
-	argString: 'hello',
-	argNumber: 2,
-	argNumberString: '2',
-	argObject: { test1: 1, test2: 2 },
-	argBoolean: true,
-	argBooleanString: 'true',
-	argDate: '2020-04-24',
+	argString: faker.random.word().substring(0, 5),
+	argNumber: faker.random.number(),
+	argNumberString: faker.random.number().toString(),
+	argObject: { test1: faker.random.number(), test2: faker.random.number() },
+	argBoolean: faker.random.boolean(),
+	argBooleanString: faker.random.boolean().toString(),
+	argDate: faker.date.past().toISOString().split('T')[0],
 	argJson: '{ "test1": 1, "test2": 2 }',
-	argHtml: "<a href='https://www.nhs.uk/'><c>b</c></a>",
+	argHtml: `<a href='https://www.nhs.uk/'><c>b</c></a>`,
 	argCtrlChars: '\x01\x09',
-	argInvalid: "i'm not valid"
+	argInvalid: faker.random.words(5)
 };
 
 const requiredArgs = {
