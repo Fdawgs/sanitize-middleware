@@ -15,6 +15,9 @@
 	"repository": "git@github.com:Fdawgs/sanitize-middleware.git",
 	"author": "Frazer Smith",
 	"license": "MIT",
+	"engines": {
+		"node": ">=12.16.3"
+	},
 	"scripts": {
 		"changelog": "conventional-changelog -p @commitlint/config-conventional -s -i CHANGELOG.md && prettier CHANGELOG.md --write",
 		"dupe-check": "yarn jsinspect ./src",
