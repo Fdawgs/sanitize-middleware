@@ -1,3 +1,29 @@
+## <small>2.0.7 (2020-05-30)</small>
+
+-   build(deps-dev): add promise and jsdoc eslint plugins; update config ([8b5799f](https://github.com/Fdawgs/sanitize-middleware/commit/8b5799f))
+-   build(deps-dev): bump conventional-changelog-cli from 2.0.31 to 2.0.34 ([3e5e424](https://github.com/Fdawgs/sanitize-middleware/commit/3e5e424))
+-   build(deps-dev): bump eslint-plugin-jest from 23.8.2 to 23.13.2 ([a5a342c](https://github.com/Fdawgs/sanitize-middleware/commit/a5a342c))
+-   build(deps-dev): bump eslint-plugin-jsdoc from 25.4.3 to 26.0.0 ([b6005d1](https://github.com/Fdawgs/sanitize-middleware/commit/b6005d1))
+-   build(deps-dev): bump jest from 25.5.2 to 25.5.3 ([e033c99](https://github.com/Fdawgs/sanitize-middleware/commit/e033c99))
+-   build(deps-dev): bump jest from 25.5.3 to 26.0.1 ([272e0d8](https://github.com/Fdawgs/sanitize-middleware/commit/272e0d8))
+-   build(deps-dev): bump typescript from 3.8.3 to 3.9.3 ([2543787](https://github.com/Fdawgs/sanitize-middleware/commit/2543787))
+-   build(deps): bump sanitize-html from 1.23.0 to 1.24.0 ([99bfd74](https://github.com/Fdawgs/sanitize-middleware/commit/99bfd74))
+-   chore: add missing @param descriptions ([9e49d6a](https://github.com/Fdawgs/sanitize-middleware/commit/9e49d6a))
+-   chore: correct @returns jsdoc tag ([0e34f15](https://github.com/Fdawgs/sanitize-middleware/commit/0e34f15))
+-   chore: correct case of type for @param jsdoc tag ([b089832](https://github.com/Fdawgs/sanitize-middleware/commit/b089832))
+-   chore: update gitignore with latest github version ([44463cc](https://github.com/Fdawgs/sanitize-middleware/commit/44463cc))
+-   chore: use @returns jsdoc tag over synonym ([36c3ece](https://github.com/Fdawgs/sanitize-middleware/commit/36c3ece))
+-   chore(package): set minimum engine version ([2410a4d](https://github.com/Fdawgs/sanitize-middleware/commit/2410a4d))
+-   tests(index): consolidate object matchers ([0912470](https://github.com/Fdawgs/sanitize-middleware/commit/0912470))
+-   tests(index): extend test pass conditions ([bed08ea](https://github.com/Fdawgs/sanitize-middleware/commit/bed08ea))
+-   tests(index): reorder expects to follow res, req, next input ([2cdc692](https://github.com/Fdawgs/sanitize-middleware/commit/2cdc692))
+-   tests(index): use lodash for deep cloning ([8c98092](https://github.com/Fdawgs/sanitize-middleware/commit/8c98092))
+-   tests(index): use pseudo-real data to test input ([5d6af68](https://github.com/Fdawgs/sanitize-middleware/commit/5d6af68))
+-   style: add missing semicolons ([98de551](https://github.com/Fdawgs/sanitize-middleware/commit/98de551))
+-   style(tests): clarify expectations ([0e2d951](https://github.com/Fdawgs/sanitize-middleware/commit/0e2d951))
+-   style(tests): structure by aaa pattern ([2040f6f](https://github.com/Fdawgs/sanitize-middleware/commit/2040f6f))
+-   docs(contributing): update conventional commit link to latest version ([23b6193](https://github.com/Fdawgs/sanitize-middleware/commit/23b6193))
+
 ## <small>2.0.6 (2020-04-30)</small>
 
 -   tests(package): add runinband option for jest cli ([b743a53](https://github.com/Fdawgs/sanitize-middleware/commit/b743a53))
