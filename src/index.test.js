@@ -4,30 +4,30 @@ const httpMocks = require('node-mocks-http');
 const sanitizeMiddleware = require('./index');
 
 const args = {
-	argString: faker.random.word().substring(0, 5),
+	argBoolean: faker.random.boolean(),
+	argBooleanString: faker.random.boolean().toString(),
+	argCtrlChars: '\x01\x09',
+	argDate: faker.date.past().toISOString().split('T')[0],
+	argHtml: `<a href='https://www.nhs.uk/'><c>b</c></a>`,
+	argInvalid: faker.random.words(5),
+	argJson: '{ "test1": 1, "test2": 2 }',
 	argNumber: faker.random.number(),
 	argNumberString: faker.random.number().toString(),
 	argObject: { test1: faker.random.number(), test2: faker.random.number() },
-	argBoolean: faker.random.boolean(),
-	argBooleanString: faker.random.boolean().toString(),
-	argDate: faker.date.past().toISOString().split('T')[0],
-	argJson: '{ "test1": 1, "test2": 2 }',
-	argHtml: `<a href='https://www.nhs.uk/'><c>b</c></a>`,
-	argCtrlChars: '\x01\x09',
-	argInvalid: faker.random.words(5)
+	argString: faker.random.word().substring(0, 5)
 };
 
 const requiredArgs = {
-	argString: { type: 'string', mandatory: false, maxLength: 5 },
+	argBoolean: { type: 'boolean', mandatory: false },
+	argBooleanString: { type: 'boolean', mandatory: false },
+	argCtrlChars: { type: 'string' },
+	argDate: { type: 'date', mandatory: false },
+	argHtml: { type: 'string' },
+	argJson: { type: 'json', mandatory: false },
 	argNumber: { type: 'number', mandatory: false },
 	argNumberString: { type: 'number', mandatory: false },
 	argObject: { type: 'object', mandatory: false },
-	argBoolean: { type: 'boolean', mandatory: false },
-	argBooleanString: { type: 'boolean', mandatory: false },
-	argDate: { type: 'date', mandatory: false },
-	argJson: { type: 'json', mandatory: false },
-	argHtml: { type: 'string' },
-	argCtrlChars: { type: 'string' }
+	argString: { type: 'string', mandatory: false, maxLength: 5 }
 };
 
 describe('Sanitization and validation middleware', () => {
@@ -50,14 +50,15 @@ describe('Sanitization and validation middleware', () => {
 		middleware(req, res, next);
 
 		expect(req.query).toMatchObject({
-			argString: expect.any(String),
-			argNumber: expect.any(Number),
-			argNumberString: expect.any(Number),
 			argBoolean: expect.any(Boolean),
 			argBooleanString: expect.any(Boolean),
-			argObject: expect.any(Object),
+			argCtrlChars: '',
+			argDate: expect.any(String),
 			argHtml: '<a href="https://www.nhs.uk/">b</a>',
-			argCtrlChars: ''
+			argNumber: expect.any(Number),
+			argNumberString: expect.any(Number),
+			argObject: expect.any(Object),
+			argString: expect.any(String)
 		});
 		expect(res.statusCode).toBe(200);
 		expect(next).toHaveBeenCalledTimes(1);
@@ -78,14 +79,15 @@ describe('Sanitization and validation middleware', () => {
 		middleware(req, res, next);
 
 		expect(req.query).toMatchObject({
-			argString: expect.any(String),
-			argNumber: expect.any(Number),
-			argNumberString: expect.any(Number),
 			argBoolean: expect.any(Boolean),
 			argBooleanString: expect.any(Boolean),
-			argObject: expect.any(Object),
+			argCtrlChars: '',
+			argDate: expect.any(String),
 			argHtml: '<a href="https://www.nhs.uk/">b</a>',
-			argCtrlChars: ''
+			argNumber: expect.any(Number),
+			argNumberString: expect.any(Number),
+			argObject: expect.any(Object),
+			argString: expect.any(String)
 		});
 		expect(res.statusCode).toBe(200);
 		expect(next).toHaveBeenCalledTimes(1);
@@ -124,14 +126,15 @@ describe('Sanitization and validation middleware', () => {
 		middleware(req, res, next);
 
 		expect(req.params).toMatchObject({
-			argString: expect.any(String),
-			argNumber: expect.any(Number),
-			argNumberString: expect.any(Number),
 			argBoolean: expect.any(Boolean),
 			argBooleanString: expect.any(Boolean),
-			argObject: expect.any(Object),
+			argCtrlChars: '',
+			argDate: expect.any(String),
 			argHtml: '<a href="https://www.nhs.uk/">b</a>',
-			argCtrlChars: ''
+			argNumber: expect.any(Number),
+			argNumberString: expect.any(Number),
+			argObject: expect.any(Object),
+			argString: expect.any(String)
 		});
 		expect(res.statusCode).toBe(200);
 		expect(next).toHaveBeenCalledTimes(1);
@@ -170,14 +173,15 @@ describe('Sanitization and validation middleware', () => {
 		middleware(req, res, next);
 
 		expect(req.body).toMatchObject({
-			argString: expect.any(String),
-			argNumber: expect.any(Number),
-			argNumberString: expect.any(Number),
 			argBoolean: expect.any(Boolean),
 			argBooleanString: expect.any(Boolean),
-			argObject: expect.any(Object),
+			argCtrlChars: '',
+			argDate: expect.any(String),
 			argHtml: '<a href="https://www.nhs.uk/">b</a>',
-			argCtrlChars: ''
+			argNumber: expect.any(Number),
+			argNumberString: expect.any(Number),
+			argObject: expect.any(Object),
+			argString: expect.any(String)
 		});
 		expect(res.statusCode).toBe(200);
 		expect(next).toHaveBeenCalledTimes(1);
