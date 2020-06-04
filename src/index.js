@@ -90,7 +90,7 @@ function parseValue(value, type) {
 			}
 			break;
 		case 'date':
-			result = validator.toDate(value);
+			result = value;
 			break;
 		case 'json':
 			result = JSON.parse(value);
