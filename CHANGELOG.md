@@ -1,3 +1,11 @@
+## <small>2.0.8 (2020-06-04)</small>
+
+-   build(deps-dev): bump eslint-plugin-jsdoc from 26.0.0 to 26.0.1 ([c195bd9](https://github.com/Fdawgs/sanitize-middleware/commit/c195bd9))
+-   build(deps-dev): bump eslint-plugin-jsdoc from 26.0.1 to 27.0.3 ([ad4f16f](https://github.com/Fdawgs/sanitize-middleware/commit/ad4f16f))
+-   build(deps): bump sanitize-html from 1.25.0 to 1.26.0 ([aacc1e2](https://github.com/Fdawgs/sanitize-middleware/commit/aacc1e2))
+-   tests(index): check date arguments; sort arg object values ([4fe2e5b](https://github.com/Fdawgs/sanitize-middleware/commit/4fe2e5b))
+-   fix(index): do not convert iso dates to date objects ([7718c3d](https://github.com/Fdawgs/sanitize-middleware/commit/7718c3d))
+
 ## <small>2.0.7 (2020-05-30)</small>
 
 -   build(deps-dev): add promise and jsdoc eslint plugins; update config ([8b5799f](https://github.com/Fdawgs/sanitize-middleware/commit/8b5799f))
