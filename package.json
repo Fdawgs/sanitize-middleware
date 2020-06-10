@@ -21,8 +21,8 @@
 	"scripts": {
 		"changelog": "conventional-changelog -p @commitlint/config-conventional -s -i CHANGELOG.md && prettier CHANGELOG.md --write",
 		"dupe-check": "yarn jsinspect ./src",
-		"lint": "eslint src/**/*.js",
-		"prettier": "prettier ** --write",
+		"lint": "eslint . --cache --ext js,jsx,ts,tsx",
+		"prettier": "prettier . --write --ignore-path .gitignore",
 		"start": "node src/index.js",
 		"test": "cross-env NODE_ENV=test yarn lint && yarn test-only",
 		"test-coverage": "cross-env NODE_ENV=test jest --coverage --runInBand",
@@ -45,6 +45,8 @@
 	},
 	"devDependencies": {
 		"@commitlint/config-conventional": "^8.3.4",
+		"@typescript-eslint/eslint-plugin": "^3.2.0",
+		"@typescript-eslint/parser": "^3.2.0",
 		"conventional-changelog-cli": "^2.0.34",
 		"coveralls": "^3.1.0",
 		"cross-env": "^7.0.2",

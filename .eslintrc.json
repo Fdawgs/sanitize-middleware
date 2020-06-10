@@ -10,6 +10,19 @@
 		"plugin:jsdoc/recommended",
 		"prettier"
 	],
+
+	"overrides": [
+		{
+			"files": ["*.ts", "*.tsx"],
+			"extends": ["plugin:@typescript-eslint/recommended"],
+			"parser": "@typescript-eslint/parser",
+			"rules": {
+				"@typescript-eslint/ban-types": "warn",
+				"@typescript-eslint/no-var-requires": "warn"
+			}
+		}
+	],
+
 	"parserOptions": {
 		"ecmaVersion": 2020,
 		"sourceType": "module"
