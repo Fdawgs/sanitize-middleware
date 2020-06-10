@@ -19,7 +19,7 @@ function deriveType(value) {
 	) {
 		result = 'boolean';
 	} else if (
-		(!Number.isNaN(value) && typeof value === 'number') ||
+		typeof value === 'number' ||
 		(validator.isFloat(value) && typeof value === 'string')
 	) {
 		result = 'number';
@@ -36,12 +36,12 @@ function deriveType(value) {
  * @author Frazer Smith
  * @description Validates that value is of type passed.
  * @param {string} value - Value to validate.
- * @param {('boolean'|'date'|'json'|'number'|'object'|'string')=} type - Expected type of value.
+ * @param {string} type - Expected JavaScript data type.
  * @returns {boolean} confirmation that value is valid.
  */
 function validateType(value, type) {
 	let result;
-	switch (type) {
+	switch (type.toLowerCase()) {
 		case 'boolean':
 			result =
 				value === 'true' ||
@@ -56,7 +56,7 @@ function validateType(value, type) {
 			break;
 		case 'number':
 			result =
-				(!Number.isNaN(value) && typeof value === 'number') ||
+				typeof value === 'number' ||
 				(validator.isFloat(value) && typeof value === 'string');
 			break;
 		case 'object':
@@ -76,8 +76,8 @@ function validateType(value, type) {
  * @author Frazer Smith
  * @description Sanitizes value based on type passed.
  * @param {string} value - Value to sanitize.
- * @param {('boolean'|'date'|'json'|'number'|'object'|'string')=} type - Expected type of value.
- * @returns {string} parsed value.
+ * @param {string} type - Expected JavaScript data type.
+ * @returns {boolean|Date|JSON|number|object|string} parsed value.
  */
 function parseValue(value, type) {
 	let result;
@@ -96,7 +96,7 @@ function parseValue(value, type) {
 			result = JSON.parse(value);
 			break;
 		case 'number':
-			if (!Number.isNaN(value) && typeof value === 'number') {
+			if (typeof value === 'number') {
 				result = value;
 			} else {
 				result = validator.toFloat(value);
@@ -118,7 +118,7 @@ function parseValue(value, type) {
  * @author Frazer Smith
  * @description Checks all mandatory arguments are present, if one or more
  * is missing an error will be returned.
- * 
+ *
  * If all mandatory arguments are present, function will attempt to validate
  * and sanitize all arguments passed.
  * @param {object} args - Object containing request arguments to be parsed.

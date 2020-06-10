@@ -36,17 +36,12 @@ function deriveType(value: any): string {
  * @author Frazer Smith
  * @description Validates that value is of type passed.
  * @param {string} value - Value to validate.
- * @param {('boolean'|'date'|'json'|'number'|'object'|'string')=} type - Expected type of value.
+ * @param {string} type - Expected JavaScript data type.
  * @returns {boolean} confirmation that value is valid.
  */
-function validateType(
-	value: string,
-	type:
-		| ('boolean' | 'date' | 'json' | 'number' | 'object' | 'string')
-		| undefined
-): boolean {
+function validateType(value: string, type: string): boolean {
 	let result: boolean;
-	switch (type) {
+	switch (type.toLowerCase()) {
 		case 'boolean':
 			result =
 				value === 'true' ||
@@ -81,14 +76,12 @@ function validateType(
  * @author Frazer Smith
  * @description Sanitizes value based on type passed.
  * @param {string} value - Value to sanitize.
- * @param {('boolean'|'date'|'json'|'number'|'object'|'string')=} type - Expected type of value.
+ * @param {string} type - Expected JavaScript data type.
  * @returns {boolean|Date|JSON|number|object|string} parsed value.
  */
 function parseValue(
 	value: string,
-	type:
-		| ('boolean' | 'date' | 'json' | 'number' | 'object' | 'string')
-		| undefined
+	type: string
 ): boolean | Date | JSON | number | object | string {
 	let result: string;
 	switch (type.toLowerCase()) {
