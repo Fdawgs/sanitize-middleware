@@ -8,8 +8,8 @@ const xss = require('xss');
  * @param {*} value - Value to derive type from.
  * @returns {string} type of value.
  */
-function deriveType(value) {
-	let result;
+function deriveType(value: any): string {
+	let result: string;
 	if (typeof value === 'object') {
 		result = 'object';
 	} else if (
@@ -39,8 +39,8 @@ function deriveType(value) {
  * @param {string} type - Expected JavaScript data type.
  * @returns {boolean} confirmation that value is valid.
  */
-function validateType(value, type) {
-	let result;
+function validateType(value: string, type: string): boolean {
+	let result: boolean;
 	switch (type.toLowerCase()) {
 		case 'boolean':
 			result =
@@ -79,8 +79,11 @@ function validateType(value, type) {
  * @param {string} type - Expected JavaScript data type.
  * @returns {boolean|Date|JSON|number|object|string} parsed value.
  */
-function parseValue(value, type) {
-	let result;
+function parseValue(
+	value: string,
+	type: string
+): boolean | Date | JSON | number | object | string {
+	let result: string;
 	switch (type.toLowerCase()) {
 		case 'boolean':
 			if (typeof value === 'boolean') {
@@ -125,10 +128,10 @@ function parseValue(value, type) {
  * @param {object=} config - Objects containing accepted arguments as properties, and their types as values.
  * @returns {Error|object} - Error object or object containing sanitized arguments.
  */
-function parseValues(args, config) {
+function parseValues(args: object, config: object | undefined): Error | object {
 	const values = args;
 	const keys = Object.keys(values);
-	let message;
+	let message: string;
 
 	// Check mandatory values are present
 	const mandatoryArgs = [];
