@@ -1,6 +1,3 @@
-declare const sanitize: any;
-declare const validator: any;
-declare const xss: any;
 /**
  * @author Frazer Smith
  * @description Attempts to derive type of value.
