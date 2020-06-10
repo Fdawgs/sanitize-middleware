@@ -4,8 +4,8 @@ const xss = require('xss');
 
 /**
  * @author Frazer Smith
- * @description Attempts to derive type of value.
- * @param {*} value - Value to derive type from.
+ * @description Attempts to derive JavaScript data type of value.
+ * @param {*} value - Value to derive JavaScript data type from.
  * @returns {string} type of value.
  */
 function deriveType(value) {
@@ -34,7 +34,7 @@ function deriveType(value) {
 
 /**
  * @author Frazer Smith
- * @description Validates that value is of type passed.
+ * @description Validates that value is of JavaScript data type passed.
  * @param {string} value - Value to validate.
  * @param {string} type - Expected JavaScript data type.
  * @returns {boolean} confirmation that value is valid.
