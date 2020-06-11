@@ -1,6 +1,6 @@
 import type express from 'express';
-import sanitize from 'sanitize-html';
-import validator from 'validator';
+import sanitize = require('sanitize-html');
+import validator = require('validator');
 import { filterXSS } from 'xss';
 
 export interface LooseObject {

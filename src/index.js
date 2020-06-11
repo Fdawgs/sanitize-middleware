@@ -1,8 +1,7 @@
 Object.defineProperty(exports, '__esModule', { value: true });
 const sanitize = require('sanitize-html');
 const validator = require('validator');
-const xss = require('xss');
-
+const xss_1 = require('xss');
 /**
  * @author Frazer Smith
  * @description Attempts to derive JavaScript data type of value.
@@ -29,10 +28,8 @@ function deriveType(value) {
 	} else {
 		result = 'string';
 	}
-
 	return result;
 }
-
 /**
  * @author Frazer Smith
  * @description Validates that value is of JavaScript data type passed.
@@ -58,8 +55,7 @@ function validateType(value, type) {
 		case 'number':
 			result =
 				typeof value === 'number' ||
-				(validator.isFloat(value) &&
-					typeof value === 'string');
+				(validator.isFloat(value) && typeof value === 'string');
 			break;
 		case 'object':
 			result = typeof value === 'object';
@@ -73,7 +69,6 @@ function validateType(value, type) {
 	}
 	return result;
 }
-
 /**
  * @author Frazer Smith
  * @description Sanitizes value based on type passed.
@@ -111,13 +106,12 @@ function parseValue(value, type) {
 		default:
 			// Strip any invalid HTML tags, non-word characters, and control characters
 			result = validator
-				.stripLow(xss.filterXSS(sanitize(value)))
+				.stripLow(xss_1.filterXSS(sanitize(value)))
 				.trim();
 			break;
 	}
 	return result;
 }
-
 /**
  * @author Frazer Smith
  * @description Checks all mandatory arguments are present, if one or more
@@ -133,7 +127,6 @@ function parseValues(args, config) {
 	const values = args;
 	const keys = Object.keys(values);
 	let message;
-
 	// Check mandatory values are present
 	const mandatoryArgs = [];
 	Object.keys(config).forEach((configKey) => {
@@ -154,7 +147,6 @@ function parseValues(args, config) {
 			.toString()}`;
 		return new Error(message);
 	}
-
 	// Check values are under the max length specified
 	const maxLengthArgs = {};
 	Object.keys(config).forEach((configKey) => {
@@ -173,7 +165,6 @@ function parseValues(args, config) {
 	if (message) {
 		return new Error(message);
 	}
-
 	/**
 	 * Compare arguments to accepted arguments in config file.
 	 * If config is empty then accept every argument, and
@@ -208,9 +199,7 @@ function parseValues(args, config) {
  * @param {object=} config - Sanitization configuration values.
  * @returns {Function} Express middleware.
  */
-exports.default = function sanitizeMiddleware(
-	config = { body: {}, params: {}, query: {} }
-) {
+function sanitizeMiddleware(config = { body: {}, params: {}, query: {} }) {
 	return (req, res, next) => {
 		if (req.body && Object.keys(req.body).length) {
 			const result = parseValues(req.body, config.body);
@@ -238,4 +227,5 @@ exports.default = function sanitizeMiddleware(
 		}
 		return next();
 	};
-};
+}
+exports.default = sanitizeMiddleware;

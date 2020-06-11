@@ -6,7 +6,7 @@
 		"importsNotUsedAsValues": "error",
 		"allowSyntheticDefaultImports": true,
 		"noImplicitUseStrict": true,
-		
+
 		/* Additional Checks */
 		"noUnusedLocals": true,
 		"noUnusedParameters": true,
