@@ -2,15 +2,16 @@
 	"compilerOptions": {
 		"target": "es2020",
 		"module": "commonjs",
-		"declaration": true,
 		"composite": true,
 		"importsNotUsedAsValues": "error",
+		"allowSyntheticDefaultImports": true,
 
 		/* Additional Checks */
 		"noUnusedLocals": true,
 		"noUnusedParameters": true,
 		"noImplicitReturns": true,
 		"noFallthroughCasesInSwitch": true,
+
 		/* Module Resolution Options */
 		"moduleResolution": "node",
 		"resolveJsonModule": true

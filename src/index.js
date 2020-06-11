@@ -108,7 +108,7 @@ function parseValue(value, type) {
 		// String types will be passed to this
 		default:
 			// Strip any invalid HTML tags, non-word characters, and control characters
-			result = validator.stripLow(xss(sanitize(value))).trim();
+			result = validator.stripLow(xss.filterXSS(sanitize(value))).trim();
 			break;
 	}
 	return result;
@@ -214,25 +214,28 @@ module.exports = function sanitizeMiddleware(
 ) {
 	return (req, res, next) => {
 		if (req.body && Object.keys(req.body).length) {
-			req.body = parseValues(req.body, config.body);
-			if (req.body instanceof Error) {
+			const result = parseValues(req.body, config.body);
+			if (result instanceof Error) {
 				res.status(400);
-				return next(req.body);
+				return next(result);
 			}
+			req.body = result;
 		}
 		if (req.params && Object.keys(req.params).length) {
-			req.params = parseValues(req.params, config.params);
-			if (req.params instanceof Error) {
+			const result = parseValues(req.params, config.params);
+			if (result instanceof Error) {
 				res.status(400);
-				return next(req.params);
+				return next(result);
 			}
+			req.params = result;
 		}
 		if (req.query && Object.keys(req.query).length) {
-			req.query = parseValues(req.query, config.query);
-			if (req.query instanceof Error) {
+			const result = parseValues(req.query, config.query);
+			if (result instanceof Error) {
 				res.status(400);
-				return next(req.query);
+				return next(result);
 			}
+			req.query = result;
 		}
 		return next();
 	};
