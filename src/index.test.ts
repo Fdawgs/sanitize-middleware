@@ -1,9 +1,13 @@
-const cloneDeep = require('lodash/cloneDeep');
-const faker = require('faker/locale/en_GB');
-const httpMocks = require('node-mocks-http');
-const sanitizeMiddleware = require('./index');
+import { cloneDeep } from 'lodash';
+import httpMocks = require('node-mocks-http');
+import faker = require('faker');
+import sanitizeMiddleware from '.';
 
-const args = {
+interface LooseObject {
+	[key: string]: any;
+}
+
+const args: LooseObject = {
 	argBoolean: faker.random.boolean(),
 	argBooleanString: faker.random.boolean().toString(),
 	argCtrlChars: '\x01\x09',
@@ -17,7 +21,7 @@ const args = {
 	argString: faker.random.word().substring(0, 5)
 };
 
-const requiredArgs = {
+const requiredArgs: LooseObject = {
 	argBoolean: { type: 'boolean', mandatory: false },
 	argBooleanString: { type: 'boolean', mandatory: false },
 	argCtrlChars: { type: 'string' },
@@ -32,13 +36,13 @@ const requiredArgs = {
 
 describe('Sanitization and validation middleware', () => {
 	test('Should return a middleware function', () => {
-		const middleware = sanitizeMiddleware();
+		const middleware = sanitizeMiddleware(undefined);
 
 		expect(typeof middleware).toBe('function');
 	});
 
 	test('Should continue when no required arguments are provided', () => {
-		const middleware = sanitizeMiddleware();
+		const middleware = sanitizeMiddleware(undefined);
 		const query = {};
 		const req = httpMocks.createRequest({
 			method: 'GET',

@@ -1,6 +1,11 @@
-const sanitize = require('sanitize-html');
-const validator = require('validator');
-const xss = require('xss');
+import type express from 'express';
+import sanitize from 'sanitize-html';
+import validator from 'validator';
+import { filterXSS } from 'xss';
+
+export interface LooseObject {
+	[key: string]: any;
+}
 
 /**
  * @author Frazer Smith
@@ -8,7 +13,7 @@ const xss = require('xss');
  * @param {*} value - Value to derive JavaScript data type from.
  * @returns {string} type of value.
  */
-function deriveType(value: any): string {
+function deriveType(value: unknown): string {
 	let result: string;
 	if (typeof value === 'object') {
 		result = 'object';
@@ -20,10 +25,10 @@ function deriveType(value: any): string {
 		result = 'boolean';
 	} else if (
 		typeof value === 'number' ||
-		(validator.isFloat(value) && typeof value === 'string')
+		(validator.isFloat(value as string) && typeof value === 'string')
 	) {
 		result = 'number';
-	} else if (validator.isISO8601(value, { strict: true })) {
+	} else if (validator.isISO8601(value as string, { strict: true })) {
 		result = 'date';
 	} else {
 		result = 'string';
@@ -83,7 +88,7 @@ function parseValue(
 	value: string,
 	type: string
 ): boolean | Date | JSON | number | object | string {
-	let result: string;
+	let result: boolean | Date | JSON | number | object | string;
 	switch (type.toLowerCase()) {
 		case 'boolean':
 			if (typeof value === 'boolean') {
@@ -111,7 +116,7 @@ function parseValue(
 		// String types will be passed to this
 		default:
 			// Strip any invalid HTML tags, non-word characters, and control characters
-			result = validator.stripLow(xss(sanitize(value))).trim();
+			result = validator.stripLow(filterXSS(sanitize(value))).trim();
 			break;
 	}
 	return result;
@@ -206,37 +211,41 @@ function parseValues(args: object, config: object | undefined): Error | object {
  * @description Validates
  * and sanitizes the query, param and body of requests to protect against
  * cross-site scripting (XSS) and command injection attacks.
- * @param {object} config - Sanitization configuration values.
- * @param {object.<string, {type: ('boolean'|'date'|'json'|'number'|'object'|'string'), mandatory: boolean, maxLength: number}>=} config.body
- * @param {object.<string, {type: ('boolean'|'date'|'json'|'number'|'object'|'string'), mandatory: boolean, maxLength: number}>=} config.params
- * @param {object.<string, {type: ('boolean'|'date'|'json'|'number'|'object'|'string'), mandatory: boolean, maxLength: number}>=} config.query
+ * @param {object=} config - Sanitization configuration values.
  * @returns {Function} Express middleware.
  */
-module.exports = function sanitizeMiddleware(
-	config = { body: {}, params: {}, query: {} }
-) {
-	return (req, res, next) => {
+export default function sanitizeMiddleware(
+	config: LooseObject | undefined = { body: {}, params: {}, query: {} }
+): Function {
+	return (
+		req: express.Request,
+		res: express.Response,
+		next: (...args: unknown[]) => void
+	) => {
 		if (req.body && Object.keys(req.body).length) {
-			req.body = parseValues(req.body, config.body);
-			if (req.body instanceof Error) {
+			const result = parseValues(req.body, config.body);
+			if (result instanceof Error) {
 				res.status(400);
-				return next(req.body);
+				return next(result);
 			}
+			req.body = result;
 		}
 		if (req.params && Object.keys(req.params).length) {
-			req.params = parseValues(req.params, config.params);
-			if (req.params instanceof Error) {
+			const result = parseValues(req.params, config.params);
+			if (result instanceof Error) {
 				res.status(400);
-				return next(req.params);
+				return next(result);
 			}
+			req.params = result as {};
 		}
 		if (req.query && Object.keys(req.query).length) {
-			req.query = parseValues(req.query, config.query);
-			if (req.query instanceof Error) {
+			const result = parseValues(req.query, config.query);
+			if (result instanceof Error) {
 				res.status(400);
-				return next(req.query);
+				return next(result);
 			}
+			req.query = result as {};
 		}
 		return next();
 	};
-};
+}
