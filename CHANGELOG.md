@@ -1,3 +1,18 @@
+## <small>2.0.9 (2020-06-11)</small>
+
+-   build(deps-dev): add typescript eslint plugin and parser; update config ([49093ae](https://github.com/Fdawgs/sanitize-middleware/commit/49093ae))
+-   build(deps-dev): bump eslint from 6.8.0 to 7.2.0 ([48a4043](https://github.com/Fdawgs/sanitize-middleware/commit/48a4043))
+-   build(typescript): add tsconfig file ([6de09b0](https://github.com/Fdawgs/sanitize-middleware/commit/6de09b0))
+-   build(typescript): ignore snake case ([e8de8c1](https://github.com/Fdawgs/sanitize-middleware/commit/e8de8c1))
+-   build(typescript): resolve build errors ([73c8746](https://github.com/Fdawgs/sanitize-middleware/commit/73c8746))
+-   fix(index): correct type errors ([8c6f274](https://github.com/Fdawgs/sanitize-middleware/commit/8c6f274))
+-   tests(index): rebuild using typescript ([c23c205](https://github.com/Fdawgs/sanitize-middleware/commit/c23c205))
+-   refactor(index): rebuild internals using typescript ([af88f67](https://github.com/Fdawgs/sanitize-middleware/commit/af88f67))
+-   chore: add .env.test to gitignore file ([67a1206](https://github.com/Fdawgs/sanitize-middleware/commit/67a1206))
+-   chore: clarify jsdoc param tag comments ([f514ab5](https://github.com/Fdawgs/sanitize-middleware/commit/f514ab5))
+-   chore: tidy parsevalues function description ([54c0ca5](https://github.com/Fdawgs/sanitize-middleware/commit/54c0ca5))
+-   chore(scripts): expand coverage of eslint and prettier ([69e08bd](https://github.com/Fdawgs/sanitize-middleware/commit/69e08bd))
+
 ## <small>2.0.8 (2020-06-04)</small>
 
 -   build(deps-dev): bump eslint-plugin-jsdoc from 26.0.0 to 26.0.1 ([c195bd9](https://github.com/Fdawgs/sanitize-middleware/commit/c195bd9))
