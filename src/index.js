@@ -1,7 +1,7 @@
 Object.defineProperty(exports, '__esModule', { value: true });
-const sanitize_html_1 = require('sanitize-html');
-const validator_1 = require('validator');
-const xss_1 = require('xss');
+const sanitize = require('sanitize-html');
+const validator = require('validator');
+const xss = require('xss');
 
 /**
  * @author Frazer Smith
@@ -21,10 +21,10 @@ function deriveType(value) {
 		result = 'boolean';
 	} else if (
 		typeof value === 'number' ||
-		(validator_1.default.isFloat(value) && typeof value === 'string')
+		(validator.isFloat(value) && typeof value === 'string')
 	) {
 		result = 'number';
-	} else if (validator_1.default.isISO8601(value, { strict: true })) {
+	} else if (validator.isISO8601(value, { strict: true })) {
 		result = 'date';
 	} else {
 		result = 'string';
@@ -50,7 +50,7 @@ function validateType(value, type) {
 				typeof value === 'boolean';
 			break;
 		case 'date':
-			result = validator_1.default.toDate(value) !== null;
+			result = validator.toDate(value) !== null;
 			break;
 		case 'json':
 			result = typeof JSON.parse(value) === 'object';
@@ -58,7 +58,7 @@ function validateType(value, type) {
 		case 'number':
 			result =
 				typeof value === 'number' ||
-				(validator_1.default.isFloat(value) &&
+				(validator.isFloat(value) &&
 					typeof value === 'string');
 			break;
 		case 'object':
@@ -88,7 +88,7 @@ function parseValue(value, type) {
 			if (typeof value === 'boolean') {
 				result = value;
 			} else {
-				result = validator_1.default.toBoolean(value, true);
+				result = validator.toBoolean(value, true);
 			}
 			break;
 		case 'date':
@@ -101,7 +101,7 @@ function parseValue(value, type) {
 			if (typeof value === 'number') {
 				result = value;
 			} else {
-				result = validator_1.default.toFloat(value);
+				result = validator.toFloat(value);
 			}
 			break;
 		case 'object':
@@ -110,8 +110,8 @@ function parseValue(value, type) {
 		// String types will be passed to this
 		default:
 			// Strip any invalid HTML tags, non-word characters, and control characters
-			result = validator_1.default
-				.stripLow(xss_1.filterXSS(sanitize_html_1.default(value)))
+			result = validator
+				.stripLow(xss.filterXSS(sanitize(value)))
 				.trim();
 			break;
 	}
