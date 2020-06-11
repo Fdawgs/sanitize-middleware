@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 Object.defineProperty(exports, '__esModule', { value: true });
 const sanitize = require('sanitize-html');
 const validator = require('validator');
