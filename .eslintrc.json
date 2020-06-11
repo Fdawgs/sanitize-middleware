@@ -16,9 +16,12 @@
 			"files": ["*.ts", "*.tsx"],
 			"extends": ["plugin:@typescript-eslint/recommended"],
 			"parser": "@typescript-eslint/parser",
+			"plugins": ["import"],
 			"rules": {
+				"import/first": "off",
 				"@typescript-eslint/ban-types": "off",
-				"@typescript-eslint/no-var-requires": "warn"
+				"@typescript-eslint/no-var-requires": "warn",
+				"@typescript-eslint/no-explicit-any": "off"
 			}
 		}
 	],

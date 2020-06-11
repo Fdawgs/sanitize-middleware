@@ -3,6 +3,10 @@ import sanitize from 'sanitize-html';
 import validator from 'validator';
 import { filterXSS } from 'xss';
 
+export interface LooseObject {
+	[key: string]: any;
+}
+
 /**
  * @author Frazer Smith
  * @description Attempts to derive JavaScript data type of value.
@@ -207,15 +211,12 @@ function parseValues(args: object, config: object | undefined): Error | object {
  * @description Validates
  * and sanitizes the query, param and body of requests to protect against
  * cross-site scripting (XSS) and command injection attacks.
- * @param {object} config - Sanitization configuration values.
- * @param {object.<string, {type: ('boolean'|'date'|'json'|'number'|'object'|'string'), mandatory: boolean, maxLength: number}>=} config.body
- * @param {object.<string, {type: ('boolean'|'date'|'json'|'number'|'object'|'string'), mandatory: boolean, maxLength: number}>=} config.params
- * @param {object.<string, {type: ('boolean'|'date'|'json'|'number'|'object'|'string'), mandatory: boolean, maxLength: number}>=} config.query
+ * @param {object=} config - Sanitization configuration values.
  * @returns {Function} Express middleware.
  */
-module.exports = function sanitizeMiddleware(
-	config = { body: {}, params: {}, query: {} }
-) {
+export default function sanitizeMiddleware(
+	config: LooseObject | undefined = { body: {}, params: {}, query: {} }
+): Function {
 	return (
 		req: express.Request,
 		res: express.Response,
@@ -247,4 +248,4 @@ module.exports = function sanitizeMiddleware(
 		}
 		return next();
 	};
-};
+}

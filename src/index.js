@@ -1,6 +1,7 @@
-const sanitize = require('sanitize-html');
-const validator = require('validator');
-const xss = require('xss');
+Object.defineProperty(exports, '__esModule', { value: true });
+const sanitize_html_1 = require('sanitize-html');
+const validator_1 = require('validator');
+const xss_1 = require('xss');
 
 /**
  * @author Frazer Smith
@@ -20,10 +21,10 @@ function deriveType(value) {
 		result = 'boolean';
 	} else if (
 		typeof value === 'number' ||
-		(validator.isFloat(value) && typeof value === 'string')
+		(validator_1.default.isFloat(value) && typeof value === 'string')
 	) {
 		result = 'number';
-	} else if (validator.isISO8601(value, { strict: true })) {
+	} else if (validator_1.default.isISO8601(value, { strict: true })) {
 		result = 'date';
 	} else {
 		result = 'string';
@@ -49,7 +50,7 @@ function validateType(value, type) {
 				typeof value === 'boolean';
 			break;
 		case 'date':
-			result = validator.toDate(value) !== null;
+			result = validator_1.default.toDate(value) !== null;
 			break;
 		case 'json':
 			result = typeof JSON.parse(value) === 'object';
@@ -57,7 +58,8 @@ function validateType(value, type) {
 		case 'number':
 			result =
 				typeof value === 'number' ||
-				(validator.isFloat(value) && typeof value === 'string');
+				(validator_1.default.isFloat(value) &&
+					typeof value === 'string');
 			break;
 		case 'object':
 			result = typeof value === 'object';
@@ -86,7 +88,7 @@ function parseValue(value, type) {
 			if (typeof value === 'boolean') {
 				result = value;
 			} else {
-				result = validator.toBoolean(value, true);
+				result = validator_1.default.toBoolean(value, true);
 			}
 			break;
 		case 'date':
@@ -99,7 +101,7 @@ function parseValue(value, type) {
 			if (typeof value === 'number') {
 				result = value;
 			} else {
-				result = validator.toFloat(value);
+				result = validator_1.default.toFloat(value);
 			}
 			break;
 		case 'object':
@@ -108,7 +110,9 @@ function parseValue(value, type) {
 		// String types will be passed to this
 		default:
 			// Strip any invalid HTML tags, non-word characters, and control characters
-			result = validator.stripLow(xss.filterXSS(sanitize(value))).trim();
+			result = validator_1.default
+				.stripLow(xss_1.filterXSS(sanitize_html_1.default(value)))
+				.trim();
 			break;
 	}
 	return result;
@@ -191,25 +195,20 @@ function parseValues(args, config) {
 			message = `Invalid option provided: ${key}`;
 		}
 	});
-
 	if (typeof message !== 'undefined') {
 		return new Error(message);
 	}
 	return values;
 }
-
 /**
  * @author Frazer Smith
  * @description Validates
  * and sanitizes the query, param and body of requests to protect against
  * cross-site scripting (XSS) and command injection attacks.
- * @param {object} config - Sanitization configuration values.
- * @param {object.<string, {type: ('boolean'|'date'|'json'|'number'|'object'|'string'), mandatory: boolean, maxLength: number}>=} config.body
- * @param {object.<string, {type: ('boolean'|'date'|'json'|'number'|'object'|'string'), mandatory: boolean, maxLength: number}>=} config.params
- * @param {object.<string, {type: ('boolean'|'date'|'json'|'number'|'object'|'string'), mandatory: boolean, maxLength: number}>=} config.query
+ * @param {object=} config - Sanitization configuration values.
  * @returns {Function} Express middleware.
  */
-module.exports = function sanitizeMiddleware(
+exports.default = function sanitizeMiddleware(
 	config = { body: {}, params: {}, query: {} }
 ) {
 	return (req, res, next) => {
