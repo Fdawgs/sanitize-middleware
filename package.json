@@ -1,6 +1,6 @@
 {
 	"name": "sanitize-middleware",
-	"version": "2.0.9",
+	"version": "2.0.10",
 	"description": "Connect/Express middleware that sanitizes requests to protect against cross-site scripting (XSS) and command injection attacks",
 	"keywords": [
 		"express",
@@ -22,7 +22,7 @@
 		"build-ts": "tsc",
 		"changelog": "conventional-changelog -p @commitlint/config-conventional -s -i CHANGELOG.md && prettier CHANGELOG.md --write",
 		"dupe-check": "yarn jsinspect ./src",
-		"lint": "eslint . --cache --ext js,jsx,ts,tsx",
+		"lint": "eslint src/. --cache --ext js,jsx,ts,tsx",
 		"prettier": "prettier . --write --ignore-path .gitignore",
 		"start": "node src/index.js",
 		"test": "cross-env NODE_ENV=test yarn lint && yarn test-only",

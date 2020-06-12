@@ -1,3 +1,8 @@
+## <small>2.0.10 (2020-06-12)</small>
+
+-   build(deps): bump validator from 13.1.0 to 13.1.1 ([de2dd05](https://github.com/Fdawgs/sanitize-middleware/commit/de2dd05))
+-   fix: remove typescript files until definitions can be fixed ([db0b975](https://github.com/Fdawgs/sanitize-middleware/commit/db0b975))
+
 ## <small>2.0.9 (2020-06-11)</small>
 
 -   build(deps-dev): add typescript eslint plugin and parser; update config ([49093ae](https://github.com/Fdawgs/sanitize-middleware/commit/49093ae))
