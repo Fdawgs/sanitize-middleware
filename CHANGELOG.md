@@ -1,3 +1,7 @@
+## <small>2.0.11 (2020-06-12)</small>
+
+-   fix(index): resolve module export ([ed7c8ca](https://github.com/Fdawgs/sanitize-middleware/commit/ed7c8ca))
+
 ## <small>2.0.10 (2020-06-12)</small>
 
 -   build(deps): bump validator from 13.1.0 to 13.1.1 ([de2dd05](https://github.com/Fdawgs/sanitize-middleware/commit/de2dd05))
