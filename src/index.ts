@@ -1,16 +1,20 @@
-/* eslint-disable camelcase */
-Object.defineProperty(exports, '__esModule', { value: true });
-const sanitize = require('sanitize-html');
-const validator = require('validator');
-const xss_1 = require('xss');
+import type express from 'express';
+import sanitize = require('sanitize-html');
+import validator = require('validator');
+import { filterXSS } from 'xss';
+
+export interface LooseObject {
+	[key: string]: any;
+}
+
 /**
  * @author Frazer Smith
  * @description Attempts to derive JavaScript data type of value.
  * @param {*} value - Value to derive JavaScript data type from.
  * @returns {string} type of value.
  */
-function deriveType(value) {
-	let result;
+function deriveType(value: unknown): string {
+	let result: string;
 	if (typeof value === 'object') {
 		result = 'object';
 	} else if (
@@ -21,16 +25,18 @@ function deriveType(value) {
 		result = 'boolean';
 	} else if (
 		typeof value === 'number' ||
-		(validator.isFloat(value) && typeof value === 'string')
+		(validator.isFloat(value as string) && typeof value === 'string')
 	) {
 		result = 'number';
-	} else if (validator.isISO8601(value, { strict: true })) {
+	} else if (validator.isISO8601(value as string, { strict: true })) {
 		result = 'date';
 	} else {
 		result = 'string';
 	}
+
 	return result;
 }
+
 /**
  * @author Frazer Smith
  * @description Validates that value is of JavaScript data type passed.
@@ -38,8 +44,8 @@ function deriveType(value) {
  * @param {string} type - Expected JavaScript data type.
  * @returns {boolean} confirmation that value is valid.
  */
-function validateType(value, type) {
-	let result;
+function validateType(value: string, type: string): boolean {
+	let result: boolean;
 	switch (type.toLowerCase()) {
 		case 'boolean':
 			result =
@@ -70,6 +76,7 @@ function validateType(value, type) {
 	}
 	return result;
 }
+
 /**
  * @author Frazer Smith
  * @description Sanitizes value based on type passed.
@@ -77,8 +84,11 @@ function validateType(value, type) {
  * @param {string} type - Expected JavaScript data type.
  * @returns {boolean|Date|JSON|number|object|string} parsed value.
  */
-function parseValue(value, type) {
-	let result;
+function parseValue(
+	value: string,
+	type: string
+): boolean | Date | JSON | number | object | string {
+	let result: boolean | Date | JSON | number | object | string;
 	switch (type.toLowerCase()) {
 		case 'boolean':
 			if (typeof value === 'boolean') {
@@ -106,13 +116,12 @@ function parseValue(value, type) {
 		// String types will be passed to this
 		default:
 			// Strip any invalid HTML tags, non-word characters, and control characters
-			result = validator
-				.stripLow(xss_1.filterXSS(sanitize(value)))
-				.trim();
+			result = validator.stripLow(filterXSS(sanitize(value))).trim();
 			break;
 	}
 	return result;
 }
+
 /**
  * @author Frazer Smith
  * @description Checks all mandatory arguments are present, if one or more
@@ -124,10 +133,11 @@ function parseValue(value, type) {
  * @param {object=} config - Objects containing accepted arguments as properties, and their types as values.
  * @returns {Error|object} - Error object or object containing sanitized arguments.
  */
-function parseValues(args, config) {
+function parseValues(args: object, config: object | undefined): Error | object {
 	const values = args;
 	const keys = Object.keys(values);
-	let message;
+	let message: string;
+
 	// Check mandatory values are present
 	const mandatoryArgs = [];
 	Object.keys(config).forEach((configKey) => {
@@ -148,6 +158,7 @@ function parseValues(args, config) {
 			.toString()}`;
 		return new Error(message);
 	}
+
 	// Check values are under the max length specified
 	const maxLengthArgs = {};
 	Object.keys(config).forEach((configKey) => {
@@ -166,6 +177,7 @@ function parseValues(args, config) {
 	if (message) {
 		return new Error(message);
 	}
+
 	/**
 	 * Compare arguments to accepted arguments in config file.
 	 * If config is empty then accept every argument, and
@@ -187,11 +199,13 @@ function parseValues(args, config) {
 			message = `Invalid option provided: ${key}`;
 		}
 	});
+
 	if (typeof message !== 'undefined') {
 		return new Error(message);
 	}
 	return values;
 }
+
 /**
  * @author Frazer Smith
  * @description Validates
@@ -200,8 +214,14 @@ function parseValues(args, config) {
  * @param {object=} config - Sanitization configuration values.
  * @returns {Function} Express middleware.
  */
-module.exports = function sanitizeMiddleware(config = { body: {}, params: {}, query: {} }) {
-	return (req, res, next) => {
+export default function sanitizeMiddleware(
+	config: LooseObject | undefined = { body: {}, params: {}, query: {} }
+): Function {
+	return (
+		req: express.Request,
+		res: express.Response,
+		next: (...args: unknown[]) => void
+	) => {
 		if (req.body && Object.keys(req.body).length) {
 			const result = parseValues(req.body, config.body);
 			if (result instanceof Error) {
@@ -216,7 +236,7 @@ module.exports = function sanitizeMiddleware(config = { body: {}, params: {}, qu
 				res.status(400);
 				return next(result);
 			}
-			req.params = result;
+			req.params = result as {};
 		}
 		if (req.query && Object.keys(req.query).length) {
 			const result = parseValues(req.query, config.query);
@@ -224,7 +244,7 @@ module.exports = function sanitizeMiddleware(config = { body: {}, params: {}, qu
 				res.status(400);
 				return next(result);
 			}
-			req.query = result;
+			req.query = result as {};
 		}
 		return next();
 	};
