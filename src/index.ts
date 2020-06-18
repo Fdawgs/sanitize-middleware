@@ -214,7 +214,7 @@ function parseValues(args: object, config: object | undefined): Error | object {
  * @param {object=} config - Sanitization configuration values.
  * @returns {Function} Express middleware.
  */
-export default function sanitizeMiddleware(
+module.exports = function sanitizeMiddleware(
 	config: LooseObject | undefined = { body: {}, params: {}, query: {} }
 ): Function {
 	return (
