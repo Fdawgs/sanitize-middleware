@@ -11,7 +11,7 @@
 		"sanitise",
 		"xss"
 	],
-	"main": "src/index.js",
+	"main": "dist/index.js",
 	"repository": "git@github.com:Fdawgs/sanitize-middleware.git",
 	"author": "Frazer Smith",
 	"license": "MIT",
@@ -19,11 +19,11 @@
 		"node": ">=12.16.3"
 	},
 	"scripts": {
-		"build-ts": "tsc",
+		"build-ts": "tsc && prettier dist/*.js --write",
 		"changelog": "conventional-changelog -p @commitlint/config-conventional -s -i CHANGELOG.md && prettier CHANGELOG.md --write",
 		"dupe-check": "yarn jsinspect ./src",
 		"lint": "eslint src/. --cache --ext js,jsx,ts,tsx",
-		"prettier": "prettier . --write --ignore-path .gitignore",
+		"prettier": "prettier . --write",
 		"start": "node src/index.js",
 		"test": "cross-env NODE_ENV=test yarn lint && yarn test-only",
 		"test-coverage": "cross-env NODE_ENV=test jest --coverage --runInBand",

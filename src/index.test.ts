@@ -2,7 +2,7 @@ import { cloneDeep } from 'lodash';
 import httpMocks = require('node-mocks-http');
 import faker = require('faker');
 
-const sanitizeMiddleware = require('./index');
+const sanitizeMiddleware = require('./index.ts');
 
 interface LooseObject {
 	[key: string]: any;

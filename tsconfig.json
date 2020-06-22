@@ -2,10 +2,10 @@
 	"compilerOptions": {
 		"target": "ES2020",
 		"module": "CommonJS",
-		"composite": true,
 		"importsNotUsedAsValues": "error",
 		"allowSyntheticDefaultImports": true,
 		"noImplicitUseStrict": true,
+		"esModuleInterop": true,
 
 		/* Additional Checks */
 		"noUnusedLocals": true,
@@ -15,7 +15,9 @@
 
 		/* Module Resolution Options */
 		"moduleResolution": "node",
-		"resolveJsonModule": true
+		"resolveJsonModule": true,
+
+		"outDir": "./dist"
 	},
 	"files": ["./src/index.ts"]
 }
