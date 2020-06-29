@@ -1,3 +1,25 @@
+## <small>2.0.12 (2020-06-29)</small>
+
+-   build(deps-dev): bump @commitlint/config-conventional ([397bb83](https://github.com/Fdawgs/sanitize-middleware/commit/397bb83))
+-   build(deps-dev): bump @types/jest from 26.0.0 to 26.0.3 ([cb97711](https://github.com/Fdawgs/sanitize-middleware/commit/cb97711))
+-   build(deps-dev): bump @types/lodash from 4.14.155 to 4.14.157 ([8a3d4ab](https://github.com/Fdawgs/sanitize-middleware/commit/8a3d4ab))
+-   build(deps-dev): bump @types/node from 14.0.13 to 14.0.14 ([408b04a](https://github.com/Fdawgs/sanitize-middleware/commit/408b04a))
+-   build(deps-dev): bump @typescript-eslint/eslint-plugin ([b393b63](https://github.com/Fdawgs/sanitize-middleware/commit/b393b63))
+-   build(deps-dev): bump @typescript-eslint/parser from 3.2.0 to 3.4.0 ([8220e49](https://github.com/Fdawgs/sanitize-middleware/commit/8220e49))
+-   build(deps-dev): bump eslint from 7.2.0 to 7.3.1 ([a843066](https://github.com/Fdawgs/sanitize-middleware/commit/a843066))
+-   build(deps-dev): bump eslint-plugin-import from 2.21.2 to 2.22.0 ([e4b25f4](https://github.com/Fdawgs/sanitize-middleware/commit/e4b25f4))
+-   build(deps-dev): bump eslint-plugin-jest from 23.13.2 to 23.17.1 ([0211a36](https://github.com/Fdawgs/sanitize-middleware/commit/0211a36))
+-   build(deps-dev): bump eslint-plugin-jsdoc from 27.0.6 to 28.5.1 ([49638a6](https://github.com/Fdawgs/sanitize-middleware/commit/49638a6))
+-   build(deps-dev): bump jest from 26.0.1 to 26.1.0 ([cb04050](https://github.com/Fdawgs/sanitize-middleware/commit/cb04050))
+-   build(deps-dev): bump ts-jest from 26.1.0 to 26.1.1 ([1255d27](https://github.com/Fdawgs/sanitize-middleware/commit/1255d27))
+-   build(deps): bump sanitize-html from 1.26.0 to 1.27.0 ([2f3ed6d](https://github.com/Fdawgs/sanitize-middleware/commit/2f3ed6d))
+-   build(typescript): resolve commonjs build issues ([ab4211c](https://github.com/Fdawgs/sanitize-middleware/commit/ab4211c))
+-   fix(index): support all date formats, not just iso8601 ([f22f65a](https://github.com/Fdawgs/sanitize-middleware/commit/f22f65a))
+-   Create Dependabot config file ([a4ee285](https://github.com/Fdawgs/sanitize-middleware/commit/a4ee285))
+-   chore(eslint): convert from json to js file format ([cd40152](https://github.com/Fdawgs/sanitize-middleware/commit/cd40152))
+-   chore(eslint): ignore camelcase rule for built js ([47fbdf7](https://github.com/Fdawgs/sanitize-middleware/commit/47fbdf7))
+-   chore(scripts): remove prettier ignore-path option ([55d0c5a](https://github.com/Fdawgs/sanitize-middleware/commit/55d0c5a))
+
 ## <small>2.0.11 (2020-06-12)</small>
 
 -   fix(index): resolve module export ([ed7c8ca](https://github.com/Fdawgs/sanitize-middleware/commit/ed7c8ca))
