@@ -28,7 +28,7 @@ function deriveType(value: unknown): string {
 		(validator.isFloat(value as string) && typeof value === 'string')
 	) {
 		result = 'number';
-	} else if (validator.isISO8601(value as string, { strict: true })) {
+	} else if (validator.isDate(value)) {
 		result = 'date';
 	} else {
 		result = 'string';
