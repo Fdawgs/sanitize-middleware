@@ -1,3 +1,16 @@
+## <small>2.0.13 (2020-07-16)</small>
+
+-   build(deps-dev): bump dev dependencies ([ef9d471](https://github.com/Fdawgs/sanitize-middleware/commit/ef9d471))
+-   build(deps): bump sanitize-html from 1.27.0 to 1.27.1 ([0b72140](https://github.com/Fdawgs/sanitize-middleware/commit/0b72140))
+-   build(travis): add test step ([1432877](https://github.com/Fdawgs/sanitize-middleware/commit/1432877))
+-   build(travis): remove windows and osx os from allowed failures ([f2207e8](https://github.com/Fdawgs/sanitize-middleware/commit/f2207e8))
+-   build(travis): replace api_token alias to pass config validation ([288fcd6](https://github.com/Fdawgs/sanitize-middleware/commit/288fcd6))
+-   build(travis): set linux dist ([ef79d90](https://github.com/Fdawgs/sanitize-middleware/commit/ef79d90))
+-   build(travis): suppress git log; skip rerunning tests on deploy ([09568ea](https://github.com/Fdawgs/sanitize-middleware/commit/09568ea))
+-   build(travis): use lts version of node for jobs ([4e6a738](https://github.com/Fdawgs/sanitize-middleware/commit/4e6a738))
+-   style(travis): sort os builds alphabetically ascending order ([140411b](https://github.com/Fdawgs/sanitize-middleware/commit/140411b))
+-   chore(scripts): use gitignore for ignore-path options ([3c6d95d](https://github.com/Fdawgs/sanitize-middleware/commit/3c6d95d))
+
 ## <small>2.0.12 (2020-06-29)</small>
 
 -   build(deps-dev): bump @commitlint/config-conventional ([397bb83](https://github.com/Fdawgs/sanitize-middleware/commit/397bb83))

@@ -32,7 +32,7 @@ module.exports = {
 	},
 	plugins: ['import', 'jest', 'jsdoc', 'json', 'promise'],
 	rules: {
-		'camelcase':'warn',
+		camelcase: 'warn',
 		'import/no-extraneous-dependencies': [
 			'error',
 			{
