@@ -43,7 +43,7 @@ jobs:
           deploy:
             provider: npm
             email: devfrazs@outlook.com
-            api_key:
+            api_token:
                 secure: evPIKd9zGpYyMfKw35Ph31UZ/GRoP6awtN+CeVS9N/4FOcADY7aAC9ZQNr/bz2qltzIp1LQsXZEwE1HTBB6iOkOeOfSdNmxVba6d/h2MwVwRu7summpn7k7EiHMkbUeVfp7uoCxFjkGVqkdm3/m5VpedZI1jEvvlSK2MorhL1KCW8e1x48tY/E8j3Tluvx1t5Hp2FuDcXlWZVGZ3Vb3o7VRfXI9IofABqaLvVfuHCHn3lGkZfStUUrHNeAsMmUn1F/6zYTChORfDM/ffUlDK0YsPjv0qsxP0yntG1/pQTZQ9lkZqA8UoqplzPFkK8x5160sYY2/cbvSqdJToTo2Hf+vjqABxpad5tTtax6naSD6symhe7kVLUzpZfRHEjk5uV4fdvKq9rJ1cpvp8hDvERk1GUZtkl6lGQoNkFWtm/OUVsAzay16JnB+VFTdZMS6WzSreGW6gUvBbb5OQ9bKHZsLg45Jh1iWDSFhKnXNVF4pjUHONkoVPP1gQHtf76rpfx8kb1CWtFjCyT0Ua7kte6z3Lm07tCS2zsDHWYWxA5lnqAVYnha14qsrI92uWTg3A27HCY5u4penxYZXNQelyWbYFxhpPPVFFIzshpr9C1UscF/s9q0u3jjtYd8QJIbv9LzaJ7bCaWTwVzH81kjZT1CrvGkojfQmXaqGrXU0vWQw=
             on:
                 tags: true
