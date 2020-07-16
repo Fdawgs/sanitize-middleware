@@ -248,4 +248,4 @@ module.exports = function sanitizeMiddleware(
 		}
 		return next();
 	};
-}
+};
