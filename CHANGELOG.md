@@ -1,3 +1,11 @@
+## <small>2.0.14 (2020-07-26)</small>
+
+-   build(deps-dev): bump dev dependencies ([58e4ac5](https://github.com/Fdawgs/sanitize-middleware/commit/58e4ac5))
+-   build(travis): fix misspelling of dist value ([c8a20da](https://github.com/Fdawgs/sanitize-middleware/commit/c8a20da))
+-   build(travis): make scripts multiline ([3c8736b](https://github.com/Fdawgs/sanitize-middleware/commit/3c8736b))
+-   build(travis): set osx image to latest version ([596be4a](https://github.com/Fdawgs/sanitize-middleware/commit/596be4a))
+-   build(travis): update linux dist to latest lts ([284a92d](https://github.com/Fdawgs/sanitize-middleware/commit/284a92d))
+
 ## <small>2.0.13 (2020-07-16)</small>
 
 -   build(deps-dev): bump dev dependencies ([ef9d471](https://github.com/Fdawgs/sanitize-middleware/commit/ef9d471))
