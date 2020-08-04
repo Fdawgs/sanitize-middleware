@@ -1,3 +1,9 @@
+## <small>2.0.15 (2020-08-04)</small>
+
+-   build(deps-dev): bump dev dependencies to resolve security cve ([72bdbe8](https://github.com/Fdawgs/sanitize-middleware/commit/72bdbe8))
+-   build(deps): bump sanitize-html from 1.27.1 to 1.27.2 ([672db4f](https://github.com/Fdawgs/sanitize-middleware/commit/672db4f))
+-   build(deps): bump xss from 1.0.7 to 1.0.8 ([3dce490](https://github.com/Fdawgs/sanitize-middleware/commit/3dce490))
+
 ## <small>2.0.14 (2020-07-26)</small>
 
 -   build(deps-dev): bump dev dependencies ([58e4ac5](https://github.com/Fdawgs/sanitize-middleware/commit/58e4ac5))
