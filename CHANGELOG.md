@@ -1,3 +1,11 @@
+## <small>2.0.16 (2020-08-18)</small>
+
+-   build(deps-dev): bump dev dependencies ([e6afef0](https://github.com/Fdawgs/sanitize-middleware/commit/e6afef0))
+-   build(deps): bump sanitize-html from 1.27.2 to 1.27.3 ([d64f1d5](https://github.com/Fdawgs/sanitize-middleware/commit/d64f1d5))
+-   build(deps): bump xss from 1.0.7 to 1.0.8 ([16a1289](https://github.com/Fdawgs/sanitize-middleware/commit/16a1289))
+-   chore: reduce minimum nodejs engine version from 12.x to 10.x ([0ae3338](https://github.com/Fdawgs/sanitize-middleware/commit/0ae3338))
+-   chore(github): add issue templates ([4eb3b4a](https://github.com/Fdawgs/sanitize-middleware/commit/4eb3b4a))
+
 ## <small>2.0.15 (2020-08-04)</small>
 
 -   build(deps-dev): bump dev dependencies to resolve security cve ([72bdbe8](https://github.com/Fdawgs/sanitize-middleware/commit/72bdbe8))
