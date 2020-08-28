@@ -8,6 +8,7 @@ module.exports = {
 		'plugin:promise/recommended',
 		'plugin:jest/recommended',
 		'plugin:jsdoc/recommended',
+		'plugin:security/recommended',
 		'prettier'
 	],
 
@@ -30,7 +31,7 @@ module.exports = {
 		ecmaVersion: 2020,
 		sourceType: 'module'
 	},
-	plugins: ['import', 'jest', 'jsdoc', 'json', 'promise'],
+	plugins: ['import', 'jest', 'jsdoc', 'json', 'promise', 'security'],
 	rules: {
 		camelcase: 'warn',
 		'import/no-extraneous-dependencies': [

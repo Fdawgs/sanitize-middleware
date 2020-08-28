@@ -1,3 +1,9 @@
+## <small>2.0.17 (2020-08-28)</small>
+
+-   build(deps-dev): add eslint-plugin-security dev dependency ([b2bf407](https://github.com/Fdawgs/sanitize-middleware/commit/b2bf407))
+-   build(deps-dev): bump dev dependencies ([a348101](https://github.com/Fdawgs/sanitize-middleware/commit/a348101))
+-   build(deps): bump sanitize-html from 1.27.3 to 1.27.4 ([3be7559](https://github.com/Fdawgs/sanitize-middleware/commit/3be7559))
+
 ## <small>2.0.16 (2020-08-18)</small>
 
 -   build(deps-dev): bump dev dependencies ([e6afef0](https://github.com/Fdawgs/sanitize-middleware/commit/e6afef0))
