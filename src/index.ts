@@ -98,6 +98,7 @@ function parseValue(
 			}
 			break;
 		case 'date':
+			// Check for valid date type occurs in validateType function, no need to convert here
 			result = value;
 			break;
 		case 'json':
@@ -115,7 +116,12 @@ function parseValue(
 			break;
 		// String types will be passed to this
 		default:
-			// Strip any invalid HTML tags, non-word characters, and control characters
+			/**
+			 * Below does the following:
+			 * - Removes invalid HTML tags using `sanitize-html`
+			 * - Escapes HTML tags using `filterXSS`
+			 * - Removes non-word characters, and control characters using `stripLow` function of `validator`
+			 */
 			result = validator.stripLow(filterXSS(sanitize(value))).trim();
 			break;
 	}
