@@ -1,6 +1,6 @@
 module.exports = {
 	env: {
-		es6: true,
+		es2021: true,
 		node: true
 	},
 	extends: [
@@ -11,7 +11,6 @@ module.exports = {
 		'plugin:security/recommended',
 		'prettier'
 	],
-
 	overrides: [
 		{
 			files: ['*.ts', '*.tsx'],
@@ -26,31 +25,25 @@ module.exports = {
 			}
 		}
 	],
-
 	parserOptions: {
-		ecmaVersion: 2020,
-		sourceType: 'module'
+		sourceType: 'module',
+		ecmaFeatures: {
+			impliedStrict: true
+		}
 	},
 	plugins: ['import', 'jest', 'jsdoc', 'json', 'promise', 'security'],
+	root: true,
 	rules: {
 		camelcase: 'warn',
-		'import/no-extraneous-dependencies': [
-			'error',
-			{
-				devDependencies: true
-			}
-		],
-		'lines-between-class-members': 'error',
+		'import/no-extraneous-dependencies': 'warn',
 		'no-multiple-empty-lines': [
 			'error',
 			{
-				max: 1,
-				maxBOF: 0,
-				maxEOF: 0
+				max: 1
 			}
 		],
 		'prefer-destructuring': 'off',
-		'promise/prefer-await-to-then': 'warn',
-		'promise/prefer-await-to-callbacks': 'warn'
+		'promise/prefer-await-to-callbacks': 'warn',
+		'promise/prefer-await-to-then': 'warn'
 	}
 };
