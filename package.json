@@ -90,7 +90,7 @@
 	},
 	"dependencies": {
 		"sanitize-html": "^1.27.4",
-		"validator": "^13.1.1",
+		"validator": "^13.1.17",
 		"xss": "^1.0.8"
 	}
 }
