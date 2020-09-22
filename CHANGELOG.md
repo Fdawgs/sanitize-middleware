@@ -1,3 +1,14 @@
+## <small>2.0.18 (2020-09-22)</small>
+
+-   build(dependabot): remove assignment of pull requests to user ([280c500](https://github.com/Fdawgs/sanitize-middleware/commit/280c500))
+-   build(deps-dev): bump dev dependencies ([b5c7b72](https://github.com/Fdawgs/sanitize-middleware/commit/b5c7b72))
+-   build(deps): bump sanitize-html from 1.27.4 to 2.0.0-rc.2 to resolve cwe ([db9885a](https://github.com/Fdawgs/sanitize-middleware/commit/db9885a))
+-   build(deps): bump validator from 13.1.1 to 13.1.17 ([2493526](https://github.com/Fdawgs/sanitize-middleware/commit/2493526))
+-   docs(readme): add snyk badge ([eeabab3](https://github.com/Fdawgs/sanitize-middleware/commit/eeabab3))
+-   docs(readme): repoint travis-ci badge from .org to .com ([abce0d8](https://github.com/Fdawgs/sanitize-middleware/commit/abce0d8))
+-   chore(eslint): remove unnecessary eslint rules ([769485e](https://github.com/Fdawgs/sanitize-middleware/commit/769485e))
+-   chore(index): clarify sanitization steps ([c86eaad](https://github.com/Fdawgs/sanitize-middleware/commit/c86eaad))
+
 ## <small>2.0.17 (2020-08-28)</small>
 
 -   build(deps-dev): add eslint-plugin-security dev dependency ([b2bf407](https://github.com/Fdawgs/sanitize-middleware/commit/b2bf407))
