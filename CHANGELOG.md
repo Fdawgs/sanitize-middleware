@@ -1,3 +1,9 @@
+## <small>2.0.19 (2020-10-01)</small>
+
+-   docs(contributing): correct release step order ([7e74168](https://github.com/Fdawgs/sanitize-middleware/commit/7e74168))
+-   build(deps-dev): bump dev dependencies ([5670cbd](https://github.com/Fdawgs/sanitize-middleware/commit/5670cbd))
+-   build(deps): bump sanitize-html from 2.0.0-rc.2 to 2.0.0 ([54be3d9](https://github.com/Fdawgs/sanitize-middleware/commit/54be3d9))
+
 ## <small>2.0.18 (2020-09-22)</small>
 
 -   build(dependabot): remove assignment of pull requests to user ([280c500](https://github.com/Fdawgs/sanitize-middleware/commit/280c500))
