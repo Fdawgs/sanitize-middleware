@@ -24,8 +24,8 @@ With those in place, you can fork the repository, clone it, and then run `yarn i
 After cloning and installing all the dependencies, there are several commands available for local development:
 
 -   `yarn lint` - Lints everything in src directory
--   `yarn jest` - Runs Jest over all tests in src directory
--   `yarn test` - Runs `yarn lint` and `yarn jest` together
+-   `yarn test-only` - Runs Jest over all tests in src directory
+-   `yarn test` - Runs `yarn lint` and `yarn test-only` together
 
 ## Pull Request Checklist
 
