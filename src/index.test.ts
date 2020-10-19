@@ -19,7 +19,9 @@ const args: LooseObject = {
 	argNumber: faker.random.number(),
 	argNumberString: faker.random.number().toString(),
 	argObject: { test1: faker.random.number(), test2: faker.random.number() },
-	argString: faker.random.word().substring(0, 5)
+	argPhoneNumber: faker.phone.phoneNumber(),
+	argString: faker.random.word().substring(0, 5),
+	argUkPhoneNumber: '01935475122'
 };
 
 const requiredArgs: LooseObject = {
@@ -32,7 +34,9 @@ const requiredArgs: LooseObject = {
 	argNumber: { type: 'number', mandatory: false },
 	argNumberString: { type: 'number', mandatory: false },
 	argObject: { type: 'object', mandatory: false },
-	argString: { type: 'string', mandatory: false, maxLength: 5 }
+	argPhoneNumber: { type: 'string', mandatory: false },
+	argString: { type: 'string', mandatory: false, maxLength: 5 },
+	argUkPhoneNumber: { type: 'string', mandatory: false }
 };
 
 describe('Sanitization and validation middleware', () => {
@@ -63,7 +67,9 @@ describe('Sanitization and validation middleware', () => {
 			argNumber: expect.any(Number),
 			argNumberString: expect.any(Number),
 			argObject: expect.any(Object),
-			argString: expect.any(String)
+			argPhoneNumber: expect.any(String),
+			argString: expect.any(String),
+			argUkPhoneNumber: expect.any(String)
 		});
 		expect(res.statusCode).toBe(200);
 		expect(next).toHaveBeenCalledTimes(1);
@@ -92,7 +98,9 @@ describe('Sanitization and validation middleware', () => {
 			argNumber: expect.any(Number),
 			argNumberString: expect.any(Number),
 			argObject: expect.any(Object),
-			argString: expect.any(String)
+			argPhoneNumber: expect.any(String),
+			argString: expect.any(String),
+			argUkPhoneNumber: expect.any(String)
 		});
 		expect(res.statusCode).toBe(200);
 		expect(next).toHaveBeenCalledTimes(1);
@@ -139,7 +147,9 @@ describe('Sanitization and validation middleware', () => {
 			argNumber: expect.any(Number),
 			argNumberString: expect.any(Number),
 			argObject: expect.any(Object),
-			argString: expect.any(String)
+			argPhoneNumber: expect.any(String),
+			argString: expect.any(String),
+			argUkPhoneNumber: expect.any(String)
 		});
 		expect(res.statusCode).toBe(200);
 		expect(next).toHaveBeenCalledTimes(1);
@@ -186,7 +196,9 @@ describe('Sanitization and validation middleware', () => {
 			argNumber: expect.any(Number),
 			argNumberString: expect.any(Number),
 			argObject: expect.any(Object),
-			argString: expect.any(String)
+			argPhoneNumber: expect.any(String),
+			argString: expect.any(String),
+			argUkPhoneNumber: expect.any(String)
 		});
 		expect(res.statusCode).toBe(200);
 		expect(next).toHaveBeenCalledTimes(1);
