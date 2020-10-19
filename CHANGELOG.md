@@ -1,3 +1,12 @@
+## 3.0.0 (2020-10-19)
+
+-   build(deps-dev): bump dev dependencies ([34ed85e](https://github.com/Fdawgs/sanitize-middleware/commit/34ed85e))
+-   fix(index): validate and sanitize json objects and strings correctly ([593cd46](https://github.com/Fdawgs/sanitize-middleware/commit/593cd46))
+
+### BREAKING CHANGE
+
+-   removed `json` type, use `object` or `string` instead. Middleware no longer returns objects or JSON, only serialised strings of them.
+
 ## <small>2.0.20 (2020-10-19)</small>
 
 -   build: create codeql-analysis.yml workflow file ([af6819c](https://github.com/Fdawgs/sanitize-middleware/commit/af6819c))
