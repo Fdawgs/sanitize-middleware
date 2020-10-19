@@ -1,5 +1,6 @@
 import type express from 'express';
 import sanitize = require('sanitize-html');
+import serialize  from 'serialize-javascript';
 import validator = require('validator');
 import { filterXSS } from 'xss';
 
@@ -16,9 +17,9 @@ export interface LooseObject {
 function deriveType(value: unknown): string {
 	let result: string;
 
-	if (typeof value === 'object') {
+	if (typeof value === 'object' || validator.isJSON(value.toString())) {
 		result = 'object';
-	} else if (
+	}  else if (
 		value === 'true' ||
 		value === 'false' ||
 		typeof value === 'boolean'
@@ -58,9 +59,6 @@ function validateType(value: string, type: string): boolean {
 		case 'date':
 			result = validator.toDate(value) !== null;
 			break;
-		case 'json':
-			result = typeof JSON.parse(value) === 'object';
-			break;
 		case 'number':
 			result =
 				value.toString().substring(0, 1) !== '0' &&
@@ -69,7 +67,7 @@ function validateType(value: string, type: string): boolean {
 						validator.isFloat(value as string)));
 			break;
 		case 'object':
-			result = typeof value === 'object';
+			result = typeof value === 'object' || validator.isJSON(value.toString());
 			break;
 		case 'string':
 			result = typeof value === 'string';
@@ -86,13 +84,13 @@ function validateType(value: string, type: string): boolean {
  * @description Sanitizes value based on type passed.
  * @param {string} value - Value to sanitize.
  * @param {string} type - Expected JavaScript data type.
- * @returns {boolean|Date|JSON|number|object|string} parsed value.
+ * @returns {boolean|Date|number|string} parsed value.
  */
 function parseValue(
 	value: string,
 	type: string
-): boolean | Date | JSON | number | object | string {
-	let result: boolean | Date | JSON | number | object | string;
+): boolean | Date | number | string {
+	let result: boolean | Date | number | string;
 	switch (type.toLowerCase()) {
 		case 'boolean':
 			if (typeof value === 'boolean') {
@@ -105,9 +103,6 @@ function parseValue(
 			// Check for valid date type occurs in validateType function, no need to convert here
 			result = value;
 			break;
-		case 'json':
-			result = JSON.parse(value);
-			break;
 		case 'number':
 			if (typeof value === 'number') {
 				result = value;
@@ -116,7 +111,12 @@ function parseValue(
 			}
 			break;
 		case 'object':
-			result = JSON.parse(JSON.stringify(value));
+			if (validator.isJSON(value.toString())) {
+				result = serialize(JSON.parse(value));
+			} else {
+				result = serialize(value);
+			}
+
 			break;
 		// String types will be passed to this
 		default:
