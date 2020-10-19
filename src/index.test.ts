@@ -9,31 +9,35 @@ interface LooseObject {
 }
 
 const args: LooseObject = {
+	argArray: ['../', '/../secret.txt'],
+	argArrayString: '["../", "/../secret.txt"]',
 	argBoolean: faker.random.boolean(),
 	argBooleanString: faker.random.boolean().toString(),
 	argCtrlChars: '\x01\x09',
 	argDate: faker.date.past().toISOString().split('T')[0],
 	argHtml: `<a href='https://www.nhs.uk/'><c>b</c></a>`,
 	argInvalid: faker.random.words(5),
-	argJson: '{ "test1": 1, "test2": 2 }',
 	argNumber: faker.random.number(),
 	argNumberString: faker.random.number().toString(),
-	argObject: { test1: faker.random.number(), test2: faker.random.number() },
+	argObject: { test1: faker.random.number(), haxorXSS: '<script></script>' },
+	argObjectString: '{ "test1": 1, "haxorXSS": "<script></script>"}',
 	argPhoneNumber: faker.phone.phoneNumber(),
 	argString: faker.random.word().substring(0, 5),
 	argUkPhoneNumber: '01935475122'
 };
 
 const requiredArgs: LooseObject = {
+	argArray: { type: 'object', mandatory: false },
+	argArrayString: { type: 'string', mandatory: false },
 	argBoolean: { type: 'boolean', mandatory: false },
 	argBooleanString: { type: 'boolean', mandatory: false },
 	argCtrlChars: { type: 'string' },
 	argDate: { type: 'date', mandatory: false },
 	argHtml: { type: 'string' },
-	argJson: { type: 'json', mandatory: false },
 	argNumber: { type: 'number', mandatory: false },
 	argNumberString: { type: 'number', mandatory: false },
 	argObject: { type: 'object', mandatory: false },
+	argObjectString: { type: 'object', mandatory: false},
 	argPhoneNumber: { type: 'string', mandatory: false },
 	argString: { type: 'string', mandatory: false, maxLength: 5 },
 	argUkPhoneNumber: { type: 'string', mandatory: false }
@@ -59,6 +63,8 @@ describe('Sanitization and validation middleware', () => {
 		middleware(req, res, next);
 
 		expect(req.query).toMatchObject({
+			argArray: expect.any(String),
+			argArrayString: expect.any(String),
 			argBoolean: expect.any(Boolean),
 			argBooleanString: expect.any(Boolean),
 			argCtrlChars: '',
@@ -66,7 +72,8 @@ describe('Sanitization and validation middleware', () => {
 			argHtml: '<a href="https://www.nhs.uk/">b</a>',
 			argNumber: expect.any(Number),
 			argNumberString: expect.any(Number),
-			argObject: expect.any(Object),
+			argObject: expect.any(String),
+			argObjectString: expect.any(String),
 			argPhoneNumber: expect.any(String),
 			argString: expect.any(String),
 			argUkPhoneNumber: expect.any(String)
@@ -90,6 +97,8 @@ describe('Sanitization and validation middleware', () => {
 		middleware(req, res, next);
 
 		expect(req.query).toMatchObject({
+			argArray: expect.any(String),
+			argArrayString: expect.any(String),
 			argBoolean: expect.any(Boolean),
 			argBooleanString: expect.any(Boolean),
 			argCtrlChars: '',
@@ -97,7 +106,8 @@ describe('Sanitization and validation middleware', () => {
 			argHtml: '<a href="https://www.nhs.uk/">b</a>',
 			argNumber: expect.any(Number),
 			argNumberString: expect.any(Number),
-			argObject: expect.any(Object),
+			argObject: expect.any(String),
+			argObjectString: expect.any(String),
 			argPhoneNumber: expect.any(String),
 			argString: expect.any(String),
 			argUkPhoneNumber: expect.any(String)
@@ -139,6 +149,8 @@ describe('Sanitization and validation middleware', () => {
 		middleware(req, res, next);
 
 		expect(req.params).toMatchObject({
+			argArray: expect.any(String),
+			argArrayString: expect.any(String),
 			argBoolean: expect.any(Boolean),
 			argBooleanString: expect.any(Boolean),
 			argCtrlChars: '',
@@ -146,7 +158,8 @@ describe('Sanitization and validation middleware', () => {
 			argHtml: '<a href="https://www.nhs.uk/">b</a>',
 			argNumber: expect.any(Number),
 			argNumberString: expect.any(Number),
-			argObject: expect.any(Object),
+			argObject: expect.any(String),
+			argObjectString: expect.any(String),
 			argPhoneNumber: expect.any(String),
 			argString: expect.any(String),
 			argUkPhoneNumber: expect.any(String)
@@ -188,6 +201,8 @@ describe('Sanitization and validation middleware', () => {
 		middleware(req, res, next);
 
 		expect(req.body).toMatchObject({
+			argArray: expect.any(String),
+			argArrayString: expect.any(String),
 			argBoolean: expect.any(Boolean),
 			argBooleanString: expect.any(Boolean),
 			argCtrlChars: '',
@@ -195,7 +210,8 @@ describe('Sanitization and validation middleware', () => {
 			argHtml: '<a href="https://www.nhs.uk/">b</a>',
 			argNumber: expect.any(Number),
 			argNumberString: expect.any(Number),
-			argObject: expect.any(Object),
+			argObject: expect.any(String),
+			argObjectString: expect.any(String),
 			argPhoneNumber: expect.any(String),
 			argString: expect.any(String),
 			argUkPhoneNumber: expect.any(String)

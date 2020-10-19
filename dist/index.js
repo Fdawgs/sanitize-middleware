@@ -1,5 +1,11 @@
+var __importDefault =
+	(this && this.__importDefault) ||
+	function (mod) {
+		return mod && mod.__esModule ? mod : { default: mod };
+	};
 Object.defineProperty(exports, '__esModule', { value: true });
 const sanitize = require('sanitize-html');
+const serialize_javascript_1 = __importDefault(require('serialize-javascript'));
 const validator = require('validator');
 const xss_1 = require('xss');
 /**
@@ -10,7 +16,7 @@ const xss_1 = require('xss');
  */
 function deriveType(value) {
 	let result;
-	if (typeof value === 'object') {
+	if (typeof value === 'object' || validator.isJSON(value.toString())) {
 		result = 'object';
 	} else if (
 		value === 'true' ||
@@ -50,9 +56,6 @@ function validateType(value, type) {
 		case 'date':
 			result = validator.toDate(value) !== null;
 			break;
-		case 'json':
-			result = typeof JSON.parse(value) === 'object';
-			break;
 		case 'number':
 			result =
 				value.toString().substring(0, 1) !== '0' &&
@@ -60,7 +63,8 @@ function validateType(value, type) {
 					(typeof value === 'string' && validator.isFloat(value)));
 			break;
 		case 'object':
-			result = typeof value === 'object';
+			result =
+				typeof value === 'object' || validator.isJSON(value.toString());
 			break;
 		case 'string':
 			result = typeof value === 'string';
@@ -76,7 +80,7 @@ function validateType(value, type) {
  * @description Sanitizes value based on type passed.
  * @param {string} value - Value to sanitize.
  * @param {string} type - Expected JavaScript data type.
- * @returns {boolean|Date|JSON|number|object|string} parsed value.
+ * @returns {boolean|Date|number|string} parsed value.
  */
 function parseValue(value, type) {
 	let result;
@@ -92,9 +96,6 @@ function parseValue(value, type) {
 			// Check for valid date type occurs in validateType function, no need to convert here
 			result = value;
 			break;
-		case 'json':
-			result = JSON.parse(value);
-			break;
 		case 'number':
 			if (typeof value === 'number') {
 				result = value;
@@ -103,7 +104,11 @@ function parseValue(value, type) {
 			}
 			break;
 		case 'object':
-			result = JSON.parse(JSON.stringify(value));
+			if (validator.isJSON(value.toString())) {
+				result = serialize_javascript_1.default(JSON.parse(value));
+			} else {
+				result = serialize_javascript_1.default(value);
+			}
 			break;
 		// String types will be passed to this
 		default:
