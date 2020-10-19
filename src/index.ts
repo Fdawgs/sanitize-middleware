@@ -15,6 +15,7 @@ export interface LooseObject {
  */
 function deriveType(value: unknown): string {
 	let result: string;
+
 	if (typeof value === 'object') {
 		result = 'object';
 	} else if (
@@ -24,8 +25,9 @@ function deriveType(value: unknown): string {
 	) {
 		result = 'boolean';
 	} else if (
-		typeof value === 'number' ||
-		(validator.isFloat(value as string) && typeof value === 'string')
+		value.toString().substring(0, 1) !== '0' &&
+		(typeof value === 'number' ||
+			(typeof value === 'string' && validator.isFloat(value as string)))
 	) {
 		result = 'number';
 	} else if (validator.isDate(value)) {
@@ -61,8 +63,10 @@ function validateType(value: string, type: string): boolean {
 			break;
 		case 'number':
 			result =
-				typeof value === 'number' ||
-				(validator.isFloat(value) && typeof value === 'string');
+				value.toString().substring(0, 1) !== '0' &&
+				(typeof value === 'number' ||
+					(typeof value === 'string' &&
+						validator.isFloat(value as string)));
 			break;
 		case 'object':
 			result = typeof value === 'object';
@@ -122,7 +126,9 @@ function parseValue(
 			 * - Escapes HTML tags using `filterXSS`
 			 * - Removes non-word characters, and control characters using `stripLow` function of `validator`
 			 */
-			result = validator.stripLow(filterXSS(sanitize(value))).trim();
+			result = validator
+				.stripLow(filterXSS(sanitize(value.toString())))
+				.trim();
 			break;
 	}
 	return result;
