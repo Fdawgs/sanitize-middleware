@@ -19,8 +19,9 @@ function deriveType(value) {
 	) {
 		result = 'boolean';
 	} else if (
-		typeof value === 'number' ||
-		(validator.isFloat(value) && typeof value === 'string')
+		value.toString().substring(0, 1) !== '0' &&
+		(typeof value === 'number' ||
+			(typeof value === 'string' && validator.isFloat(value)))
 	) {
 		result = 'number';
 	} else if (validator.isDate(value)) {
@@ -54,8 +55,9 @@ function validateType(value, type) {
 			break;
 		case 'number':
 			result =
-				typeof value === 'number' ||
-				(validator.isFloat(value) && typeof value === 'string');
+				value.toString().substring(0, 1) !== '0' &&
+				(typeof value === 'number' ||
+					(typeof value === 'string' && validator.isFloat(value)));
 			break;
 		case 'object':
 			result = typeof value === 'object';
@@ -112,7 +114,7 @@ function parseValue(value, type) {
 			 * - Removes non-word characters, and control characters using `stripLow` function of `validator`
 			 */
 			result = validator
-				.stripLow(xss_1.filterXSS(sanitize(value)))
+				.stripLow(xss_1.filterXSS(sanitize(value.toString())))
 				.trim();
 			break;
 	}
