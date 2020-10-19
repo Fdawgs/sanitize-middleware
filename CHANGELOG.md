@@ -1,3 +1,12 @@
+## <small>2.0.20 (2020-10-19)</small>
+
+-   build: create codeql-analysis.yml workflow file ([af6819c](https://github.com/Fdawgs/sanitize-middleware/commit/af6819c))
+-   build(deps-dev): bump dev dependencies ([c235f3c](https://github.com/Fdawgs/sanitize-middleware/commit/c235f3c))
+-   build(deps): bump sanitize-html from 2.0.0 to 2.1.0 ([df0729d](https://github.com/Fdawgs/sanitize-middleware/commit/df0729d))
+-   fix(index): handle numbers with leading zeros as strings ([77718e5](https://github.com/Fdawgs/sanitize-middleware/commit/77718e5))
+-   docs(contributing): remove reference to replaced jest script ([caba57d](https://github.com/Fdawgs/sanitize-middleware/commit/caba57d))
+-   docs(contributing): spelling and grammar fixes ([edcd5b0](https://github.com/Fdawgs/sanitize-middleware/commit/edcd5b0))
+
 ## <small>2.0.19 (2020-10-01)</small>
 
 -   docs(contributing): correct release step order ([7e74168](https://github.com/Fdawgs/sanitize-middleware/commit/7e74168))
