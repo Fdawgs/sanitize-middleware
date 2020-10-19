@@ -89,7 +89,7 @@
 		"typescript": "^4.0.3"
 	},
 	"dependencies": {
-		"sanitize-html": "^2.0.0",
+		"sanitize-html": "^2.1.0",
 		"validator": "^13.1.17",
 		"xss": "^1.0.8"
 	}
