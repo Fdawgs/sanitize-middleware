@@ -11,6 +11,7 @@ interface LooseObject {
 const args: LooseObject = {
 	argArray: ['../', '/../secret.txt'],
 	argArrayString: '["../", "/../secret.txt"]',
+	argBuffer: Buffer.from('tést', 'latin1'),
 	argBoolean: faker.random.boolean(),
 	argBooleanString: faker.random.boolean().toString(),
 	argCtrlChars: '\x01\x09',
@@ -29,6 +30,7 @@ const args: LooseObject = {
 const requiredArgs: LooseObject = {
 	argArray: { type: 'object', mandatory: false },
 	argArrayString: { type: 'string', mandatory: false },
+	argBuffer: { type: 'object', mandatory: false },
 	argBoolean: { type: 'boolean', mandatory: false },
 	argBooleanString: { type: 'boolean', mandatory: false },
 	argCtrlChars: { type: 'string' },
@@ -37,7 +39,7 @@ const requiredArgs: LooseObject = {
 	argNumber: { type: 'number', mandatory: false },
 	argNumberString: { type: 'number', mandatory: false },
 	argObject: { type: 'object', mandatory: false },
-	argObjectString: { type: 'object', mandatory: false},
+	argObjectString: { type: 'object', mandatory: false },
 	argPhoneNumber: { type: 'string', mandatory: false },
 	argString: { type: 'string', mandatory: false, maxLength: 5 },
 	argUkPhoneNumber: { type: 'string', mandatory: false }
@@ -64,6 +66,7 @@ describe('Sanitization and validation middleware', () => {
 
 		expect(req.query).toMatchObject({
 			argArray: expect.any(String),
+			argBuffer: expect.any(String),
 			argArrayString: expect.any(String),
 			argBoolean: expect.any(Boolean),
 			argBooleanString: expect.any(Boolean),
@@ -98,6 +101,7 @@ describe('Sanitization and validation middleware', () => {
 
 		expect(req.query).toMatchObject({
 			argArray: expect.any(String),
+			argBuffer: expect.any(String),
 			argArrayString: expect.any(String),
 			argBoolean: expect.any(Boolean),
 			argBooleanString: expect.any(Boolean),
@@ -150,6 +154,7 @@ describe('Sanitization and validation middleware', () => {
 
 		expect(req.params).toMatchObject({
 			argArray: expect.any(String),
+			argBuffer: expect.any(String),
 			argArrayString: expect.any(String),
 			argBoolean: expect.any(Boolean),
 			argBooleanString: expect.any(Boolean),
@@ -202,6 +207,7 @@ describe('Sanitization and validation middleware', () => {
 
 		expect(req.body).toMatchObject({
 			argArray: expect.any(String),
+			argBuffer: expect.any(String),
 			argArrayString: expect.any(String),
 			argBoolean: expect.any(Boolean),
 			argBooleanString: expect.any(Boolean),
