@@ -1,3 +1,9 @@
+## 3.1.0 (2020-10-29)
+
+-   build(deps-dev): bump dev dependencies ([1c08b0a](https://github.com/Fdawgs/sanitize-middleware/commit/1c08b0a))
+-   feat(index): escape html rather than remove completely ([1ecdcb5](https://github.com/Fdawgs/sanitize-middleware/commit/1ecdcb5))
+-   tests(index): test buffer arrays ([c0cadf5](https://github.com/Fdawgs/sanitize-middleware/commit/c0cadf5))
+
 ## 3.0.0 (2020-10-19)
 
 -   build(deps-dev): bump dev dependencies ([34ed85e](https://github.com/Fdawgs/sanitize-middleware/commit/34ed85e))
