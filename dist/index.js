@@ -4,10 +4,8 @@ var __importDefault =
 		return mod && mod.__esModule ? mod : { default: mod };
 	};
 Object.defineProperty(exports, '__esModule', { value: true });
-const sanitize = require('sanitize-html');
 const serialize_javascript_1 = __importDefault(require('serialize-javascript'));
 const validator = require('validator');
-const xss_1 = require('xss');
 /**
  * @author Frazer Smith
  * @description Attempts to derive JavaScript data type of value.
@@ -114,12 +112,11 @@ function parseValue(value, type) {
 		default:
 			/**
 			 * Below does the following:
-			 * - Removes invalid HTML tags using `sanitize-html`
-			 * - Escapes HTML tags using `filterXSS`
+			 * - Escapes HTML tags using `escape` function of `validator`, replacing them with HTML entities
 			 * - Removes non-word characters, and control characters using `stripLow` function of `validator`
 			 */
 			result = validator
-				.stripLow(xss_1.filterXSS(sanitize(value.toString())))
+				.stripLow(validator.escape(value.toString()))
 				.trim();
 			break;
 	}
@@ -206,8 +203,7 @@ function parseValues(args, config) {
 }
 /**
  * @author Frazer Smith
- * @description Validates
- * and sanitizes the query, param and body of requests to protect against
+ * @description Validates, sanitizes, and escapes the query, param and body of requests to protect against
  * cross-site scripting (XSS) and command injection attacks.
  * @param {object=} config - Sanitization configuration values.
  * @returns {Function} Express middleware.
