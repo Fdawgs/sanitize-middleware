@@ -1,8 +1,6 @@
 import type express from 'express';
-import sanitize = require('sanitize-html');
-import serialize  from 'serialize-javascript';
+import serialize from 'serialize-javascript';
 import validator = require('validator');
-import { filterXSS } from 'xss';
 
 export interface LooseObject {
 	[key: string]: any;
@@ -19,7 +17,7 @@ function deriveType(value: unknown): string {
 
 	if (typeof value === 'object' || validator.isJSON(value.toString())) {
 		result = 'object';
-	}  else if (
+	} else if (
 		value === 'true' ||
 		value === 'false' ||
 		typeof value === 'boolean'
@@ -67,7 +65,8 @@ function validateType(value: string, type: string): boolean {
 						validator.isFloat(value as string)));
 			break;
 		case 'object':
-			result = typeof value === 'object' || validator.isJSON(value.toString());
+			result =
+				typeof value === 'object' || validator.isJSON(value.toString());
 			break;
 		case 'string':
 			result = typeof value === 'string';
@@ -122,12 +121,11 @@ function parseValue(
 		default:
 			/**
 			 * Below does the following:
-			 * - Removes invalid HTML tags using `sanitize-html`
-			 * - Escapes HTML tags using `filterXSS`
+			 * - Escapes HTML tags using `escape` function of `validator`, replacing them with HTML entities
 			 * - Removes non-word characters, and control characters using `stripLow` function of `validator`
 			 */
 			result = validator
-				.stripLow(filterXSS(sanitize(value.toString())))
+				.stripLow(validator.escape(value.toString()))
 				.trim();
 			break;
 	}
@@ -220,8 +218,7 @@ function parseValues(args: object, config: object | undefined): Error | object {
 
 /**
  * @author Frazer Smith
- * @description Validates
- * and sanitizes the query, param and body of requests to protect against
+ * @description Validates, sanitizes, and escapes the query, param and body of requests to protect against
  * cross-site scripting (XSS) and command injection attacks.
  * @param {object=} config - Sanitization configuration values.
  * @returns {Function} Express middleware.
