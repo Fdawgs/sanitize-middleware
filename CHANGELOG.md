@@ -1,3 +1,12 @@
+## 4.0.0 (2020-11-02)
+
+-   build(deps-dev): bump dev dependencies ([5e9fccc](https://github.com/Fdawgs/sanitize-middleware/commit/5e9fccc))
+-   refactor(index): use html-entities dependency for escaping html ([1bd3c4b](https://github.com/Fdawgs/sanitize-middleware/commit/1bd3c4b))
+
+### BREAKING CHANGE
+
+-   middleware now escapes html tags rather than removing it
+
 ## 3.1.0 (2020-10-29)
 
 -   build(deps-dev): bump dev dependencies ([1c08b0a](https://github.com/Fdawgs/sanitize-middleware/commit/1c08b0a))
