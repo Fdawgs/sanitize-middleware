@@ -127,8 +127,8 @@ function parseValue(
 			 * - Removes non-word characters, and control characters using `stripLow` function of `validator`
 			 * - Escapes HTML tags using `encode` function of `entities`, replacing them with HTML entities
 			 */
-			result = entities.encode(validator
-				.stripLow(value.toString()))
+			result = entities
+				.encode(validator.stripLow(value.toString()))
 				.trim();
 			break;
 	}
