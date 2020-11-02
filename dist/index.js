@@ -4,8 +4,10 @@ var __importDefault =
 		return mod && mod.__esModule ? mod : { default: mod };
 	};
 Object.defineProperty(exports, '__esModule', { value: true });
+const html_entities_1 = require('html-entities');
 const serialize_javascript_1 = __importDefault(require('serialize-javascript'));
 const validator = require('validator');
+const entities = new html_entities_1.AllHtmlEntities();
 /**
  * @author Frazer Smith
  * @description Attempts to derive JavaScript data type of value.
@@ -112,11 +114,11 @@ function parseValue(value, type) {
 		default:
 			/**
 			 * Below does the following:
-			 * - Escapes HTML tags using `escape` function of `validator`, replacing them with HTML entities
 			 * - Removes non-word characters, and control characters using `stripLow` function of `validator`
+			 * - Escapes HTML tags using `encode` function of `entities`, replacing them with HTML entities
 			 */
-			result = validator
-				.stripLow(validator.escape(value.toString()))
+			result = entities
+				.encode(validator.stripLow(value.toString()))
 				.trim();
 			break;
 	}
