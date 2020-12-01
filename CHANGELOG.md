@@ -1,3 +1,11 @@
+## <small>4.0.1 (2020-12-01)</small>
+
+-   build(deps-dev): bump dev dependencies ([49b0347](https://github.com/Fdawgs/sanitize-middleware/commit/49b0347))
+-   build(deps): bump validator from 13.1.17 to 13.5.1 ([b80f52c](https://github.com/Fdawgs/sanitize-middleware/commit/b80f52c))
+-   chore: add security.md ([194ca60](https://github.com/Fdawgs/sanitize-middleware/commit/194ca60))
+-   ci: add cd action to publish to npm ([43efb37](https://github.com/Fdawgs/sanitize-middleware/commit/43efb37))
+-   ci: replace travis-ci with github actions ([fe70ce5](https://github.com/Fdawgs/sanitize-middleware/commit/fe70ce5))
+
 ## 4.0.0 (2020-11-02)
 
 -   build(deps-dev): bump dev dependencies ([5e9fccc](https://github.com/Fdawgs/sanitize-middleware/commit/5e9fccc))
