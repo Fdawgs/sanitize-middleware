@@ -1,6 +1,6 @@
 {
 	"name": "sanitize-middleware",
-	"version": "4.0.0",
+	"version": "4.0.1",
 	"description": "Connect/Express middleware that sanitizes and escapes requests to protect against cross-site scripting (XSS) and command injection attacks",
 	"keywords": [
 		"express",
