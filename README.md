@@ -23,7 +23,7 @@ sanitize-middleware's test scripts use yarn commands.
 ## API
 
 ```js
-const sanitizeMiddleware = require('sanitize-middleware');
+const sanitizeMiddleware = require("sanitize-middleware");
 ```
 
 ### Options
@@ -40,14 +40,14 @@ Each of the above properties must be objects, with further properties as objects
 const exampleConfig = {
 	body: {
 		bodyProperty1: {},
-		bodyProperty2: {}
+		bodyProperty2: {},
 	},
 	query: {
-		queryProperty1: {}
+		queryProperty1: {},
 	},
 	params: {
-		paramsProperty1: {}
-	}
+		paramsProperty1: {},
+	},
 };
 ```
 
@@ -64,8 +64,8 @@ Each of the object properties within `body`, `query`, and/or `params` have prope
 If no options are provided to the middleware, the middleware will accept every property found in the `body`, `query`, and `params` object properties of a `req` and then attempt to derive the type before sanitizing.
 
 ```js
-const sanitizeMiddleware = require('sanitize-middleware');
-const express = require('express');
+const sanitizeMiddleware = require("sanitize-middleware");
+const express = require("express");
 const app = express();
 
 app.use(sanitizeMiddleware());
@@ -74,8 +74,8 @@ app.use(sanitizeMiddleware());
 With options provided, if a received property that is mandatory is missing, is the wrong type, or is longer than the max length, an error will be passed to `next()` to be handled by your error handler middleware.
 
 ```js
-const sanitizeMiddleware = require('sanitize-middleware');
-const express = require('express');
+const sanitizeMiddleware = require("sanitize-middleware");
+const express = require("express");
 const app = express();
 
 // localhost:8204/test?id=hello&status=current would throw an error as type of the id query key is wrong
@@ -83,12 +83,12 @@ const app = express();
 // localhost:8204/test?subject=bananas would throw an error as the length is greater than the maxLength allowed
 const options = {
 	query: {
-		status: { type: 'string', mandatory: true },
-		type: { type: 'string', mandatory: false },
-		id: { type: 'number', mandatory: false },
-		specialty: { type: 'string', mandatory: false },
-		subject: { type: 'string', mandatory: false, maxLength: 5 }
-	}
+		status: { type: "string", mandatory: true },
+		type: { type: "string", mandatory: false },
+		id: { type: "number", mandatory: false },
+		specialty: { type: "string", mandatory: false },
+		subject: { type: "string", mandatory: false, maxLength: 5 },
+	},
 };
 
 app.use(sanitizeMiddleware(options));
@@ -97,18 +97,18 @@ app.use(sanitizeMiddleware(options));
 The `mandatory` property is optional, if not present it is assumed a received property matching its parent key name is not mandatory.
 
 ```js
-const sanitizeMiddleware = require('sanitize-middleware');
-const express = require('express');
+const sanitizeMiddleware = require("sanitize-middleware");
+const express = require("express");
 const app = express();
 
 const options = {
 	query: {
-		specialty: { type: 'string', mandatory: false },
-		subject: { type: 'string', mandatory: false }
+		specialty: { type: "string", mandatory: false },
+		subject: { type: "string", mandatory: false },
 	},
 	params: {
-		id: { type: 'string' }
-	}
+		id: { type: "string" },
+	},
 };
 
 app.use(sanitizeMiddleware(options));

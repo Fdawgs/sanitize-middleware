@@ -1,49 +1,48 @@
 module.exports = {
 	env: {
 		es2021: true,
-		node: true
+		node: true,
 	},
 	extends: [
-		'airbnb-base',
-		'plugin:promise/recommended',
-		'plugin:jest/recommended',
-		'plugin:jsdoc/recommended',
-		'plugin:security/recommended',
-		'prettier'
+		"airbnb-base",
+		"plugin:promise/recommended",
+		"plugin:jest/recommended",
+		"plugin:jsdoc/recommended",
+		"plugin:security/recommended",
+		"prettier",
 	],
 	overrides: [
 		{
-			files: ['*.ts', '*.tsx'],
-			extends: ['plugin:@typescript-eslint/recommended'],
-			parser: '@typescript-eslint/parser',
-			plugins: ['import'],
+			files: ["*.ts", "*.tsx"],
+			extends: ["plugin:@typescript-eslint/recommended"],
+			parser: "@typescript-eslint/parser",
+			plugins: ["import"],
 			rules: {
-				'import/first': 'off',
-				'@typescript-eslint/ban-types': 'off',
-				'@typescript-eslint/no-var-requires': 'warn',
-				'@typescript-eslint/no-explicit-any': 'off'
-			}
-		}
+				"import/first": "off",
+				"@typescript-eslint/ban-types": "off",
+				"@typescript-eslint/no-var-requires": "warn",
+				"@typescript-eslint/no-explicit-any": "off",
+			},
+		},
 	],
 	parserOptions: {
-		sourceType: 'module',
+		sourceType: "module",
 		ecmaFeatures: {
-			impliedStrict: true
-		}
+			impliedStrict: true,
+		},
 	},
-	plugins: ['import', 'jest', 'jsdoc', 'promise', 'security'],
+	plugins: ["import", "jest", "jsdoc", "promise", "security"],
 	root: true,
 	rules: {
-		camelcase: 'warn',
-		'import/no-extraneous-dependencies': 'warn',
-		'no-multiple-empty-lines': [
-			'error',
+		"import/no-extraneous-dependencies": "warn",
+		"no-multiple-empty-lines": [
+			"error",
 			{
-				max: 1
-			}
+				max: 1,
+			},
 		],
-		'prefer-destructuring': 'off',
-		'promise/prefer-await-to-callbacks': 'warn',
-		'promise/prefer-await-to-then': 'warn'
-	}
+		"prefer-destructuring": "off",
+		"promise/prefer-await-to-callbacks": "warn",
+		"promise/prefer-await-to-then": "warn",
+	},
 };
