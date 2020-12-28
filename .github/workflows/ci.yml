@@ -12,7 +12,8 @@ on:
 
 jobs:
     lint:
-        name: Lint
+        name: Lint Code
+        if: github.event.pull_request.draft == false
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v2
@@ -25,9 +26,12 @@ jobs:
               run: yarn lint
             - name: Run Prettier
               run: yarn lint:prettier:ci
+            - name: Compile TypeScript Definition File
+              run: yarn tsc
 
-    build:
-        name: Build
+    unittests:
+        name: Unit Tests
+        if: github.event.pull_request.draft == false
         strategy:
             matrix:
                 node-version: [10.x, 12.x, 14.x]
@@ -35,8 +39,8 @@ jobs:
         runs-on: ${{ matrix.os }}
         steps:
             - uses: actions/checkout@v2
-            - name: Use Node.js ${{ matrix.node-version }} on ${{ matrix.os }}
-              uses: actions/setup-node@v1
+            - name: Use Node.js ${{ matrix.node-version }}
+              uses: actions/setup-node@v2
               with:
                   node-version: ${{ matrix.node-version }}
             - name: Install
@@ -53,7 +57,8 @@ jobs:
 
     coverage:
         name: Aggregate Coverage Calculations
-        needs: build
+        if: github.event.pull_request.draft == false
+        needs: unittests
         runs-on: ubuntu-latest
         steps:
             - name: Coveralls Finished
@@ -64,10 +69,10 @@ jobs:
 
     automerge:
         name: Automatically merge Dependabot pull requests
-        needs: [lint, build]
+        needs: [lint, unittests]
         runs-on: ubuntu-latest
         steps:
-            - uses: fastify/github-action-merge-dependabot@v1
+            - uses: fastify/github-action-merge-dependabot@v1.1.1
               if: ${{ github.actor == 'dependabot[bot]' && github.event_name == 'pull_request' }}
               with:
                   github-token: ${{ secrets.GITHUB_TOKEN }}
