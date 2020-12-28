@@ -1,7 +1,7 @@
-import type express from 'express';
-import { AllHtmlEntities } from 'html-entities';
-import serialize from 'serialize-javascript';
-import validator = require('validator');
+import type express from "express";
+import { AllHtmlEntities } from "html-entities";
+import serialize from "serialize-javascript";
+import validator = require("validator");
 
 const entities = new AllHtmlEntities();
 
@@ -18,24 +18,24 @@ export interface LooseObject {
 function deriveType(value: unknown): string {
 	let result: string;
 
-	if (typeof value === 'object' || validator.isJSON(value.toString())) {
-		result = 'object';
+	if (typeof value === "object" || validator.isJSON(value.toString())) {
+		result = "object";
 	} else if (
-		value === 'true' ||
-		value === 'false' ||
-		typeof value === 'boolean'
+		value === "true" ||
+		value === "false" ||
+		typeof value === "boolean"
 	) {
-		result = 'boolean';
+		result = "boolean";
 	} else if (
-		value.toString().substring(0, 1) !== '0' &&
-		(typeof value === 'number' ||
-			(typeof value === 'string' && validator.isFloat(value as string)))
+		value.toString().substring(0, 1) !== "0" &&
+		(typeof value === "number" ||
+			(typeof value === "string" && validator.isFloat(value as string)))
 	) {
-		result = 'number';
+		result = "number";
 	} else if (validator.isDate(value)) {
-		result = 'date';
+		result = "date";
 	} else {
-		result = 'string';
+		result = "string";
 	}
 
 	return result;
@@ -51,28 +51,28 @@ function deriveType(value: unknown): string {
 function validateType(value: string, type: string): boolean {
 	let result: boolean;
 	switch (type.toLowerCase()) {
-		case 'boolean':
+		case "boolean":
 			result =
-				value === 'true' ||
-				value === 'false' ||
-				typeof value === 'boolean';
+				value === "true" ||
+				value === "false" ||
+				typeof value === "boolean";
 			break;
-		case 'date':
+		case "date":
 			result = validator.toDate(value) !== null;
 			break;
-		case 'number':
+		case "number":
 			result =
-				value.toString().substring(0, 1) !== '0' &&
-				(typeof value === 'number' ||
-					(typeof value === 'string' &&
+				value.toString().substring(0, 1) !== "0" &&
+				(typeof value === "number" ||
+					(typeof value === "string" &&
 						validator.isFloat(value as string)));
 			break;
-		case 'object':
+		case "object":
 			result =
-				typeof value === 'object' || validator.isJSON(value.toString());
+				typeof value === "object" || validator.isJSON(value.toString());
 			break;
-		case 'string':
-			result = typeof value === 'string';
+		case "string":
+			result = typeof value === "string";
 			break;
 		default:
 			result = false;
@@ -94,25 +94,25 @@ function parseValue(
 ): boolean | Date | number | string {
 	let result: boolean | Date | number | string;
 	switch (type.toLowerCase()) {
-		case 'boolean':
-			if (typeof value === 'boolean') {
+		case "boolean":
+			if (typeof value === "boolean") {
 				result = value;
 			} else {
 				result = validator.toBoolean(value, true);
 			}
 			break;
-		case 'date':
+		case "date":
 			// Check for valid date type occurs in validateType function, no need to convert here
 			result = value;
 			break;
-		case 'number':
-			if (typeof value === 'number') {
+		case "number":
+			if (typeof value === "number") {
 				result = value;
 			} else {
 				result = validator.toFloat(value);
 			}
 			break;
-		case 'object':
+		case "object":
 			if (validator.isJSON(value.toString())) {
 				result = serialize(JSON.parse(value));
 			} else {
@@ -167,7 +167,7 @@ function parseValues(args: object, config: object | undefined): Error | object {
 		) === false
 	) {
 		message = `A mandatory parameter is missing from the list: ${mandatoryArgs
-			.join(', ')
+			.join(", ")
 			.toString()}`;
 		return new Error(message);
 	}
@@ -177,7 +177,7 @@ function parseValues(args: object, config: object | undefined): Error | object {
 	Object.keys(config).forEach((configKey) => {
 		if (
 			config[configKey].maxLength &&
-			typeof config[configKey].maxLength === 'number'
+			typeof config[configKey].maxLength === "number"
 		) {
 			maxLengthArgs[configKey] = config[configKey].maxLength;
 		}
@@ -213,7 +213,7 @@ function parseValues(args: object, config: object | undefined): Error | object {
 		}
 	});
 
-	if (typeof message !== 'undefined') {
+	if (typeof message !== "undefined") {
 		return new Error(message);
 	}
 	return values;
