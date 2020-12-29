@@ -29,7 +29,7 @@ jobs:
             - name: Compile TypeScript
               run: yarn build
 
-    unittests:
+    unit-tests:
         name: Unit Tests
         if: github.event.pull_request.draft == false
         strategy:
@@ -58,7 +58,7 @@ jobs:
     coverage:
         name: Aggregate Coverage Calculations
         if: github.event.pull_request.draft == false
-        needs: unittests
+        needs: unit-tests
         runs-on: ubuntu-latest
         steps:
             - name: Coveralls Finished
@@ -69,7 +69,8 @@ jobs:
 
     automerge:
         name: Automatically merge Dependabot pull requests
-        needs: [lint, unittests]
+        if: github.event.pull_request.draft == false
+        needs: [lint, unit-tests]
         runs-on: ubuntu-latest
         steps:
             - uses: fastify/github-action-merge-dependabot@v1.1.1
