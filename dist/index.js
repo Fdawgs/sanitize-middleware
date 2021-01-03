@@ -6,8 +6,7 @@ var __importDefault =
 Object.defineProperty(exports, "__esModule", { value: true });
 const html_entities_1 = require("html-entities");
 const serialize_javascript_1 = __importDefault(require("serialize-javascript"));
-const validator = require("validator");
-const entities = new html_entities_1.AllHtmlEntities();
+const validator_1 = __importDefault(require("validator"));
 /**
  * @author Frazer Smith
  * @description Attempts to derive JavaScript data type of value.
@@ -16,7 +15,10 @@ const entities = new html_entities_1.AllHtmlEntities();
  */
 function deriveType(value) {
 	let result;
-	if (typeof value === "object" || validator.isJSON(value.toString())) {
+	if (
+		typeof value === "object" ||
+		validator_1.default.isJSON(value.toString())
+	) {
 		result = "object";
 	} else if (
 		value === "true" ||
@@ -27,10 +29,10 @@ function deriveType(value) {
 	} else if (
 		value.toString().substring(0, 1) !== "0" &&
 		(typeof value === "number" ||
-			(typeof value === "string" && validator.isFloat(value)))
+			(typeof value === "string" && validator_1.default.isFloat(value)))
 	) {
 		result = "number";
-	} else if (validator.isDate(value)) {
+	} else if (validator_1.default.isDate(value)) {
 		result = "date";
 	} else {
 		result = "string";
@@ -54,17 +56,19 @@ function validateType(value, type) {
 				typeof value === "boolean";
 			break;
 		case "date":
-			result = validator.toDate(value) !== null;
+			result = validator_1.default.toDate(value) !== null;
 			break;
 		case "number":
 			result =
 				value.toString().substring(0, 1) !== "0" &&
 				(typeof value === "number" ||
-					(typeof value === "string" && validator.isFloat(value)));
+					(typeof value === "string" &&
+						validator_1.default.isFloat(value)));
 			break;
 		case "object":
 			result =
-				typeof value === "object" || validator.isJSON(value.toString());
+				typeof value === "object" ||
+				validator_1.default.isJSON(value.toString());
 			break;
 		case "string":
 			result = typeof value === "string";
@@ -89,7 +93,7 @@ function parseValue(value, type) {
 			if (typeof value === "boolean") {
 				result = value;
 			} else {
-				result = validator.toBoolean(value, true);
+				result = validator_1.default.toBoolean(value, true);
 			}
 			break;
 		case "date":
@@ -100,11 +104,11 @@ function parseValue(value, type) {
 			if (typeof value === "number") {
 				result = value;
 			} else {
-				result = validator.toFloat(value);
+				result = validator_1.default.toFloat(value);
 			}
 			break;
 		case "object":
-			if (validator.isJSON(value.toString())) {
+			if (validator_1.default.isJSON(value.toString())) {
 				result = serialize_javascript_1.default(JSON.parse(value));
 			} else {
 				result = serialize_javascript_1.default(value);
@@ -117,8 +121,8 @@ function parseValue(value, type) {
 			 * - Removes non-word characters, and control characters using `stripLow` function of `validator`
 			 * - Escapes HTML tags using `encode` function of `entities`, replacing them with HTML entities
 			 */
-			result = entities
-				.encode(validator.stripLow(value.toString()))
+			result = html_entities_1
+				.encode(validator_1.default.stripLow(value.toString()))
 				.trim();
 			break;
 	}

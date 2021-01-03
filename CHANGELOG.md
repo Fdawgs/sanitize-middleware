@@ -1,3 +1,20 @@
+## <small>4.0.3 (2021-01-03)</small>
+
+-   build(deps-dev): add @types/validator ([db58ce4](https://github.com/Fdawgs/sanitize-middleware/commit/db58ce4))
+-   build(deps-dev): bump @types/lodash from 4.14.166 to 4.14.167 (#172) ([8c27bcf](https://github.com/Fdawgs/sanitize-middleware/commit/8c27bcf)), closes [#172](https://github.com/Fdawgs/sanitize-middleware/issues/172)
+-   build(deps-dev): bump @types/node from 14.14.16 to 14.14.17 (#167) ([ecd60b7](https://github.com/Fdawgs/sanitize-middleware/commit/ecd60b7)), closes [#167](https://github.com/Fdawgs/sanitize-middleware/issues/167)
+-   build(deps-dev): bump @types/node from 14.14.17 to 14.14.19 (#170) ([f1b87c3](https://github.com/Fdawgs/sanitize-middleware/commit/f1b87c3)), closes [#170](https://github.com/Fdawgs/sanitize-middleware/issues/170)
+-   build(deps-dev): bump eslint from 7.16.0 to 7.17.0 (#171) ([98e706e](https://github.com/Fdawgs/sanitize-middleware/commit/98e706e)), closes [#171](https://github.com/Fdawgs/sanitize-middleware/issues/171)
+-   build(deps-dev): bump eslint-plugin-jsdoc from 30.7.9 to 30.7.13 (#173) ([b6e3972](https://github.com/Fdawgs/sanitize-middleware/commit/b6e3972)), closes [#173](https://github.com/Fdawgs/sanitize-middleware/issues/173)
+-   build(deps-dev): remove cross-env ([0ec125c](https://github.com/Fdawgs/sanitize-middleware/commit/0ec125c))
+-   build(deps): bump html-entities from 1.4.0 to 2.0.2 ([d459429](https://github.com/Fdawgs/sanitize-middleware/commit/d459429))
+-   refactor(index): html-entities function ([a52cac2](https://github.com/Fdawgs/sanitize-middleware/commit/a52cac2))
+-   ci: refactor `codeql-analysis.yml` ([506dbb9](https://github.com/Fdawgs/sanitize-middleware/commit/506dbb9))
+-   ci: use yarn cache of node dependencies if present ([a926777](https://github.com/Fdawgs/sanitize-middleware/commit/a926777))
+-   ci(codeql): specify more query suites ([3cdbd55](https://github.com/Fdawgs/sanitize-middleware/commit/3cdbd55))
+-   chore: remove old .env files from gitignore ([439c376](https://github.com/Fdawgs/sanitize-middleware/commit/439c376))
+-   style(ci): tidy job names ([22db2e9](https://github.com/Fdawgs/sanitize-middleware/commit/22db2e9))
+
 ## <small>4.0.2 (2020-12-28)</small>
 
 -   build: update github-actions with dependabot ([e1e7805](https://github.com/Fdawgs/sanitize-middleware/commit/e1e7805))
