@@ -1,9 +1,7 @@
 import type express from "express";
-import { AllHtmlEntities } from "html-entities";
+import { encode } from "html-entities";
 import serialize from "serialize-javascript";
 import validator = require("validator");
-
-const entities = new AllHtmlEntities();
 
 export interface LooseObject {
 	[key: string]: any;
@@ -127,9 +125,7 @@ function parseValue(
 			 * - Removes non-word characters, and control characters using `stripLow` function of `validator`
 			 * - Escapes HTML tags using `encode` function of `entities`, replacing them with HTML entities
 			 */
-			result = entities
-				.encode(validator.stripLow(value.toString()))
-				.trim();
+			result = encode(validator.stripLow(value.toString())).trim();
 			break;
 	}
 	return result;
