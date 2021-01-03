@@ -62,6 +62,7 @@
 		"@types/lodash": "^4.14.166",
 		"@types/node": "^14.14.16",
 		"@types/serialize-javascript": "^5.0.0",
+		"@types/validator": "^13.1.2",
 		"@typescript-eslint/eslint-plugin": "^4.11.1",
 		"@typescript-eslint/parser": "^4.11.1",
 		"conventional-changelog-cli": "^2.1.1",
