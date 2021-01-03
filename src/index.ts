@@ -1,7 +1,7 @@
 import type express from "express";
 import { encode } from "html-entities";
 import serialize from "serialize-javascript";
-import validator = require("validator");
+import validator from "validator";
 
 export interface LooseObject {
 	[key: string]: any;
@@ -30,7 +30,7 @@ function deriveType(value: unknown): string {
 			(typeof value === "string" && validator.isFloat(value as string)))
 	) {
 		result = "number";
-	} else if (validator.isDate(value)) {
+	} else if (validator.isDate(value as string)) {
 		result = "date";
 	} else {
 		result = "string";
