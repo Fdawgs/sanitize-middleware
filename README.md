@@ -6,19 +6,19 @@
 
 ## Installation
 
-Install using [`yarn`](https://yarnpkg.com/en/package/sanitize-middleware):
-
-```bash
-yarn add sanitize-middleware
-```
-
-Or [`npm`](https://www.npmjs.com/package/sanitize-middleware):
+Install using [`npm`](https://www.npmjs.com/package/sanitize-middleware):
 
 ```bash
 npm install sanitize-middleware
 ```
 
-sanitize-middleware's test scripts use yarn commands.
+Or [`yarn`](https://yarnpkg.com/en/package/sanitize-middleware):
+
+```bash
+yarn add sanitize-middleware
+```
+
+sanitize-middleware's test scripts use npm commands.
 
 ## API
 
