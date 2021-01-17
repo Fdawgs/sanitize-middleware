@@ -12,9 +12,13 @@
 		"xss"
 	],
 	"main": "dist/index.js",
-	"repository": "git@github.com:Fdawgs/sanitize-middleware.git",
-	"author": "Frazer Smith <frazer.dev@outlook.com>",
+	"repository": "git+https://github.com/Fdawgs/sanitize-middleware.git",
+	"homepage": "https://github.com/Fdawgs/sanitize-middleware",
+	"bugs": {
+		"url": "https://github.com/Fdawgs/sanitize-middleware/issues"
+	},
 	"license": "MIT",
+	"author": "Frazer Smith <frazer.dev@outlook.com>",
 	"engines": {
 		"node": ">=10.22.0"
 	},
