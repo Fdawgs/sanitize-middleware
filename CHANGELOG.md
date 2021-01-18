@@ -1,3 +1,18 @@
+## <small>4.0.4 (2021-01-18)</small>
+
+-   build: add typoci config file ([c9bdcc8](https://github.com/Fdawgs/sanitize-middleware/commit/c9bdcc8))
+-   build: remove `yarn` as package manager, revert to `npm` ([ca50b4d](https://github.com/Fdawgs/sanitize-middleware/commit/ca50b4d))
+-   build(deps-dev): bump eslint-plugin-jsdoc from 30.7.13 to 31.0.7 (#176) ([8aeac38](https://github.com/Fdawgs/sanitize-middleware/commit/8aeac38)), closes [#176](https://github.com/Fdawgs/sanitize-middleware/issues/176)
+-   ci: ignore scripts on publish ([97d8c4e](https://github.com/Fdawgs/sanitize-middleware/commit/97d8c4e))
+-   ci: remove redundant javascript dictionary ([e6197df](https://github.com/Fdawgs/sanitize-middleware/commit/e6197df))
+-   ci: use `npm install` instead of `npm ci` ([282edc1](https://github.com/Fdawgs/sanitize-middleware/commit/282edc1))
+-   ci(typo-ci): add `ydh` to list of excluded words ([4c360e5](https://github.com/Fdawgs/sanitize-middleware/commit/4c360e5))
+-   fix: remove lockfile ([5269f63](https://github.com/Fdawgs/sanitize-middleware/commit/5269f63))
+-   fix(package): script calls ([2c6737e](https://github.com/Fdawgs/sanitize-middleware/commit/2c6737e))
+-   chore(package): add homepage and bug urls ([a81f02f](https://github.com/Fdawgs/sanitize-middleware/commit/a81f02f))
+-   docs: update contact email ([ddb8145](https://github.com/Fdawgs/sanitize-middleware/commit/ddb8145))
+-   docs(contributing): update yarn link ([9ed8438](https://github.com/Fdawgs/sanitize-middleware/commit/9ed8438))
+
 ## <small>4.0.3 (2021-01-03)</small>
 
 -   build(deps-dev): add @types/validator ([db58ce4](https://github.com/Fdawgs/sanitize-middleware/commit/db58ce4))
