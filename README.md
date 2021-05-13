@@ -1,3 +1,5 @@
+> **NOTE: Development of this repository has been discontinued as of 2021-01-18.**
+
 # sanitize-middleware
 
 [![GitHub Release](https://img.shields.io/github/release/Fdawgs/sanitize-middleware.svg)](https://github.com/Fdawgs/sanitize-middleware/releases/latest/) [![npm version](https://img.shields.io/npm/v/sanitize-middleware)](https://www.npmjs.com/package/sanitize-middleware) ![Build Status](https://github.com/Fdawgs/sanitize-middleware/workflows/CI/badge.svg?branch=master) [![Coverage Status](https://coveralls.io/repos/github/Fdawgs/sanitize-middleware/badge.svg?branch=master)](https://coveralls.io/github/Fdawgs/sanitize-middleware?branch=master) [![Known Vulnerabilities](https://snyk.io/test/github/Fdawgs/sanitize-middleware/badge.svg)](https://snyk.io/test/github/Fdawgs/sanitize-middleware) [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
